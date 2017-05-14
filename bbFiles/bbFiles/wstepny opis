@@ -1,0 +1,12 @@
+Celem projektu jest stworzenie aplikacji, która bêdzie u³atwia³a pracê w punktach krwiodawstwa.
+Projekt bêdzie oparty na technologii WPF, a baza danych bêdzie obs³ugiwana przez Microsoft SQL Server w Windows Azure.
+
+Program bêdzie umo¿liwia³:
+	-Logowanie ustawiaj¹ce poziom uprawnieñ takich jak Admin, Pracownik, Odbiorca.
+	-Operacje na dawcach takie jak dodadnie lub edycja danych dawcy oraz wyszukiwanie danych poszczególnych dawców.
+	-Dodanie i wyœwietlanie poborów krwii dla wszystkich lub pojedyñczych dawców.
+	-Dodawanie, edytowanie i usuwanie danych odbiorów.
+	-Dodawanie zapotrzebowania na konkretn¹ iloœæ i grupê krwii przez konto odbiorcy.
+	-Zbiorcz¹ statystykê aktualnych zapasów w postaci wykresu.
+	-Dodawanie, edycja i usuwanie kont przez Administratora.
+	
