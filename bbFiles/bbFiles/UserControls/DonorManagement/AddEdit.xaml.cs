@@ -13,16 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace bbFiles
+namespace bbFiles.UserControls.DonorManagement
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy AddEdit.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddEdit : UserControl
     {
-        public MainWindow()
+        User user;
+        public AddEdit(User User)
         {
+            Privileges.CheckAdmin(user);
             InitializeComponent();
+            this.user = User;
+        }
+
+        private void btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

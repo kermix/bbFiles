@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="bbFiles.UserControls.UserManagement.List"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:p="clr-namespace:bbFiles.Properties"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:bbFiles.UserControls.UserManagement"
+             mc:Ignorable="d" 
+             d:DesignHeight="465" d:DesignWidth="605">
+    <Grid>
+        <DataGrid x:Name="UserManagementDataGrid" 
+                  ItemsSource="{Binding}" 
+                  AutoGenerateColumns="False" 
+                  SelectionUnit="FullRow" 
+                  SelectionMode="Single" 
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding UserID}" 
+                                    Header="{x:Static p:Strings.ID}" 
+                                    Width="0.3*"/>
+                <DataGridTextColumn Binding="{Binding Login}" 
+                                    Header="{x:Static p:Strings.Username}" 
+                                    Width="*"/>
+                <DataGridCheckBoxColumn Binding="{Binding PasswordChanged}" 
+                                        Header="{x:Static p:Strings.IsPasswordChanged}" 
+                                        Width="0.6*"/>
+                <DataGridTextColumn Binding="{Binding Role}" 
+                                    Header="{x:Static p:Strings.Roles}" 
+                                    Width="0.5*"/>
+                <DataGridTemplateColumn Header="{x:Static p:Strings.RegisteredDateShort}" 
+                                        Width="0.75*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding RegisteredDate, StringFormat=\{0:d\}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static p:Strings.LastLoginDateShort}" 
+                                        Width="0.75*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LastLoggedDate, StringFormat=\{0:d\}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+            
+    </Grid>
+</UserControl>

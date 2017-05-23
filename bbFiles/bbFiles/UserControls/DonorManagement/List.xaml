@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="bbFiles.UserControls.DonorManagement.List"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:bbFiles.Properties"
+             xmlns:local="clr-namespace:bbFiles.UserControls.DonorManagement"
+             mc:Ignorable="d" 
+             d:DesignHeight="465" d:DesignWidth="605">
+    <Grid>
+        <Grid>
+            <DataGrid x:Name="DonorManagementDataGrid"
+                  ItemsSource="{Binding}" 
+                  AutoGenerateColumns="False" 
+                  SelectionUnit="FullRow" 
+                  SelectionMode="Single" 
+                  IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding DonorID}" 
+                                    Header="{x:Static p:Strings.ID}" 
+                                    Width="0.3*"/>
+                    <DataGridTextColumn Binding="{Binding Firstname}" 
+                                    Header="{x:Static p:Strings.Firstname}" 
+                                    Width="1.5*"/>
+                    <DataGridTextColumn Binding="{Binding Surname}" 
+                                    Header="{x:Static p:Strings.Surname}" 
+                                    Width="2.5*" />
+                    <DataGridTemplateColumn Header="{x:Static p:Strings.BirthDate}" 
+                                        Width="0.75*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BirthDate, StringFormat=\{0:d\}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding BloodType}" 
+                                    Header="{x:Static p:Strings.BloodType}" 
+                                    Width="*" />
+                    <DataGridTextColumn Binding="{Binding RhMarker}" 
+                                    Header="{x:Static p:Strings.RhMarker}" 
+                                    Width="0.3*"/>
+                    <DataGridTextColumn Binding="{Binding BloodGiven}" 
+                                    Header="{x:Static p:Strings.BloodGiven}" 
+                                    Width="0.3*"/>
+                    <DataGridTextColumn Binding="{Binding PESEL}" 
+                                    Header="{x:Static p:Strings.PESEL}" 
+                                    Width="0.3*"/>
+                    <DataGridTextColumn Binding="{Binding Email}" 
+                                    Header="{x:Static p:Strings.Email}" 
+                                    Width="0.3*"/>
+                    <DataGridTextColumn Binding="{Binding PhoneNumber}" 
+                                    Header="{x:Static p:Strings.PhoneNumber}" 
+                                    Width="0.3*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</UserControl>
