@@ -83,7 +83,7 @@ namespace bbFiles.UserControls.UserManagement
                 //    sUser.Edit();
                 //else
                     sUser.Add();
-                Utilities.ucSendEndOfEdition(this);
+                Utilities.UcSendEndOfEdition(this);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace bbFiles.UserControls.UserManagement
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
-            Utilities.ucSendEndOfEdition(this);
+            Utilities.UcSendEndOfEdition(this);
         }
 
         private void cb_Role_SelectionChanged(object sender, SelectionChangedEventArgs e)

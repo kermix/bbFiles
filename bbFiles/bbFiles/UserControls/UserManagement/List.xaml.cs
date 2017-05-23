@@ -23,12 +23,12 @@ namespace bbFiles.UserControls.UserManagement
         public List()
         {
             InitializeComponent();
-            Utilities.refreshGrid(UserManagementDataGrid, typeof(Credentials));
+            Utilities.RefreshGrid(UserManagementDataGrid, typeof(Credentials));
         }
 
         public void Refresh()
         {
-            Utilities.refreshGrid(UserManagementDataGrid, typeof(Credentials));
+            Utilities.RefreshGrid(UserManagementDataGrid, typeof(Credentials));
         }
         public Credentials GetSelected()
         {

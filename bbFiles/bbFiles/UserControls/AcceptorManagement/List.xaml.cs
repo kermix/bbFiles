@@ -23,11 +23,11 @@ namespace bbFiles.UserControls.AcceptorManagement
         public List()
         {
             InitializeComponent();
-            Utilities.refreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
+            Utilities.RefreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
         }
         public void Refresh()
         {
-            Utilities.refreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
+            Utilities.RefreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
         }
         public bbFiles.Acceptors GetSelected()
         {

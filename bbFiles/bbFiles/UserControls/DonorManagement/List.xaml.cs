@@ -23,11 +23,11 @@ namespace bbFiles.UserControls.DonorManagement
         public List()
         {
             InitializeComponent();
-            Utilities.refreshGrid(DonorManagementDataGrid, typeof(Donors));
+            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(Donors));
         }
         public void Refresh()
         {
-            Utilities.refreshGrid(DonorManagementDataGrid, typeof(Acceptors));
+            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(Acceptors));
         }
         public bbFiles.Donors GetSelected()
         {

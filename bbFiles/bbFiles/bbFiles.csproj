@@ -74,7 +74,6 @@
     <Compile Include="Classes\SignIn.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserContactInfo.cs" />
-    <Compile Include="Classes\Utilities.cs" />
     <Compile Include="database.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -125,6 +124,13 @@
     <Compile Include="UserControls\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\GetAllAcceptors.cs" />
+    <Compile Include="Utilities\GetAllBloodTypes.cs" />
+    <Compile Include="Utilities\GetAllCredentials.cs" />
+    <Compile Include="Utilities\GetAllDonors.cs" />
+    <Compile Include="Utilities\GetAllRoles.cs" />
+    <Compile Include="Utilities\RefreshGrid.cs" />
+    <Compile Include="Utilities\UcSendEndOfEdition.cs" />
     <Page Include="ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
