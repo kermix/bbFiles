@@ -8,19 +8,16 @@ namespace bbFiles
         public int? phone { get; set; }
         public string email { get; set; }
 
-        public bool IsPhoneNumberValid()
+        public void IsPhoneNumberValid()
         {
             if (!Regex.Match(phone.ToString(), @"^(\+[0-9]{9})$").Success)
                 throw new ArgumentException(Properties.Strings.InvalidPhoneNumber);
-            else
-                return true;
         }
-        public bool IsEmailValid()
+        public void IsEmailValid()
         {
             try
             {
                 System.Net.Mail.MailAddress mail = new System.Net.Mail.MailAddress(email);
-                return true;
             }
             catch (Exception ex)
             {

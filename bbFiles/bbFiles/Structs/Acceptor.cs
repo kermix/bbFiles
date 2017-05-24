@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace bbFiles.Structs
 {
@@ -21,7 +22,7 @@ namespace bbFiles.Structs
             this.email = email;
             this.phone = phone;
         }
-
+        //TODO : Ogarnąć metody Add i Edit, bo coś chyba nie bangla
         public void Add(User user)
         {
             var dc = new databaseDataContext();
@@ -35,16 +36,24 @@ namespace bbFiles.Structs
                           where c.Login == user.username
                           select c.UserID).Single()
             };
-            if (this.IsPhoneNumberValid() && this.IsEmailValid())
+            try
             {
-                dc.Acceptors.InsertOnSubmit(newAcceptorRow);
-                dc.SubmitChanges();
+                    this.IsPhoneNumberValid();
+                    this.IsEmailValid();
+                    dc.Acceptors.InsertOnSubmit(newAcceptorRow);
+                    dc.SubmitChanges();
             }
+            catch (Exception ex) { throw ex; }
+            finally
+            {
+                if (!((from c in dc.Acceptors
+                       where c.UserID == newAcceptorRow.UserID
+                       select c).Any()))
+                    user.Delete();
+            }
+            
 
-            if (!((from c in dc.Acceptors
-                   where c.UserID == newAcceptorRow.UserID
-                   select c).Any()))
-                user.Delete();
+            
         }
         public void Edit(User user)
         {
@@ -61,11 +70,11 @@ namespace bbFiles.Structs
             {
                 q2.AcceptorName = this.name;
                 q2.Address = this.adress;
-                if (this.IsPhoneNumberValid() && this.IsEmailValid())
-                {
-                    q2.Email = this.email;
-                    q2.PhoneNumber = this.phone;
-                }
+                this.IsPhoneNumberValid();
+                this.IsEmailValid();
+                q2.Email = this.email;
+                q2.PhoneNumber = this.phone;
+                
             }
             dc.SubmitChanges();
         }

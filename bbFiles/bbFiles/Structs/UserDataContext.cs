@@ -20,7 +20,6 @@ namespace bbFiles.Structs
         {
             if (userExists(this.user.username))
                 throw new UserEditException(Properties.Strings.UserExists);
-
             else
             {
                 this.user.Add();
@@ -34,7 +33,7 @@ namespace bbFiles.Structs
         {
             this.user.Edit();
 
-            if (this.acceptor != null)
+            if (this.acceptor.name != null)
                 this.acceptor.Edit(user);
         }
 
