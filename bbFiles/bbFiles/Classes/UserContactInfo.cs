@@ -10,7 +10,7 @@ namespace bbFiles
 
         public void IsPhoneNumberValid()
         {
-            if (!Regex.Match(phone.ToString(), @"^(\+[0-9]{9})$").Success)
+            if (!(Regex.Match(phone.ToString(), @"^\d{9}$").Success))
                 throw new ArgumentException(Properties.Strings.InvalidPhoneNumber);
         }
         public void IsEmailValid()
