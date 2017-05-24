@@ -49,8 +49,8 @@
       <Column Name="RhMarker" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="BloodGiven" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="PESEL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

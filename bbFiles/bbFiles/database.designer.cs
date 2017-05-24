@@ -846,7 +846,7 @@ namespace bbFiles
 		
 		private string _Email;
 		
-		private string _PhoneNumber;
+		private System.Nullable<int> _PhoneNumber;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -870,7 +870,7 @@ namespace bbFiles
     partial void OnPESELChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanging(System.Nullable<int> value);
     partial void OnPhoneNumberChanged();
     #endregion
 		
@@ -1039,7 +1039,7 @@ namespace bbFiles
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
 		public string Email
 		{
 			get
@@ -1059,8 +1059,8 @@ namespace bbFiles
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NChar(10)")]
-		public string PhoneNumber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="Int")]
+		public System.Nullable<int> PhoneNumber
 		{
 			get
 			{

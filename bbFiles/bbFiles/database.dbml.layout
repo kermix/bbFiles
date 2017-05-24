@@ -26,10 +26,10 @@
         <elementListCompartment Id="985b79d1-b359-452e-a580-b8d0cc8766bd" absoluteBounds="1.3900000000000001, 3.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="23f449dc-065f-4cf7-b394-f6dacd3deedf" absoluteBounds="3.625, 3.125, 2, 2.7324039713541666">
+    <classShape Id="e1dea2b3-ae7d-4d56-ac94-aec922fb08dd" absoluteBounds="3.625, 3.125, 2, 2.7324039713541666">
       <DataClassMoniker Name="/databaseDataContext/Donors" />
       <nestedChildShapes>
-        <elementListCompartment Id="1871e51a-d608-46d7-b954-bab47fb36ba8" absoluteBounds="3.6399999999999997, 3.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d0880eb6-1df2-4c16-a204-15c9c9432c6a" absoluteBounds="3.6399999999999997, 3.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

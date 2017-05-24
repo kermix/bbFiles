@@ -40,7 +40,7 @@ namespace bbFiles.UserControls.DonorManagement
             var q = (from c in dc.Donors
                      where c.PESEL == pesel
                      select c).Single();
-            donor = new Structs.Donor(q.Firstname, q.Surname, q.Birthdate, q.BloodType, q.RhMarker, q.PESEL);
+            donor = new Structs.Donor(q.Firstname, q.Surname, q.Birthdate, q.BloodType, q.RhMarker, q.PESEL, q.Email, q.PhoneNumber);
             this.DataContext = donor;
         }
 
