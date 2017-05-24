@@ -836,7 +836,7 @@ namespace bbFiles
 		
 		private System.DateTime _Birthdate;
 		
-		private int _BloodType;
+		private global::bbFiles.BloodTypes _BloodType;
 		
 		private bool _RhMarker;
 		
@@ -860,7 +860,7 @@ namespace bbFiles
     partial void OnSurnameChanged();
     partial void OnBirthdateChanging(System.DateTime value);
     partial void OnBirthdateChanged();
-    partial void OnBloodTypeChanging(int value);
+    partial void OnBloodTypeChanging(global::bbFiles.BloodTypes value);
     partial void OnBloodTypeChanged();
     partial void OnRhMarkerChanging(bool value);
     partial void OnRhMarkerChanged();
@@ -959,8 +959,8 @@ namespace bbFiles
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloodType", DbType="Int NOT NULL")]
-		public int BloodType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloodType", DbType="Int NOT NULL", CanBeNull=false)]
+		public global::bbFiles.BloodTypes BloodType
 		{
 			get
 			{

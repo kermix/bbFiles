@@ -20,9 +20,50 @@ namespace bbFiles.UserControls
     /// </summary>
     public partial class Donors : UserControl
     {
-        public Donors()
+        UserControls.DonorManagement.List DonorsList = new UserControls.DonorManagement.List();
+        bool _editEnded;
+        public User user { get; set; }
+        public bool editEnded
         {
-            InitializeComponent();
+            set
+            {
+                _editEnded = value;
+                if (value == true)
+                {
+                    g_Manage.IsEnabled = true;
+                    cc_Content.Content = DonorsList;
+                    DonorsList.Refresh();
+                }
+                else
+                {
+                    g_Manage.IsEnabled = false;
+                }
+            }
+            get
+            {
+                return _editEnded;
+            }
         }
+        public Donors(User user)
+        {
+            this.user = user;
+            InitializeComponent();
+            cc_Content.Content = DonorsList;
+        }
+
+        private void btn_AddDonor_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void btn_EditDonor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btn_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            DonorsList.Refresh();
+        }
+
+
     }
 }

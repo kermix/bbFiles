@@ -24,18 +24,18 @@
                 <RowDefinition/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btn_AddAcceptor" 
+            <Button x:Name="btn_AddDonor" 
                 Content="{x:Static p:Strings.Add}"  
                 Grid.Row="0"  
-                Style="{StaticResource Button}" />
-            <Button x:Name="btn_EditAcceptor" 
+                Style="{StaticResource Button}" Click="btn_AddDonor_Click" />
+            <Button x:Name="btn_EditDonor" 
                 Content="{x:Static p:Strings.Edit}"  
                 Grid.Row="1" 
-                Style="{StaticResource Button}" />
+                Style="{StaticResource Button}" Margin="5,5,5.4,5.2" RenderTransformOrigin="0.5,0.502" Click="btn_EditDonor_Click" />
             <Button x:Name="btn_Refresh" 
                 Content="{x:Static p:Strings.Refresh}"  
                 Grid.Row="2"  
-                Style="{StaticResource Button}" />
+                Style="{StaticResource Button}" Click="btn_Refresh_Click" Height="54" Margin="5,0,5.4,5.2" VerticalAlignment="Bottom" />
         </Grid>
         <Label x:Name="lb_Message" 
                Content="" 
