@@ -76,9 +76,12 @@ namespace bbFiles.UserControls.UserManagement
         {
             try
             {
-                if (isEditing)
-                    sUser.Edit();
-                else
+                if (!sUser.user.IsPasswordLengthProper())
+                    throw new ArgumentOutOfRangeException(Properties.Strings.PasswordTooShort);
+
+                //if (isEditing)
+                //    sUser.Edit();
+                //else
                     sUser.Add();
                 Utilities.UcSendEndOfEdition(this);
             }
@@ -97,5 +100,7 @@ namespace bbFiles.UserControls.UserManagement
         {
             g_AcceptorData.IsEnabled = ((ComboBox)sender).SelectedIndex == 0 ? true : false;
         }
+
+
     }
 }

@@ -22,6 +22,7 @@ namespace bbFiles.Structs
             this.email = email;
             this.phone = phone;
         }
+        //TODO : Ogarnąć metody Add i Edit, bo coś chyba nie bangla
         public void Add(User user)
         {
             var dc = new databaseDataContext();

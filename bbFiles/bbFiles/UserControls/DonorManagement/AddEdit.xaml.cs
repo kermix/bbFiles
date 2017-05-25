@@ -46,18 +46,6 @@ namespace bbFiles.UserControls.DonorManagement
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (isEditing)
-                    donor.Edit();
-                else
-                    donor.Add();
-                Utilities.UcSendEndOfEdition(this);
-            }
-            catch(Exception ex)
-            {
-                lb_Message.Content = ex.Message;
-            }
 
         }
 

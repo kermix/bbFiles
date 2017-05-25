@@ -60,13 +60,8 @@ namespace bbFiles.Structs
                 RegisteredDate = DateTime.Now,
                 Role = (Roles)this.role
             };
-            if (IsPasswordLengthProper())
-            {
-                dc.Credentials.InsertOnSubmit(newUserRow);
-                dc.SubmitChanges();
-            }
-            else
-                throw new ArgumentOutOfRangeException(Properties.Strings.PasswordTooShort);
+            dc.Credentials.InsertOnSubmit(newUserRow);
+            dc.SubmitChanges();
         }
 
         public void Edit()
@@ -78,14 +73,8 @@ namespace bbFiles.Structs
 
             q.Password = this.password;
             q.PasswordChanged = (bool)!this.hasToChangePassword;
-            if (IsPasswordLengthProper())
-            {
-                dc.SubmitChanges();
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException(Properties.Strings.PasswordTooShort);
-            }
+            dc.SubmitChanges();
+
         }
 
         public void Delete()
