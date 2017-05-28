@@ -243,4 +243,10 @@
   <data name="Users" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="DonorExists" xml:space="preserve">
+    <value>Donor with this PESEL number already exists.</value>
+  </data>
+  <data name="PeselInvalid" xml:space="preserve">
+    <value>PESEL number is not valid</value>
+  </data>
 </root>

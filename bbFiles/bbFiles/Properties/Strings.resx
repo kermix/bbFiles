@@ -282,4 +282,10 @@
   <data name="Users" xml:space="preserve">
     <value>Użytkownicy</value>
   </data>
+  <data name="DonorExist" xml:space="preserve">
+    <value>Dawca o tym numerze PESEL istnieje już w bazie.</value>
+  </data>
+  <data name="PeselInvalid" xml:space="preserve">
+    <value>Numer PESEL niepoprawny.</value>
+  </data>
 </root>

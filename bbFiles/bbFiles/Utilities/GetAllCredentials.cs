@@ -7,7 +7,7 @@ namespace bbFiles
     {
         public static ObservableCollection<Credentials> GetAllCredentials()
         {
-            databaseDataContext dc = new databaseDataContext();
+            var dc = new databaseDataContext();
             var r = from c in dc.Credentials select c;
             return new ObservableCollection<Credentials>(r);
         }

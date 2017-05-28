@@ -18,24 +18,24 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding DonorID}" 
                                     Header="{x:Static p:Strings.ID}" 
-                                    Width="0.3*"/>
+                                    Width="0.2*"/>
                     <DataGridTextColumn Binding="{Binding Firstname}" 
                                     Header="{x:Static p:Strings.Firstname}" 
-                                    Width="1.5*"/>
+                                    Width="0.6*"/>
                     <DataGridTextColumn Binding="{Binding Surname}" 
                                     Header="{x:Static p:Strings.Surname}" 
-                                    Width="2.5*" />
+                                    Width="*" />
                     <DataGridTemplateColumn Header="{x:Static p:Strings.BirthDate}" 
                                         Width="0.75*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding BirthDate, StringFormat=\{0:d\}}" />
+                                <TextBlock Text="{Binding Birthdate, StringFormat=\{0:d\}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Binding="{Binding BloodType}" 
                                     Header="{x:Static p:Strings.BloodType}" 
-                                    Width="*" />
+                                    Width="0.5*" />
                     <DataGridTextColumn Binding="{Binding RhMarker}" 
                                     Header="{x:Static p:Strings.RhMarker}" 
                                     Width="0.3*"/>
@@ -44,13 +44,13 @@
                                     Width="0.3*"/>
                     <DataGridTextColumn Binding="{Binding PESEL}" 
                                     Header="{x:Static p:Strings.PESEL}" 
-                                    Width="0.3*"/>
+                                    Width="0.75*"/>
                     <DataGridTextColumn Binding="{Binding Email}" 
                                     Header="{x:Static p:Strings.Email}" 
-                                    Width="0.3*"/>
+                                    Width="*"/>
                     <DataGridTextColumn Binding="{Binding PhoneNumber}" 
                                     Header="{x:Static p:Strings.PhoneNumber}" 
-                                    Width="0.3*"/>
+                                    Width="0.6*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -79,9 +79,9 @@ namespace bbFiles.UserControls.UserManagement
                 if (!sUser.user.IsPasswordLengthProper())
                     throw new ArgumentOutOfRangeException(Properties.Strings.PasswordTooShort);
 
-                //if (isEditing)
-                //    sUser.Edit();
-                //else
+                if (isEditing)
+                    sUser.Edit();
+                else
                     sUser.Add();
                 Utilities.UcSendEndOfEdition(this);
             }

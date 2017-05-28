@@ -35,7 +35,7 @@ namespace bbFiles.UserControls.UserManagement
             Credentials selectedRow = (Credentials)UserManagementDataGrid.SelectedItem;
             if(selectedRow == null)
             {
-                throw new NullReferenceException("Żadna pozycja nie została wybrana");
+                throw new NullReferenceException(Properties.Strings.PositionIsNotSelected);
             }
             return selectedRow;
         }

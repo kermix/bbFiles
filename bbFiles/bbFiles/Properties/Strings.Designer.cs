@@ -223,6 +223,15 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dawca o tym numerze PESEL istnieje już w bazie..
+        /// </summary>
+        public static string DonorExist {
+            get {
+                return ResourceManager.GetString("DonorExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dawcy.
         /// </summary>
         public static string Donors {
@@ -408,6 +417,15 @@ namespace bbFiles.Properties {
         public static string PESEL {
             get {
                 return ResourceManager.GetString("PESEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Numer PESEL niepoprawny..
+        /// </summary>
+        public static string PeselInvalid {
+            get {
+                return ResourceManager.GetString("PeselInvalid", resourceCulture);
             }
         }
         

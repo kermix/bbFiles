@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System;
 
 namespace bbFiles.UserControls
 {
     /// <summary>
     /// Logika interakcji dla klasy Donors.xaml
     /// </summary>
-    public partial class Donors : UserControl
+    
+    public partial class Donors : UserControl, IUControlManagement
     {
         UserControls.DonorManagement.List DonorsList = new UserControls.DonorManagement.List();
         bool _editEnded;
@@ -49,21 +39,48 @@ namespace bbFiles.UserControls
             this.user = user;
             InitializeComponent();
             cc_Content.Content = DonorsList;
+            
         }
 
         private void btn_AddDonor_Click(object sender, RoutedEventArgs e)
         {
-            
+            cc_Content.Content = new DonorManagement.AddEdit(user);
+            editEnded = false;
+            Window parentWindow = Window.GetWindow(this);
+            ((DockerWindow)parentWindow).g_Navigation.IsEnabled = false;
         }
         private void btn_EditDonor_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                bbFiles.Donors row = DonorsList.GetSelected();
+                cc_Content.Content = new DonorManagement.AddEdit(user, row.PESEL);
+                editEnded = false;
+                Window parentWindow = Window.GetWindow(this);
+                ((DockerWindow)parentWindow).g_Navigation.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
         }
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)
         {
-            DonorsList.Refresh();
+            tb_PeselFilter.Text = "";
         }
 
-
+        private void tb_PeselFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            long pesel;
+            if (tb_PeselFilter.Text.Trim() != "")
+            {
+                bool pResult = long.TryParse(tb_PeselFilter.Text.Trim(), out pesel);
+                if (pResult)
+                    DonorsList.Refresh(pesel);
+            }
+            else
+                DonorsList.Refresh();
+        }
     }
 }

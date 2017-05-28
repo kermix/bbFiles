@@ -10,9 +10,9 @@ namespace bbFiles.Structs
         public DateTime birthdate { get; }
         public BloodTypes bloodtype { get; set; }
         public bool rhMarker { get; set; }
-        public int PESEL { set; get; }
+        public long PESEL { set; get; }
         public Donor() { }
-        public Donor(string firstname, string surname, DateTime birthdate, BloodTypes bloodtype, bool rhMarker, int pesel, string email, int? phone)
+        public Donor(string firstname, string surname, DateTime birthdate, BloodTypes bloodtype, bool rhMarker, long pesel, string email, int? phone)
         {
             this.firstname = firstname;
             this.surname = surname;
@@ -31,7 +31,6 @@ namespace bbFiles.Structs
             {
                 Firstname = this.firstname,
                 Surname = this.surname,
-                Birthdate = this.birthdate,
                 BloodType = this.bloodtype,
                 RhMarker = this.rhMarker,
                 BloodGiven = 0,
@@ -43,8 +42,18 @@ namespace bbFiles.Structs
             {
                 this.IsPhoneNumberValid();
                 this.IsEmailValid();
-                dc.Donors.InsertOnSubmit(newDonorRow);
-                dc.SubmitChanges();
+                newDonorRow.Birthdate = ValidatePesel(newDonorRow.PESEL);
+                if (newDonorRow.Birthdate != DateTime.MinValue.Date)
+                {
+                    if (DonorExist(this.PESEL))
+                        throw new UserEditException(Properties.Strings.DonorExist);
+                    dc.Donors.InsertOnSubmit(newDonorRow);
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                    throw new ArgumentException(Properties.Strings.PeselInvalid);
+                }
             }catch(Exception ex) { throw ex; }
         }
 
@@ -57,13 +66,24 @@ namespace bbFiles.Structs
 
             q.Firstname = this.firstname;
             q.Surname = this.surname;
-            q.Birthdate = this.birthdate;
             q.BloodType = this.bloodtype;
             q.RhMarker = this.rhMarker;
             q.PhoneNumber = this.phone;
             q.Email = this.email;
-
+            this.IsPhoneNumberValid();
+            this.IsEmailValid();
             dc.SubmitChanges();
+        }
+
+        public static bool DonorExist(long pesel)
+        {
+            databaseDataContext dc = new databaseDataContext();
+            bool userExists = (from c in dc.Donors
+                               where c.PESEL == pesel
+                               select c).Any();
+            if (userExists)
+                return true;
+            return false;
         }
     }
 }

@@ -17,5 +17,11 @@ namespace bbFiles
             else if (type == typeof(Donors))
                 grid.ItemsSource = GetAllDonors();
         }
+
+        public static void RefreshGrid(System.Windows.Controls.DataGrid grid, Type type, long filter)
+        {
+            if (type == typeof(Donors))
+                grid.ItemsSource = GetAllDonorsByPESEL(filter);
+        }
     }
 }

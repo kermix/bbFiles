@@ -45,12 +45,6 @@
             <Label Content="{x:Static p:Strings.Firstname}"
                    Grid.Row="0"
                    Grid.Column="0"/>
-            <Label Content="{x:Static p:Strings.BirthDate}"
-                   Grid.Row="2"
-                   Grid.Column="0"/>
-            <Label Content="{x:Static p:Strings.BirthDate}"
-                   Grid.Row="2"
-                   Grid.Column="0"/>
             <Label Content="{x:Static p:Strings.BloodType}"
                    Grid.Row="3"
                    Grid.Column="0"/>
@@ -58,31 +52,24 @@
                    Grid.Row="4"
                    Grid.Column="0"/>
             <TextBox x:Name="tb_Firstname" 
-                 Text="{Binding Path=Donor.firstname, Mode=TwoWay, 
+                 Text="{Binding Path=firstname, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="0" 
-                 Grid.Column="1" 
-                 IsReadOnly="True"/>
+                 Grid.Column="1"/>
             <TextBox x:Name="tb_Surname" 
-                 Text="{Binding Path=Donor.surname, Mode=TwoWay, 
+                 Text="{Binding Path=surname, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="1" 
-                 Grid.Column="1" 
-                 IsReadOnly="True"/>
-            <TextBox x:Name="tb_BirthDate" 
-                 Text="{Binding Path=Donor.birthdate,  Mode=OneWay, StringFormat='yyyy-MM-dd'}" 
-                 Grid.Row="2" 
-                 Grid.Column="1" 
-                 IsReadOnly="True"/>
+                 Grid.Column="1"/>
             <ComboBox x:Name="cb_BloodType" 
                   ItemsSource="{Binding Source={StaticResource BloodTypes}}"
                     DisplayMemberPath="Value" SelectedValuePath="Key" 
-                    SelectedValue="{Binding Path=Donor.bloodtype, Mode=TwoWay}"
+                    SelectedValue="{Binding Path=bloodtype, Mode=TwoWay}"
                   Grid.Row="3" 
                   Grid.Column="1"/>
             <CheckBox x:Name="cb_rhMarker" 
                   IsThreeState="False" 
-                  IsChecked="{Binding Path=Donor.rhMarker, Mode=TwoWay, 
+                  IsChecked="{Binding Path=rhMarker, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                   Grid.Row="4" 
                   Grid.Column="1" />
@@ -108,23 +95,21 @@
                    Grid.Row="2"
                    Grid.Column="0"/>
             <TextBox x:Name="tb_PESEL" 
-                 Text="{Binding Path=Donor.PESEL, Mode=TwoWay, 
+                 Text="{Binding Path=PESEL, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="0" 
                  Grid.Column="1" 
                  IsReadOnly="True"/>
             <TextBox x:Name="tb_Email" 
-                 Text="{Binding Path=Donor.email, Mode=TwoWay, 
+                 Text="{Binding Path=email, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="1" 
-                 Grid.Column="1" 
-                 IsReadOnly="True"/>
+                 Grid.Column="1"/>
             <TextBox x:Name="tb_Phone" 
-                 Text="{Binding Path=Donor.phone, Mode=TwoWay, 
+                 Text="{Binding Path=phone, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="2" 
-                 Grid.Column="1" 
-                 IsReadOnly="True"/>
+                 Grid.Column="1"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>

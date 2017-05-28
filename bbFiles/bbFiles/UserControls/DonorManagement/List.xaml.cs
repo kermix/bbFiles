@@ -23,18 +23,22 @@ namespace bbFiles.UserControls.DonorManagement
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(Donors));
+            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(bbFiles.Donors));
         }
         public void Refresh()
         {
-            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(Acceptors));
+            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(bbFiles.Donors));
+        }
+        public void Refresh(long pesel)
+        {
+            Utilities.RefreshGrid(DonorManagementDataGrid, typeof(bbFiles.Donors), pesel);
         }
         public bbFiles.Donors GetSelected()
         {
             bbFiles.Donors selectedRow = (bbFiles.Donors)DonorManagementDataGrid.SelectedItem;
             if (selectedRow == null)
             {
-                throw new NullReferenceException("Żadna pozycja nie została wybrana");
+                throw new NullReferenceException(Properties.Strings.PositionIsNotSelected);
             }
             return selectedRow;
         }

@@ -8,7 +8,7 @@ namespace bbFiles.Structs
 {
     partial class Donor
     {
-        public static DateTime ValidatePesel(int sPesel)
+        public static DateTime ValidatePesel(long sPesel)
         {
             byte[] weight = new byte[10] { 9, 7, 3, 1, 9, 7, 3, 1, 9, 7 };
             bool bResult = false;
@@ -63,6 +63,7 @@ namespace bbFiles.Structs
                     year += Convert.ToInt32(pesel[0].ToString()) * 10 + Convert.ToInt32(pesel[1].ToString());
                     String szDate = year.ToString() + "-" + (month < 10 ? "0" + month.ToString() : month.ToString()) + "-" + (day < 10 ? "0" + day.ToString() : day.ToString());
                     bResult = DateTime.TryParse(szDate, out dt);
+                    dt = dt.Date;
                     if (bResult == false)
                         return DateTime.MinValue.Date;
                 }

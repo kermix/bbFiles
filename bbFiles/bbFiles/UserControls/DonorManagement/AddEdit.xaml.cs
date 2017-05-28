@@ -26,13 +26,14 @@ namespace bbFiles.UserControls.DonorManagement
 
         public AddEdit(User User)
         {
+            this.user = User;
             Privileges.CheckAdmin(user);
             InitializeComponent();
-            this.user = User;
             donor = new Structs.Donor();
+            this.DataContext = donor;
             tb_PESEL.IsReadOnly = false;
         }
-        public AddEdit(User user ,int pesel) : this(user)
+        public AddEdit(User user, long pesel) : this(user)
         {
             tb_PESEL.IsReadOnly = true;
             databaseDataContext dc = new databaseDataContext();
@@ -46,6 +47,18 @@ namespace bbFiles.UserControls.DonorManagement
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (isEditing)
+                    donor.Edit();
+                else
+                    donor.Add();
+                Utilities.UcSendEndOfEdition(this);
+            }
+            catch (Exception ex)
+            {
+                lb_Message.Content = ex.Message;
+            }
 
         }
 

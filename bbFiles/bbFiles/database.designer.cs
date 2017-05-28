@@ -842,7 +842,7 @@ namespace bbFiles
 		
 		private double _BloodGiven;
 		
-		private int _PESEL;
+		private long _PESEL;
 		
 		private string _Email;
 		
@@ -866,7 +866,7 @@ namespace bbFiles
     partial void OnRhMarkerChanged();
     partial void OnBloodGivenChanging(double value);
     partial void OnBloodGivenChanged();
-    partial void OnPESELChanging(int value);
+    partial void OnPESELChanging(long value);
     partial void OnPESELChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
@@ -1019,8 +1019,8 @@ namespace bbFiles
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PESEL", DbType="Int NOT NULL")]
-		public int PESEL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PESEL", DbType="BigInt NOT NULL")]
+		public long PESEL
 		{
 			get
 			{
