@@ -235,7 +235,7 @@
     <value>You have assigned an incorrect role</value>
   </data>
   <data name="UserExists" xml:space="preserve">
-    <value>The user no longer instnieje</value>
+    <value>User no longer exists</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
@@ -248,5 +248,14 @@
   </data>
   <data name="PeselInvalid" xml:space="preserve">
     <value>PESEL number is not valid</value>
+  </data>
+  <data name="DonorWithPeselNotFound" xml:space="preserve">
+    <value>Cannot find donor with this PESEL number</value>
+  </data>
+  <data name="AmountMl" xml:space="preserve">
+    <value>Amount [ml]</value>
+  </data>
+  <data name="DonateDate" xml:space="preserve">
+    <value>Donate date</value>
   </data>
 </root>

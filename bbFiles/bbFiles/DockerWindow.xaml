@@ -38,7 +38,8 @@
                 Content="{x:Static p:Strings.Donates}" 
                 Grid.Column="1" 
                 Style="{StaticResource Button}" 
-                IsEnabled="False"/>
+                IsEnabled="False"
+                Click="btn_Donates_Click"/>
             <Button x:Name="btn_Acceptors" 
                 Content="{x:Static p:Strings.Acceptors}" 
                 Grid.Column="2" 

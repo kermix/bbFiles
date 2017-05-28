@@ -8,52 +8,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="465" d:DesignWidth="605">
     <Grid>
-        <Grid>
-            <DataGrid x:Name="DonorManagementDataGrid"
+        <DataGrid x:Name="dg_DonorManagement"
                   ItemsSource="{Binding}" 
                   AutoGenerateColumns="False" 
                   SelectionUnit="FullRow" 
                   SelectionMode="Single" 
                   IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding DonorID}" 
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding DonorID}" 
                                     Header="{x:Static p:Strings.ID}" 
                                     Width="0.2*"/>
-                    <DataGridTextColumn Binding="{Binding Firstname}" 
+                <DataGridTextColumn Binding="{Binding Firstname}" 
                                     Header="{x:Static p:Strings.Firstname}" 
                                     Width="0.6*"/>
-                    <DataGridTextColumn Binding="{Binding Surname}" 
+                <DataGridTextColumn Binding="{Binding Surname}" 
                                     Header="{x:Static p:Strings.Surname}" 
                                     Width="*" />
-                    <DataGridTemplateColumn Header="{x:Static p:Strings.BirthDate}" 
+                <DataGridTemplateColumn Header="{x:Static p:Strings.BirthDate}" 
                                         Width="0.75*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Birthdate, StringFormat=\{0:d\}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding BloodType}" 
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Birthdate, StringFormat=\{0:d\}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding BloodType}" 
                                     Header="{x:Static p:Strings.BloodType}" 
                                     Width="0.5*" />
-                    <DataGridTextColumn Binding="{Binding RhMarker}" 
+                <DataGridCheckBoxColumn Binding="{Binding RhMarker}" 
                                     Header="{x:Static p:Strings.RhMarker}" 
                                     Width="0.3*"/>
-                    <DataGridTextColumn Binding="{Binding BloodGiven}" 
+                <DataGridTextColumn Binding="{Binding BloodGiven}" 
                                     Header="{x:Static p:Strings.BloodGiven}" 
                                     Width="0.3*"/>
-                    <DataGridTextColumn Binding="{Binding PESEL}" 
+                <DataGridTextColumn Binding="{Binding PESEL}" 
                                     Header="{x:Static p:Strings.PESEL}" 
                                     Width="0.75*"/>
-                    <DataGridTextColumn Binding="{Binding Email}" 
+                <DataGridTextColumn Binding="{Binding Email}" 
                                     Header="{x:Static p:Strings.Email}" 
                                     Width="*"/>
-                    <DataGridTextColumn Binding="{Binding PhoneNumber}" 
+                <DataGridTextColumn Binding="{Binding PhoneNumber}" 
                                     Header="{x:Static p:Strings.PhoneNumber}" 
                                     Width="0.6*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

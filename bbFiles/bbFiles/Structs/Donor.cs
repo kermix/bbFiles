@@ -26,8 +26,8 @@ namespace bbFiles.Structs
 
         public void Add()
         {
-            databaseDataContext dc = new databaseDataContext();
-            Donors newDonorRow = new Donors()
+            var dc = new databaseDataContext();
+            var newDonorRow = new Donors()
             {
                 Firstname = this.firstname,
                 Surname = this.surname,

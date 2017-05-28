@@ -39,12 +39,12 @@ namespace bbFiles
     partial void InsertCredentials(Credentials instance);
     partial void UpdateCredentials(Credentials instance);
     partial void DeleteCredentials(Credentials instance);
-    partial void InsertDonates(Donates instance);
-    partial void UpdateDonates(Donates instance);
-    partial void DeleteDonates(Donates instance);
     partial void InsertDonors(Donors instance);
     partial void UpdateDonors(Donors instance);
     partial void DeleteDonors(Donors instance);
+    partial void InsertDonates(Donates instance);
+    partial void UpdateDonates(Donates instance);
+    partial void DeleteDonates(Donates instance);
     #endregion
 		
 		public databaseDataContext() : 
@@ -101,19 +101,19 @@ namespace bbFiles
 			}
 		}
 		
-		public System.Data.Linq.Table<Donates> Donates
-		{
-			get
-			{
-				return this.GetTable<Donates>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Donors> Donors
 		{
 			get
 			{
 				return this.GetTable<Donors>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Donates> Donates
+		{
+			get
+			{
+				return this.GetTable<Donates>();
 			}
 		}
 	}
@@ -664,171 +664,11 @@ namespace bbFiles
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donates")]
-	public partial class Donates : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DonateID;
-		
-		private int _DonorID;
-		
-		private double _Amount;
-		
-		private System.DateTime _Date;
-		
-		private bool _Available;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDonateIDChanging(int value);
-    partial void OnDonateIDChanged();
-    partial void OnDonorIDChanging(int value);
-    partial void OnDonorIDChanged();
-    partial void OnAmountChanging(double value);
-    partial void OnAmountChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnAvailableChanging(bool value);
-    partial void OnAvailableChanged();
-    #endregion
-		
-		public Donates()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonateID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int DonateID
-		{
-			get
-			{
-				return this._DonateID;
-			}
-			set
-			{
-				if ((this._DonateID != value))
-				{
-					this.OnDonateIDChanging(value);
-					this.SendPropertyChanging();
-					this._DonateID = value;
-					this.SendPropertyChanged("DonateID");
-					this.OnDonateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonorID", DbType="Int NOT NULL")]
-		public int DonorID
-		{
-			get
-			{
-				return this._DonorID;
-			}
-			set
-			{
-				if ((this._DonorID != value))
-				{
-					this.OnDonorIDChanging(value);
-					this.SendPropertyChanging();
-					this._DonorID = value;
-					this.SendPropertyChanged("DonorID");
-					this.OnDonorIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float NOT NULL")]
-		public double Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Available", DbType="Bit NOT NULL")]
-		public bool Available
-		{
-			get
-			{
-				return this._Available;
-			}
-			set
-			{
-				if ((this._Available != value))
-				{
-					this.OnAvailableChanging(value);
-					this.SendPropertyChanging();
-					this._Available = value;
-					this.SendPropertyChanged("Available");
-					this.OnAvailableChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donors")]
 	public partial class Donors : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DonorID;
 		
 		private string _Firstname;
 		
@@ -852,8 +692,6 @@ namespace bbFiles
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnDonorIDChanging(int value);
-    partial void OnDonorIDChanged();
     partial void OnFirstnameChanging(string value);
     partial void OnFirstnameChanged();
     partial void OnSurnameChanging(string value);
@@ -877,26 +715,6 @@ namespace bbFiles
 		public Donors()
 		{
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonorID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DonorID
-		{
-			get
-			{
-				return this._DonorID;
-			}
-			set
-			{
-				if ((this._DonorID != value))
-				{
-					this.OnDonorIDChanging(value);
-					this.SendPropertyChanging();
-					this._DonorID = value;
-					this.SendPropertyChanged("DonorID");
-					this.OnDonorIDChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Firstname", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
@@ -1019,7 +837,7 @@ namespace bbFiles
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PESEL", DbType="BigInt NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PESEL", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
 		public long PESEL
 		{
 			get
@@ -1075,6 +893,212 @@ namespace bbFiles
 					this._PhoneNumber = value;
 					this.SendPropertyChanged("PhoneNumber");
 					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Donates")]
+	public partial class Donates : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DonateID;
+		
+		private int _Amount;
+		
+		private System.DateTime _Date;
+		
+		private global::bbFiles.BloodTypes _BloodType;
+		
+		private bool _RhMarker;
+		
+		private long _DonorPESEL;
+		
+		private bool _Available;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDonateIDChanging(int value);
+    partial void OnDonateIDChanged();
+    partial void OnAmountChanging(int value);
+    partial void OnAmountChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnBloodTypeChanging(global::bbFiles.BloodTypes value);
+    partial void OnBloodTypeChanged();
+    partial void OnRhMarkerChanging(bool value);
+    partial void OnRhMarkerChanged();
+    partial void OnDonorPESELChanging(long value);
+    partial void OnDonorPESELChanged();
+    partial void OnAvailableChanging(bool value);
+    partial void OnAvailableChanged();
+    #endregion
+		
+		public Donates()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DonateID
+		{
+			get
+			{
+				return this._DonateID;
+			}
+			set
+			{
+				if ((this._DonateID != value))
+				{
+					this.OnDonateIDChanging(value);
+					this.SendPropertyChanging();
+					this._DonateID = value;
+					this.SendPropertyChanged("DonateID");
+					this.OnDonateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int NOT NULL")]
+		public int Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloodType", DbType="Int NOT NULL", CanBeNull=false)]
+		public global::bbFiles.BloodTypes BloodType
+		{
+			get
+			{
+				return this._BloodType;
+			}
+			set
+			{
+				if ((this._BloodType != value))
+				{
+					this.OnBloodTypeChanging(value);
+					this.SendPropertyChanging();
+					this._BloodType = value;
+					this.SendPropertyChanged("BloodType");
+					this.OnBloodTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RhMarker", DbType="Bit NOT NULL")]
+		public bool RhMarker
+		{
+			get
+			{
+				return this._RhMarker;
+			}
+			set
+			{
+				if ((this._RhMarker != value))
+				{
+					this.OnRhMarkerChanging(value);
+					this.SendPropertyChanging();
+					this._RhMarker = value;
+					this.SendPropertyChanged("RhMarker");
+					this.OnRhMarkerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonorPESEL", DbType="BigInt NOT NULL")]
+		public long DonorPESEL
+		{
+			get
+			{
+				return this._DonorPESEL;
+			}
+			set
+			{
+				if ((this._DonorPESEL != value))
+				{
+					this.OnDonorPESELChanging(value);
+					this.SendPropertyChanging();
+					this._DonorPESEL = value;
+					this.SendPropertyChanged("DonorPESEL");
+					this.OnDonorPESELChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Available", DbType="Bit NOT NULL")]
+		public bool Available
+		{
+			get
+			{
+				return this._Available;
+			}
+			set
+			{
+				if ((this._Available != value))
+				{
+					this.OnAvailableChanging(value);
+					this.SendPropertyChanging();
+					this._Available = value;
+					this.SendPropertyChanged("Available");
+					this.OnAvailableChanged();
 				}
 			}
 		}

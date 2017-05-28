@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace bbFiles.UserControls.UserManagement
+namespace bbFiles.UserControls.DonatesManagement
 {
     /// <summary>
     /// Logika interakcji dla klasy List.xaml
@@ -23,23 +23,24 @@ namespace bbFiles.UserControls.UserManagement
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(dg_UserManagement, typeof(Credentials));
+            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates));
         }
 
         public void Refresh()
         {
-            Utilities.RefreshGrid(dg_UserManagement, typeof(Credentials));
+            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates));
         }
-        public Credentials GetSelected()
+        public void Refresh(long pesel)
         {
-            Credentials selectedRow = (Credentials)dg_UserManagement.SelectedItem;
-            if(selectedRow == null)
-            {
-                throw new NullReferenceException(Properties.Strings.PositionIsNotSelected);
-            }
-            return selectedRow;
+            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates), pesel);
         }
 
-
+        private void dg_DonateManagement_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            if (((bbFiles.Donates)(e.Row.DataContext)).Available == false )
+            {
+                e.Row.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
     }
 }

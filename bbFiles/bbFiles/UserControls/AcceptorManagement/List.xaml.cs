@@ -23,15 +23,15 @@ namespace bbFiles.UserControls.AcceptorManagement
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
+            Utilities.RefreshGrid(dg_AcceptorManagement, typeof(bbFiles.Acceptors));
         }
         public void Refresh()
         {
-            Utilities.RefreshGrid(AcceptorManagementDataGrid, typeof(bbFiles.Acceptors));
+            Utilities.RefreshGrid(dg_AcceptorManagement, typeof(bbFiles.Acceptors));
         }
         public bbFiles.Acceptors GetSelected()
         {
-            bbFiles.Acceptors selectedRow = (bbFiles.Acceptors)AcceptorManagementDataGrid.SelectedItem;
+            bbFiles.Acceptors selectedRow = (bbFiles.Acceptors)dg_AcceptorManagement.SelectedItem;
             if (selectedRow == null)
             {
                 throw new NullReferenceException("Żadna pozycja nie została wybrana");

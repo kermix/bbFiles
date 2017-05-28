@@ -94,6 +94,7 @@
       <DependentUpon>Strings.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Structs\Acceptor.cs" />
+    <Compile Include="Structs\Donate.cs" />
     <Compile Include="Structs\Donor.cs" />
     <Compile Include="Structs\User.cs" />
     <Compile Include="Structs\UserDataContext.cs" />
@@ -102,6 +103,15 @@
     </Compile>
     <Compile Include="UserControls\Acceptors.xaml.cs">
       <DependentUpon>Acceptors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Donates.xaml.cs">
+      <DependentUpon>Donates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DonatesManagement\Add.xaml.cs">
+      <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DonatesManagement\List.xaml.cs">
+      <DependentUpon>List.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\DonorManagement\AddEdit.xaml.cs">
       <DependentUpon>AddEdit.xaml</DependentUpon>
@@ -127,6 +137,7 @@
     <Compile Include="Utilities\GetAllAcceptors.cs" />
     <Compile Include="Utilities\GetAllBloodTypes.cs" />
     <Compile Include="Utilities\GetAllCredentials.cs" />
+    <Compile Include="Utilities\GetAllDonates.cs" />
     <Compile Include="Utilities\GetAllDonors.cs" />
     <Compile Include="Utilities\GetAllRoles.cs" />
     <Compile Include="Utilities\RefreshGrid.cs" />
@@ -159,6 +170,18 @@
     <Page Include="UserControls\Acceptors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Donates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DonatesManagement\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DonatesManagement\List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DonorManagement\AddEdit.xaml">
       <Generator>MSBuild:Compile</Generator>

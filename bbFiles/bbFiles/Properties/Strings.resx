@@ -288,4 +288,13 @@
   <data name="PeselInvalid" xml:space="preserve">
     <value>Numer PESEL niepoprawny.</value>
   </data>
+  <data name="DonorWithPeselNotFound" xml:space="preserve">
+    <value>Nie znaleziono dawcy z takim numerem PESEL</value>
+  </data>
+  <data name="AmountMl" xml:space="preserve">
+    <value>Ilość [ml]</value>
+  </data>
+  <data name="DonateDate" xml:space="preserve">
+    <value>Data poboru</value>
+  </data>
 </root>

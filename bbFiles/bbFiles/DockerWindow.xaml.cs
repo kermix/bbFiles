@@ -72,5 +72,10 @@ namespace bbFiles
         {
             cc_Content.Content = new UserControls.Donors(user);
         }
+
+        private void btn_Donates_Click(object sender, RoutedEventArgs e)
+        {
+            cc_Content.Content = new UserControls.Donates(user);
+        }
     }
 }

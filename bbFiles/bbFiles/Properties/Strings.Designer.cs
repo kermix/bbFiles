@@ -124,6 +124,15 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ilość [ml].
+        /// </summary>
+        public static string AmountMl {
+            get {
+                return ResourceManager.GetString("AmountMl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data Urodzin.
         /// </summary>
         public static string BirthDate {
@@ -214,6 +223,15 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data poboru.
+        /// </summary>
+        public static string DonateDate {
+            get {
+                return ResourceManager.GetString("DonateDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pobrania.
         /// </summary>
         public static string Donates {
@@ -237,6 +255,15 @@ namespace bbFiles.Properties {
         public static string Donors {
             get {
                 return ResourceManager.GetString("Donors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie znaleziono dawcy z takim numerem PESEL.
+        /// </summary>
+        public static string DonorWithPeselNotFound {
+            get {
+                return ResourceManager.GetString("DonorWithPeselNotFound", resourceCulture);
             }
         }
         
