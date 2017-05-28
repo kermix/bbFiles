@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace bbFiles.Structs
 {
-    class Donor : UserContactInfo
+    partial class Donor : UserContactInfo
     {
         public string firstname { get; set; }
         public string surname { get; set; }
