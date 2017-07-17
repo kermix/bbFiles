@@ -17,8 +17,8 @@ namespace bbFiles
         }
         public static void RefreshAcceptors(System.Windows.Controls.DataGrid grid, string filter)
         {
-            IQueryable<Acceptors> acceptor = from c in (new databaseDataContext()).Acceptors
-                                             select c;         
+            IQueryable<Acceptors> acceptor = (from c in (new databaseDataContext()).Acceptors
+                                             select c).OrderBy(x => x.UserID);         
             grid.ItemsSource = new ObservableCollection<Acceptors>(acceptor);
         }
         public static void RefreshDonors(System.Windows.Controls.DataGrid grid, string filter)
@@ -30,22 +30,22 @@ namespace bbFiles
         }
         public static void RefreshDonates(System.Windows.Controls.DataGrid grid, string filter)
         {
-            IQueryable<Donates> donate = from c in (new databaseDataContext()).Donates
+            IQueryable<Donates> donate = (from c in (new databaseDataContext()).Donates
                                          where c.DonateID.ToString().StartsWith(filter.Trim())
-                                         select c;
+                                         select c).OrderByDescending(x => x.Available);
             grid.ItemsSource = new ObservableCollection<Donates>(donate);
         }
         public static void RefreshDonatesByPesel(System.Windows.Controls.DataGrid grid, string filter)
         {
-            IQueryable<Donates> donate = from c in (new databaseDataContext()).Donates
+            IQueryable<Donates> donate = (from c in (new databaseDataContext()).Donates
                                          where c.DonorPESEL.ToString().StartsWith(filter.Trim())
-                                         select c;
+                                         select c).OrderByDescending(x => x.Available);
             grid.ItemsSource = new ObservableCollection<Donates>(donate);
         }
         public static void RefreshOrders(System.Windows.Controls.DataGrid grid, string filter)
         {
-            IQueryable<Orders> order = from c in (new databaseDataContext()).Orders
-                                        select c;
+            IQueryable<Orders> order = (from c in (new databaseDataContext()).Orders
+                                        select c).OrderBy(x => x.Send);
             grid.ItemsSource = new ObservableCollection<Orders>(order);
         }
     }

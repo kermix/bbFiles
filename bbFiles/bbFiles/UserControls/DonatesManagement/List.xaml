@@ -13,7 +13,19 @@
                   AutoGenerateColumns="False"
                     SelectionUnit="FullRow"
                   SelectionMode="Single"
-                  IsReadOnly="True" LoadingRow="dg_DonateManagement_LoadingRow">
+                  IsReadOnly="True">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Available}" Value="False">
+                            <Setter Property="Foreground" Value="Gray"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Available}" Value="True">
+                            <Setter Property="Foreground" Value="Black"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding DonateID}"
                                     Header="{x:Static p:Strings.ID}"/>

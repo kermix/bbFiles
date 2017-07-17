@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Utilities\GetAllBloodTypes.cs" />
     <Compile Include="Utilities\GetAllRoles.cs" />
+    <Compile Include="Utilities\IEnumerable.cs" />
     <Compile Include="Utilities\RefreshList.cs" />
     <Compile Include="Utilities\UcSendEndOfEdition.cs" />
     <Compile Include="Utilities\ValidatePesel.cs" />

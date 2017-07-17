@@ -20,7 +20,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Button x:Name="btn_AddOrder"
                     Content="{x:Static p:Strings.Add}"
@@ -32,6 +33,11 @@
                     Grid.Row="1"
                     Style="{StaticResource Button}"
                     Click="btn_Refresh_Click"/>
+            <Button x:Name="btn_MarkSend"
+                    Content="{x:Static p:Strings.Send}"
+                    Grid.Row="2"
+                    Style="{StaticResource Button}"
+                    Click="btn_MarkSend_Click"/>
         </Grid>
         <Label x:Name="lb_Message" 
                Content="" 

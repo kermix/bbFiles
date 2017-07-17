@@ -13,7 +13,16 @@
                   AutoGenerateColumns="False" 
                   SelectionUnit="FullRow" 
                   SelectionMode="Single" 
-                  IsReadOnly="True" LoadingRow="dg_AcceptorManagement_LoadingRow">
+                  IsReadOnly="True">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserID}" Value="-1">
+                            <Setter Property="Foreground" Value="Gray"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding AcceptorID}" 
                                     Header="{x:Static p:Strings.ID}" 

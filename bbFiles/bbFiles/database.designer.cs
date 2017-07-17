@@ -986,6 +986,8 @@ namespace bbFiles
 		
 		private System.Nullable<double> _Amount;
 		
+		private System.Nullable<bool> _Send;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1004,6 +1006,8 @@ namespace bbFiles
     partial void OnRhMarkerChanged();
     partial void OnAmountChanging(System.Nullable<double> value);
     partial void OnAmountChanged();
+    partial void OnSendChanging(System.Nullable<bool> value);
+    partial void OnSendChanged();
     #endregion
 		
 		public Orders()
@@ -1011,7 +1015,7 @@ namespace bbFiles
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int OrderID
 		{
 			get
@@ -1147,6 +1151,26 @@ namespace bbFiles
 					this._Amount = value;
 					this.SendPropertyChanged("Amount");
 					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Send", DbType="Bit")]
+		public System.Nullable<bool> Send
+		{
+			get
+			{
+				return this._Send;
+			}
+			set
+			{
+				if ((this._Send != value))
+				{
+					this.OnSendChanging(value);
+					this.SendPropertyChanging();
+					this._Send = value;
+					this.SendPropertyChanged("Send");
+					this.OnSendChanged();
 				}
 			}
 		}

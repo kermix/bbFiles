@@ -35,7 +35,7 @@
                 <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Content="{x:Static p:Strings.AcceptorName}"
+            <Label Content="{x:Static p:Strings.AcceptorID}"
                    Grid.Row="0"
                    Grid.Column="0"/>
             <Label Content="{x:Static p:Strings.BloodType}"
@@ -47,14 +47,20 @@
             <Label Content="{x:Static p:Strings.Amount}"
                    Grid.Row="3"
                    Grid.Column="0"/>
-            <TextBox x:Name="tb_AcceptorName"
+            <TextBox x:Name="tb_AcceptorID"
                      Text="{Binding Path=acceptorID, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="0"
                      Grid.Column="1"/>
             <ComboBox x:Name="cb_BloodType"
+                      ItemsSource="{Binding Source={StaticResource BloodTypes}}"
+                        DisplayMemberPath="Value" SelectedValuePath="Key" 
+                        SelectedValue="{Binding Path=bloodType, Mode=TwoWay}"
                       Grid.Row="1"
                       Grid.Column="1"/>
             <CheckBox x:Name="cb_RhMarker"
+                      IsThreeState="False" 
+                      IsChecked="{Binding Path=rhMarker, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" 
                       Grid.Row="2"
                       Grid.Column="1"/>
             <TextBox x:Name="tb_Amount"

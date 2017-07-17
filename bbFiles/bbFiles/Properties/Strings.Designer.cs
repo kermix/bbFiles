@@ -47,7 +47,7 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
-        ///   Zastępuje właściwość CurrentUICulture bieżącego wątku dla wszystkich
+        ///   Przesłania właściwość CurrentUICulture bieżącego wątku dla wszystkich
         ///   przypadków przeszukiwania zasobów za pomocą tej klasy zasobów wymagającej zdefiniowania typu.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -133,7 +133,7 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ilość [l].
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ilość [ml].
         /// </summary>
         public static string Amount {
             get {
@@ -439,6 +439,15 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zbyt małe zapotrzebowanie. W tej chwili minimalna wartość na żądaną grupę krwii to  .
+        /// </summary>
+        public static string OrderTooSmall {
+            get {
+                return ResourceManager.GetString("OrderTooSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hasło.
         /// </summary>
         public static string Password {
@@ -579,6 +588,15 @@ namespace bbFiles.Properties {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wysłane.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
             }
         }
         

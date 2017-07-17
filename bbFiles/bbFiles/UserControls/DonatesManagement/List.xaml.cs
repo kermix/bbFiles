@@ -39,12 +39,5 @@ namespace bbFiles.UserControls.DonatesManagement
                 refreshList = RefreshList.RefreshDonatesByPesel;
             refreshList(dg_DonateManagement, filter.ToString());
         }
-        private void dg_DonateManagement_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            if (((bbFiles.Donates)(e.Row.DataContext)).Available == false )
-            {
-                e.Row.Foreground = new SolidColorBrush(Colors.Gray);
-            }
-        }
     }
 }

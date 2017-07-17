@@ -307,6 +307,12 @@
     <value>Data zamówenia</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Ilość [l]</value>
+    <value>Ilość [ml]</value>
+  </data>
+  <data name="OrderTooSmall" xml:space="preserve">
+    <value>Zbyt małe zapotrzebowanie. W tej chwili minimalna wartość na żądaną grupę krwii to  </value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Wysłane</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Collections.ObjectModel;
 
 namespace bbFiles.UserControls.OrdersManagement
@@ -12,16 +13,26 @@ namespace bbFiles.UserControls.OrdersManagement
     /// </summary>
     public partial class List : UserControl
     {
-
+        RefreshList.Refresh<DataGrid, string> refreshList = RefreshList.RefreshOrders;
         public List()
         {
             InitializeComponent();
-            
+            this.Refresh();
         }
 
-        private void dg_OrderManagement_LoadingRow(object sender, DataGridRowEventArgs e)
+        public void Refresh()
         {
-           
+            refreshList(dg_OrderManagement);
+        }
+
+        public bbFiles.Orders GetSelected()
+        {
+            bbFiles.Orders selectedRow = (bbFiles.Orders)dg_OrderManagement.SelectedItem;
+            if (selectedRow == null)
+            {
+                throw new NullReferenceException(Properties.Strings.PositionIsNotSelected);
+            }
+            return selectedRow;
         }
     }
     [ValueConversion(typeof(string), typeof(List<string>))]
@@ -37,4 +48,6 @@ namespace bbFiles.UserControls.OrdersManagement
             throw new NotImplementedException();
         }
     }
+
+
 }

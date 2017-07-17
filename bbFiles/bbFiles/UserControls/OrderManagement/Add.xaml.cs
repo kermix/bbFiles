@@ -23,8 +23,9 @@ namespace bbFiles.UserControls.OrderManagement
     {
         User user;
         Structs.Order order = new Structs.Order();
-        public Add()
+        public Add(User user)
         {
+            this.user = user;
             InitializeComponent();
             this.DataContext = order;
         }

@@ -41,11 +41,5 @@ namespace bbFiles.UserControls.AcceptorManagement
             }
             return selectedRow;
         }
-
-        private void dg_AcceptorManagement_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            if (((bbFiles.Acceptors)(e.Row.DataContext)).UserID == -1)
-                e.Row.Foreground = new SolidColorBrush(Colors.Gray);
-        }
     }
 }

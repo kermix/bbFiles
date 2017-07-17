@@ -11,6 +11,7 @@ namespace bbFiles.Structs
         public BloodTypes bloodtype { get; set; }
         public bool rhMarker { get; set; }
         public long PESEL { set; get; }
+  
         public Donor() { }
         public Donor(string firstname, string surname, DateTime birthdate, BloodTypes bloodtype, bool rhMarker, long pesel, string email, int? phone)
         {

@@ -16,17 +16,29 @@
                     AutoGenerateColumns="False"
                     SelectionUnit="FullRow"
                     SelectionMode="Single"
-                    IsReadOnly="True"
-                    LoadingRow="dg_OrderManagement_LoadingRow">
+                    IsReadOnly="True">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Send}" Value="True">
+                            <Setter Property="Foreground" Value="Gray"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Send}" Value="False">
+                            <Setter Property="Foreground" Value="Black"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding AcceptorID}"
                                     Header="{x:Static p:Strings.AcceptorID}"
                                     Width="*"/>
                 <DataGridTemplateColumn Header="{x:Static p:Strings.OrderDate}" 
-                                        Width="0.75*">
+                                        Width="0.75*"
+                                        >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding OrderDate, StringFormat=\{0:d\}}" />
+                            <TextBlock Text="{Binding OrderDate, StringFormat=\{0:d\}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

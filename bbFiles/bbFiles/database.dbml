@@ -47,13 +47,14 @@
   </Table>
   <Table Name="dbo.Orders" Member="Orders">
     <Type Name="Orders">
-      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AcceptorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DonateID" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="OrderDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="BloodType" Type="global::bbFiles.BloodTypes" DbType="SmallInt" CanBeNull="true" />
       <Column Name="RhMarker" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Send" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
