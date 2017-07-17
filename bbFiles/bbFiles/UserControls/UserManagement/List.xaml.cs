@@ -20,15 +20,15 @@ namespace bbFiles.UserControls.UserManagement
     /// </summary>
     public partial class List : UserControl
     {
+        RefreshList.Refresh<DataGrid, string> refreshList = RefreshList.RefreshCredentials;
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(dg_UserManagement, typeof(Credentials));
+            this.Refresh();
         }
-
         public void Refresh()
         {
-            Utilities.RefreshGrid(dg_UserManagement, typeof(Credentials));
+            refreshList(dg_UserManagement);
         }
         public Credentials GetSelected()
         {

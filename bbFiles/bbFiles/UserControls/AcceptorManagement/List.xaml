@@ -13,7 +13,7 @@
                   AutoGenerateColumns="False" 
                   SelectionUnit="FullRow" 
                   SelectionMode="Single" 
-                  IsReadOnly="True">
+                  IsReadOnly="True" LoadingRow="dg_AcceptorManagement_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding AcceptorID}" 
                                     Header="{x:Static p:Strings.ID}" 

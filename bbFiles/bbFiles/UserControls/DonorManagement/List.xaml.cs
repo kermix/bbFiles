@@ -20,18 +20,19 @@ namespace bbFiles.UserControls.DonorManagement
     /// </summary>
     public partial class List : UserControl
     {
+        RefreshList.Refresh<DataGrid, string> refreshList = RefreshList.RefreshDonors;
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(dg_DonorManagement, typeof(bbFiles.Donors));
-        }
+            this.Refresh();
+    }
         public void Refresh()
         {
-            Utilities.RefreshGrid(dg_DonorManagement, typeof(bbFiles.Donors));
+           refreshList(dg_DonorManagement);
         }
         public void Refresh(long pesel)
         {
-            Utilities.RefreshGrid(dg_DonorManagement, typeof(bbFiles.Donors), pesel);
+            refreshList(dg_DonorManagement, pesel.ToString());
         }
         public bbFiles.Donors GetSelected()
         {

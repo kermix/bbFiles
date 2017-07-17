@@ -297,4 +297,16 @@
   <data name="DonateDate" xml:space="preserve">
     <value>Data poboru</value>
   </data>
+  <data name="AcceptorID" xml:space="preserve">
+    <value>ID odbiorcy</value>
+  </data>
+  <data name="DonateIDs" xml:space="preserve">
+    <value>ID pobrań</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>Data zamówenia</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Ilość [l]</value>
+  </data>
 </root>

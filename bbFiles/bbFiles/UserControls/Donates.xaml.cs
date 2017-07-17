@@ -61,17 +61,23 @@ namespace bbFiles.UserControls
 
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)
         {
-            tb_PeselFilter.Text = "";
+            if (tb_Filter.Text != "")
+                tb_Filter.Text = "";
+            else
+                DonatesList.Refresh();
         }
 
-        private void tb_PeselFilter_TextChanged(object sender, TextChangedEventArgs e)
+        private void tb_Filter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            long pesel;
-            if (tb_PeselFilter.Text.Trim() != "")
+            long filter;
+            if (tb_Filter.Text.Trim() != "")
             {
-                bool pResult = long.TryParse(tb_PeselFilter.Text.Trim(), out pesel);
+                bool pResult = long.TryParse(tb_Filter.Text.Trim(), out filter);
                 if (pResult)
-                    DonatesList.Refresh(pesel);
+                    if (cb_Filter.SelectedIndex == 0)
+                        DonatesList.Refresh(filter, false); // PESEL
+                    else if (cb_Filter.SelectedIndex == 1)
+                        DonatesList.Refresh(filter); //ID
             }
             else
                 DonatesList.Refresh();

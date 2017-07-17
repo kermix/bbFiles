@@ -20,21 +20,25 @@ namespace bbFiles.UserControls.DonatesManagement
     /// </summary>
     public partial class List : UserControl
     {
+        RefreshList.Refresh<DataGrid, string> refreshList;
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates));
+            this.Refresh();
         }
-
         public void Refresh()
         {
-            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates));
+            refreshList = RefreshList.RefreshDonates;
+            refreshList(dg_DonateManagement);
         }
-        public void Refresh(long pesel)
+        public void Refresh(long filter, bool isID = true)
         {
-            Utilities.RefreshGrid(dg_DonateManagement, typeof(bbFiles.Donates), pesel);
+            if (isID)
+                refreshList = RefreshList.RefreshDonates;
+            else
+                refreshList = RefreshList.RefreshDonatesByPesel;
+            refreshList(dg_DonateManagement, filter.ToString());
         }
-
         private void dg_DonateManagement_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             if (((bbFiles.Donates)(e.Row.DataContext)).Available == false )

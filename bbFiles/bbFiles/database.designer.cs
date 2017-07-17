@@ -33,9 +33,6 @@ namespace bbFiles
     partial void InsertAcceptors(Acceptors instance);
     partial void UpdateAcceptors(Acceptors instance);
     partial void DeleteAcceptors(Acceptors instance);
-    partial void InsertAccepts(Accepts instance);
-    partial void UpdateAccepts(Accepts instance);
-    partial void DeleteAccepts(Accepts instance);
     partial void InsertCredentials(Credentials instance);
     partial void UpdateCredentials(Credentials instance);
     partial void DeleteCredentials(Credentials instance);
@@ -45,6 +42,9 @@ namespace bbFiles
     partial void InsertDonates(Donates instance);
     partial void UpdateDonates(Donates instance);
     partial void DeleteDonates(Donates instance);
+    partial void InsertOrders(Orders instance);
+    partial void UpdateOrders(Orders instance);
+    partial void DeleteOrders(Orders instance);
     #endregion
 		
 		public databaseDataContext() : 
@@ -85,14 +85,6 @@ namespace bbFiles
 			}
 		}
 		
-		public System.Data.Linq.Table<Accepts> Accepts
-		{
-			get
-			{
-				return this.GetTable<Accepts>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Credentials> Credentials
 		{
 			get
@@ -114,6 +106,14 @@ namespace bbFiles
 			get
 			{
 				return this.GetTable<Donates>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Orders> Orders
+		{
+			get
+			{
+				return this.GetTable<Orders>();
 			}
 		}
 	}
@@ -275,164 +275,6 @@ namespace bbFiles
 					this._UserID = value;
 					this.SendPropertyChanged("UserID");
 					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Accepts")]
-	public partial class Accepts : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AcceptID;
-		
-		private int _AcceptorID;
-		
-		private int _DonateID;
-		
-		private System.DateTime _AcceptDate;
-		
-		private bool _Status;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAcceptIDChanging(int value);
-    partial void OnAcceptIDChanged();
-    partial void OnAcceptorIDChanging(int value);
-    partial void OnAcceptorIDChanged();
-    partial void OnDonateIDChanging(int value);
-    partial void OnDonateIDChanged();
-    partial void OnAcceptDateChanging(System.DateTime value);
-    partial void OnAcceptDateChanged();
-    partial void OnStatusChanging(bool value);
-    partial void OnStatusChanged();
-    #endregion
-		
-		public Accepts()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcceptID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int AcceptID
-		{
-			get
-			{
-				return this._AcceptID;
-			}
-			set
-			{
-				if ((this._AcceptID != value))
-				{
-					this.OnAcceptIDChanging(value);
-					this.SendPropertyChanging();
-					this._AcceptID = value;
-					this.SendPropertyChanged("AcceptID");
-					this.OnAcceptIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcceptorID", DbType="Int NOT NULL")]
-		public int AcceptorID
-		{
-			get
-			{
-				return this._AcceptorID;
-			}
-			set
-			{
-				if ((this._AcceptorID != value))
-				{
-					this.OnAcceptorIDChanging(value);
-					this.SendPropertyChanging();
-					this._AcceptorID = value;
-					this.SendPropertyChanged("AcceptorID");
-					this.OnAcceptorIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonateID", DbType="Int NOT NULL")]
-		public int DonateID
-		{
-			get
-			{
-				return this._DonateID;
-			}
-			set
-			{
-				if ((this._DonateID != value))
-				{
-					this.OnDonateIDChanging(value);
-					this.SendPropertyChanging();
-					this._DonateID = value;
-					this.SendPropertyChanged("DonateID");
-					this.OnDonateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcceptDate", DbType="Date NOT NULL")]
-		public System.DateTime AcceptDate
-		{
-			get
-			{
-				return this._AcceptDate;
-			}
-			set
-			{
-				if ((this._AcceptDate != value))
-				{
-					this.OnAcceptDateChanging(value);
-					this.SendPropertyChanging();
-					this._AcceptDate = value;
-					this.SendPropertyChanged("AcceptDate");
-					this.OnAcceptDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL")]
-		public bool Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
 				}
 			}
 		}
@@ -1099,6 +941,212 @@ namespace bbFiles
 					this._Available = value;
 					this.SendPropertyChanged("Available");
 					this.OnAvailableChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
+	public partial class Orders : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OrderID;
+		
+		private int _AcceptorID;
+		
+		private string _DonateID;
+		
+		private System.DateTime _OrderDate;
+		
+		private global::bbFiles.BloodTypes _BloodType;
+		
+		private System.Nullable<bool> _RhMarker;
+		
+		private System.Nullable<double> _Amount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrderIDChanging(int value);
+    partial void OnOrderIDChanged();
+    partial void OnAcceptorIDChanging(int value);
+    partial void OnAcceptorIDChanged();
+    partial void OnDonateIDChanging(string value);
+    partial void OnDonateIDChanged();
+    partial void OnOrderDateChanging(System.DateTime value);
+    partial void OnOrderDateChanged();
+    partial void OnBloodTypeChanging(global::bbFiles.BloodTypes value);
+    partial void OnBloodTypeChanged();
+    partial void OnRhMarkerChanging(System.Nullable<bool> value);
+    partial void OnRhMarkerChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    #endregion
+		
+		public Orders()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this.OnOrderIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrderID = value;
+					this.SendPropertyChanged("OrderID");
+					this.OnOrderIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcceptorID", DbType="Int NOT NULL")]
+		public int AcceptorID
+		{
+			get
+			{
+				return this._AcceptorID;
+			}
+			set
+			{
+				if ((this._AcceptorID != value))
+				{
+					this.OnAcceptorIDChanging(value);
+					this.SendPropertyChanging();
+					this._AcceptorID = value;
+					this.SendPropertyChanged("AcceptorID");
+					this.OnAcceptorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DonateID", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string DonateID
+		{
+			get
+			{
+				return this._DonateID;
+			}
+			set
+			{
+				if ((this._DonateID != value))
+				{
+					this.OnDonateIDChanging(value);
+					this.SendPropertyChanging();
+					this._DonateID = value;
+					this.SendPropertyChanged("DonateID");
+					this.OnDonateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderDate", DbType="Date NOT NULL")]
+		public System.DateTime OrderDate
+		{
+			get
+			{
+				return this._OrderDate;
+			}
+			set
+			{
+				if ((this._OrderDate != value))
+				{
+					this.OnOrderDateChanging(value);
+					this.SendPropertyChanging();
+					this._OrderDate = value;
+					this.SendPropertyChanged("OrderDate");
+					this.OnOrderDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloodType", DbType="SmallInt", CanBeNull=true)]
+		public global::bbFiles.BloodTypes BloodType
+		{
+			get
+			{
+				return this._BloodType;
+			}
+			set
+			{
+				if ((this._BloodType != value))
+				{
+					this.OnBloodTypeChanging(value);
+					this.SendPropertyChanging();
+					this._BloodType = value;
+					this.SendPropertyChanged("BloodType");
+					this.OnBloodTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RhMarker", DbType="Bit")]
+		public System.Nullable<bool> RhMarker
+		{
+			get
+			{
+				return this._RhMarker;
+			}
+			set
+			{
+				if ((this._RhMarker != value))
+				{
+					this.OnRhMarkerChanging(value);
+					this.SendPropertyChanging();
+					this._RhMarker = value;
+					this.SendPropertyChanged("RhMarker");
+					this.OnRhMarkerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
 				}
 			}
 		}

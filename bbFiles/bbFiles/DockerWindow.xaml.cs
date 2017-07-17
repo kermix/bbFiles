@@ -27,7 +27,7 @@ namespace bbFiles
             if (user.IsInRole("Admin"))
             {
                 btn_Acceptors.IsEnabled = true;
-                btn_Accepts.IsEnabled = true;
+                btn_Orders.IsEnabled = true;
                 btn_Donates.IsEnabled = true;
                 btn_Donors.IsEnabled = true;
                 btn_User.IsEnabled = true;
@@ -36,14 +36,14 @@ namespace bbFiles
             else if (user.IsInRole("Employee"))
             {
                 btn_Acceptors.IsEnabled = true;
-                btn_Accepts.IsEnabled = true;
+                btn_Orders.IsEnabled = true;
                 btn_Donates.IsEnabled = true;
                 btn_Donors.IsEnabled = true;
                 btn_Statistics.IsEnabled = true;
             }
             else if (user.IsInRole("Acceptor"))
             {
-                btn_Accepts.IsEnabled = true;
+                btn_Orders.IsEnabled = true;
                 btn_Statistics.IsEnabled = true;
             }
             else
@@ -76,6 +76,11 @@ namespace bbFiles
         private void btn_Donates_Click(object sender, RoutedEventArgs e)
         {
             cc_Content.Content = new UserControls.Donates(user);
+        }
+
+        private void btn_Orders_Click(object sender, RoutedEventArgs e)
+        {
+            cc_Content.Content = new UserControls.Orders(user);
         }
     }
 }

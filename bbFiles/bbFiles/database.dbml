@@ -10,15 +10,6 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.Accepts" Member="Accepts">
-    <Type Name="Accepts">
-      <Column Name="AcceptID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="AcceptorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DonateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AcceptDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Credentials" Member="Credentials">
     <Type Name="Credentials">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -52,6 +43,17 @@
       <Column Name="RhMarker" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="DonorPESEL" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Available" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Orders">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AcceptorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DonateID" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="BloodType" Type="global::bbFiles.BloodTypes" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="RhMarker" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

@@ -67,7 +67,10 @@ namespace bbFiles.UserControls
         }
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)
         {
-            tb_PeselFilter.Text = "";
+            if (tb_PeselFilter.Text != "")
+                tb_PeselFilter.Text = "";
+            else
+                DonorsList.Refresh();
         }
 
         private void tb_PeselFilter_TextChanged(object sender, TextChangedEventArgs e)

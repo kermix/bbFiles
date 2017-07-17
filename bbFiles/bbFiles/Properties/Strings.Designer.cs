@@ -70,6 +70,15 @@ namespace bbFiles.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu ID odbiorcy.
+        /// </summary>
+        public static string AcceptorID {
+            get {
+                return ResourceManager.GetString("AcceptorID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa odbiorcy.
         /// </summary>
         public static string AcceptorName {
@@ -120,6 +129,15 @@ namespace bbFiles.Properties {
         public static string Adress {
             get {
                 return ResourceManager.GetString("Adress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ilość [l].
+        /// </summary>
+        public static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
             }
         }
         
@@ -228,6 +246,15 @@ namespace bbFiles.Properties {
         public static string DonateDate {
             get {
                 return ResourceManager.GetString("DonateDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu ID pobrań.
+        /// </summary>
+        public static string DonateIDs {
+            get {
+                return ResourceManager.GetString("DonateIDs", resourceCulture);
             }
         }
         
@@ -399,6 +426,15 @@ namespace bbFiles.Properties {
         public static string NoSuchUser {
             get {
                 return ResourceManager.GetString("NoSuchUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data zamówenia.
+        /// </summary>
+        public static string OrderDate {
+            get {
+                return ResourceManager.GetString("OrderDate", resourceCulture);
             }
         }
         

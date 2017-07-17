@@ -35,11 +35,11 @@ namespace bbFiles.Structs
                         DonorPESEL = (long)pesel,
                         Available = true                        
                     };
-                    var bloodGiven = (from c in dc.Donors
-                                      where c.PESEL == pesel
-                                      select c.BloodGiven).Single();
                     dc.Donates.InsertOnSubmit(newDonateRow);
-                    bloodGiven += amount != null ? (int)amount / 1000 : 0;
+                    var donator = (from c in dc.Donors
+                                      where c.PESEL == pesel
+                                      select c).Single();
+                    donator.BloodGiven += ((int)amount / 1000.0);
                     dc.SubmitChanges();
                 }
             }

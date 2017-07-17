@@ -20,15 +20,18 @@ namespace bbFiles.UserControls.AcceptorManagement
     /// </summary>
     public partial class List : UserControl
     {
+        RefreshList.Refresh<DataGrid, string> refreshList = RefreshList.RefreshAcceptors;
         public List()
         {
             InitializeComponent();
-            Utilities.RefreshGrid(dg_AcceptorManagement, typeof(bbFiles.Acceptors));
+            this.Refresh();
         }
+
         public void Refresh()
         {
-            Utilities.RefreshGrid(dg_AcceptorManagement, typeof(bbFiles.Acceptors));
+            refreshList(dg_AcceptorManagement);
         }
+
         public bbFiles.Acceptors GetSelected()
         {
             bbFiles.Acceptors selectedRow = (bbFiles.Acceptors)dg_AcceptorManagement.SelectedItem;
@@ -37,6 +40,12 @@ namespace bbFiles.UserControls.AcceptorManagement
                 throw new NullReferenceException("Żadna pozycja nie została wybrana");
             }
             return selectedRow;
+        }
+
+        private void dg_AcceptorManagement_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            if (((bbFiles.Acceptors)(e.Row.DataContext)).UserID == -1)
+                e.Row.Foreground = new SolidColorBrush(Colors.Gray);
         }
     }
 }

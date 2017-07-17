@@ -96,6 +96,7 @@
     <Compile Include="Structs\Acceptor.cs" />
     <Compile Include="Structs\Donate.cs" />
     <Compile Include="Structs\Donor.cs" />
+    <Compile Include="Structs\Order.cs" />
     <Compile Include="Structs\User.cs" />
     <Compile Include="Structs\UserDataContext.cs" />
     <Compile Include="UserControls\AcceptorManagement\List.xaml.cs">
@@ -122,6 +123,15 @@
     <Compile Include="UserControls\Donors.xaml.cs">
       <DependentUpon>Donors.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderManagement\Add.xaml.cs">
+      <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Orders.xaml.cs">
+      <DependentUpon>Orders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderManagement\List.xaml.cs">
+      <DependentUpon>List.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
@@ -134,13 +144,9 @@
     <Compile Include="UserControls\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\GetAllAcceptors.cs" />
     <Compile Include="Utilities\GetAllBloodTypes.cs" />
-    <Compile Include="Utilities\GetAllCredentials.cs" />
-    <Compile Include="Utilities\GetAllDonates.cs" />
-    <Compile Include="Utilities\GetAllDonors.cs" />
     <Compile Include="Utilities\GetAllRoles.cs" />
-    <Compile Include="Utilities\RefreshGrid.cs" />
+    <Compile Include="Utilities\RefreshList.cs" />
     <Compile Include="Utilities\UcSendEndOfEdition.cs" />
     <Compile Include="Utilities\ValidatePesel.cs" />
     <Page Include="ChangePasswordWindow.xaml">
@@ -194,6 +200,18 @@
     <Page Include="UserControls\Donors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\OrderManagement\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Orders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderManagement\List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Statistics.xaml">
       <Generator>MSBuild:Compile</Generator>
