@@ -41,6 +41,7 @@ namespace bbFiles.Structs
                     DonateID = GetAvaliableDonates(dc),
                     Send = false
                 };
+                
                 dc.Orders.InsertOnSubmit(newOrderRow);
                 dc.SubmitChanges();
             }
@@ -50,22 +51,35 @@ namespace bbFiles.Structs
         public string GetAvaliableDonates(databaseDataContext dc)
         {
             int blockedBlood = 0;
-            var avaliableDonates = dc.Donates.Where(x => x.Available == true && x.BloodType == bloodType && x.RhMarker == rhMarker)
-                .OrderBy(x => x.Amount)
+            var avaliableDonates = dc.Donates.Where(x => x.Available == true && 
+                                                        x.BloodType == bloodType && 
+                                                        x.RhMarker == rhMarker &&
+                                                        x.Amount <= amount)
+                .OrderByDescending(x => x.Amount)
                 .AsEnumerable()
                 .Select(x =>
                         {
                             blockedBlood += x.Amount;
                             return new { Donate = x, blood = blockedBlood };
                         })
-                .TakeWhile(x => (x.blood <= amount), true)
+                .TakeWhile(x => (x.blood < amount), true)
                 .Select(x => { x.Donate.Available = false; return x.Donate.DonateID; });
 
+            BlockAmountOfBlood(avaliableDonates, dc);
 
-            string blockedDonates = string.Join(",", avaliableDonates);
+            return (string.Join(",", avaliableDonates));
+        }
 
-            return blockedDonates;
+        public void BlockAmountOfBlood(IEnumerable<int> blockedIDs, databaseDataContext dc)
+        {
+            var stat = (from c in dc.Stats
+                        where c.BloodType.StartsWith((bloodType).ToString() + (rhMarker == true ? "+" : "-"))
+                        select c).Single();
 
+            foreach(int donateID in blockedIDs)
+            {
+                stat.TotalAmount -= dc.Donates.Where(x => x.DonateID == donateID).Select(x => x.Amount).Single();
+            }
         }
 
 

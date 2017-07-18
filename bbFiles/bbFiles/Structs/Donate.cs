@@ -41,6 +41,11 @@ namespace bbFiles.Structs
                                       select c).Single();
                     donator.BloodGiven += ((int)amount / 1000.0);
                     dc.SubmitChanges();
+                    var stat = (from c in dc.Stats
+                                where c.BloodType.StartsWith((q.BloodType).ToString() + (q.RhMarker == true ? "+" : "-"))
+                                select c).Single();
+                    stat.TotalAmount += ((int)amount);
+                    dc.SubmitChanges();
                 }
             }
             catch(Exception ex)

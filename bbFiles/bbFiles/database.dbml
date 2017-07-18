@@ -57,4 +57,10 @@
       <Column Name="Send" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Stats" Member="Stats">
+    <Type Name="Stats">
+      <Column Name="BloodType" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

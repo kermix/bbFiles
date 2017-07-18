@@ -47,7 +47,8 @@ namespace bbFiles
             }
             catch (Exception ex)
             {
-                lb_Message.Content = ex.Message;
+                //lb_Message.Content = ex.Message;
+                MessageBox.Show(ex.ToString());
             }
         }
 

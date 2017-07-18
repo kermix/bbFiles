@@ -45,6 +45,9 @@ namespace bbFiles
     partial void InsertOrders(Orders instance);
     partial void UpdateOrders(Orders instance);
     partial void DeleteOrders(Orders instance);
+    partial void InsertStats(Stats instance);
+    partial void UpdateStats(Stats instance);
+    partial void DeleteStats(Stats instance);
     #endregion
 		
 		public databaseDataContext() : 
@@ -114,6 +117,14 @@ namespace bbFiles
 			get
 			{
 				return this.GetTable<Orders>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Stats> Stats
+		{
+			get
+			{
+				return this.GetTable<Stats>();
 			}
 		}
 	}
@@ -1171,6 +1182,92 @@ namespace bbFiles
 					this._Send = value;
 					this.SendPropertyChanged("Send");
 					this.OnSendChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Stats")]
+	public partial class Stats : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _BloodType;
+		
+		private long _TotalAmount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBloodTypeChanging(string value);
+    partial void OnBloodTypeChanged();
+    partial void OnTotalAmountChanging(long value);
+    partial void OnTotalAmountChanged();
+    #endregion
+		
+		public Stats()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloodType", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string BloodType
+		{
+			get
+			{
+				return this._BloodType;
+			}
+			set
+			{
+				if ((this._BloodType != value))
+				{
+					this.OnBloodTypeChanging(value);
+					this.SendPropertyChanging();
+					this._BloodType = value;
+					this.SendPropertyChanged("BloodType");
+					this.OnBloodTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="BigInt NOT NULL")]
+		public long TotalAmount
+		{
+			get
+			{
+				return this._TotalAmount;
+			}
+			set
+			{
+				if ((this._TotalAmount != value))
+				{
+					this.OnTotalAmountChanging(value);
+					this.SendPropertyChanging();
+					this._TotalAmount = value;
+					this.SendPropertyChanged("TotalAmount");
+					this.OnTotalAmountChanged();
 				}
 			}
 		}

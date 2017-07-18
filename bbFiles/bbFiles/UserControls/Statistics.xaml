@@ -4,15 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:bbFiles.UserControls"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="560" d:DesignWidth="910">
+             d:DesignHeight="560" d:DesignWidth="910" d:DataContext="{d:DesignInstance local:Statistics}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Canvas Grid.Row="0" Grid.Column="0"/>
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Grupa krwi" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="% rezerwy" LabelFormatter="{Binding Formatter}" 
+                          MinValue="0" MaxValue="100"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
     </Grid>
 </UserControl>
