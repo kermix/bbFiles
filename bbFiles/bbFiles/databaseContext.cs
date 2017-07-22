@@ -8,7 +8,7 @@ namespace bbFiles
     public partial class databaseContext : DbContext
     {
         public databaseContext()
-            : base("name=databaseContext")
+            : base("name=localdbConnectionString")
         {
         }
 

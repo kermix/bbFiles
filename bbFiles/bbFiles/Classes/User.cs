@@ -17,8 +17,7 @@ namespace bbFiles
         public IIdentity Identity { get { return this; } }
         public bool IsInRole(string role)
         {
-            databaseDataContext dc = new databaseDataContext();
-            var q = (from r in dc.Credentials
+            var q = (from r in (new databaseContext()).Credentials
                      where r.Login == name
                      select r.Role).SingleOrDefault();
             if ((role.ToLower() == "admin") && (q == Roles.ADMIN))
@@ -34,8 +33,7 @@ namespace bbFiles
         {
             try
             {
-                databaseDataContext dc = new databaseDataContext();
-                var q = (from r in dc.Credentials
+                var q = (from r in (new databaseContext()).Credentials
                          where r.Login == name
                          select r.PasswordChanged).SingleOrDefault();
                 if (q)
@@ -56,13 +54,13 @@ namespace bbFiles
         {
             try
             {
-                databaseDataContext dc = new databaseDataContext();
+                databaseContext dc = new databaseContext();
                 var q = (from r in dc.Credentials
                          where r.Login == name
                          select r).SingleOrDefault();
                 q.Password = password;
                 q.PasswordChanged = true;
-                dc.SubmitChanges();
+                dc.SaveChanges();
             }
             catch (Exception ex)
             {

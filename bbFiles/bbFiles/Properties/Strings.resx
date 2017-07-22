@@ -135,7 +135,7 @@
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="Adress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adres</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
@@ -314,5 +314,14 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Wysłane</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Miasto</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Kod pocztowy</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Ulica</value>
   </data>
 </root>

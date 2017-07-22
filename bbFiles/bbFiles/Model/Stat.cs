@@ -8,9 +8,13 @@ namespace bbFiles.Model
 
     public partial class Stat
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "BloodType", ResourceType = typeof(bbFiles.Properties.Strings))]
         public string BloodType { get; set; }
 
+        [Range(0,long.MaxValue)]
+        [Required]
+        [Display(Name = "Amount", ResourceType = typeof(bbFiles.Properties.Strings))]
         public long TotalAmount { get; set; }
     }
 }

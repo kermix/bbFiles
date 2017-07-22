@@ -95,6 +95,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -118,13 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201707191104382_initial.cs" />
-    <Compile Include="Migrations\201707191104382_initial.Designer.cs">
-      <DependentUpon>201707191104382_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707191333276_init.cs" />
-    <Compile Include="Migrations\201707191333276_init.Designer.cs">
-      <DependentUpon>201707191333276_init.cs</DependentUpon>
+    <Compile Include="localdbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>localdbDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Acceptor.cs" />
@@ -139,11 +137,6 @@
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserContactInfo.cs" />
     <Compile Include="Model\Credential.cs" />
-    <Compile Include="database.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>database.dbml</DependentUpon>
-    </Compile>
     <Compile Include="databaseContext.cs" />
     <Compile Include="DockerWindow.xaml.cs">
       <DependentUpon>DockerWindow.xaml</DependentUpon>
@@ -163,62 +156,12 @@
       <DependentUpon>Strings.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\Stat.cs" />
-    <Compile Include="Structs\Acceptor.cs" />
-    <Compile Include="Structs\Donate.cs" />
-    <Compile Include="Structs\Donor.cs" />
-    <Compile Include="Structs\Order.cs" />
-    <Compile Include="Structs\Statistics.cs" />
-    <Compile Include="Structs\User.cs" />
-    <Compile Include="Structs\UserDataContext.cs" />
-    <Compile Include="UserControls\AcceptorManagement\List.xaml.cs">
-      <DependentUpon>List.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Acceptors.xaml.cs">
-      <DependentUpon>Acceptors.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Donates.xaml.cs">
-      <DependentUpon>Donates.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\DonatesManagement\Add.xaml.cs">
-      <DependentUpon>Add.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\DonatesManagement\List.xaml.cs">
-      <DependentUpon>List.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\DonorManagement\AddEdit.xaml.cs">
-      <DependentUpon>AddEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\DonorManagement\List.xaml.cs">
-      <DependentUpon>List.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Donors.xaml.cs">
-      <DependentUpon>Donors.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\OrderManagement\Add.xaml.cs">
-      <DependentUpon>Add.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Orders.xaml.cs">
-      <DependentUpon>Orders.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\OrderManagement\List.xaml.cs">
-      <DependentUpon>List.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserManagement\AddEdit.xaml.cs">
-      <DependentUpon>AddEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserManagement\List.xaml.cs">
-      <DependentUpon>List.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Users.xaml.cs">
-      <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\GetAllBloodTypes.cs" />
     <Compile Include="Utilities\GetAllRoles.cs" />
     <Compile Include="Utilities\IEnumerable.cs" />
-    <Compile Include="Utilities\RefreshList.cs" />
     <Compile Include="Utilities\UcSendEndOfEdition.cs" />
     <Compile Include="Utilities\ValidatePesel.cs" />
     <Page Include="ChangePasswordWindow.xaml">
@@ -241,65 +184,9 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\AcceptorManagement\List.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Acceptors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Donates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\DonatesManagement\Add.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\DonatesManagement\List.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\DonorManagement\AddEdit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\DonorManagement\List.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Donors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\OrderManagement\Add.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\Orders.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\OrderManagement\List.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\Statistics.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\UserManagement\AddEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\UserManagement\List.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Users.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -316,12 +203,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201707191104382_initial.resx">
-      <DependentUpon>201707191104382_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707191333276_init.resx">
-      <DependentUpon>201707191333276_init.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Strings.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.en.Designer.cs</LastGenOutput>
@@ -335,15 +216,25 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="bbFiles_TemporaryKey.pfx" />
-    <None Include="database.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>database.designer.cs</LastGenOutput>
+    <None Include="localdbDataSet.xsc">
+      <DependentUpon>localdbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="localdbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>localdbDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="database.dbml.layout">
-      <DependentUpon>database.dbml</DependentUpon>
+    <None Include="localdbDataSet.xss">
+      <DependentUpon>localdbDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\bbFiles.Model.Acceptor.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Address.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Credential.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Donate.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Donor.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Order.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Model.Stat.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -373,6 +264,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="localdb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="localdb_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>localdb.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

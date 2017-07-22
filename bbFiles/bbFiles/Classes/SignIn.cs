@@ -9,7 +9,7 @@ namespace bbFiles
         {
             try
             {
-                databaseDataContext dc = new databaseDataContext();
+                databaseContext dc = new databaseContext();
                 var q = (from r in dc.Credentials
                          where r.Login == username && r.Password == password
                          select r).SingleOrDefault();
@@ -17,7 +17,7 @@ namespace bbFiles
                 {
                     User user = new User(q.Login);
                     q.LastLoggedDate = DateTime.Now;
-                    dc.SubmitChanges();
+                    dc.SaveChanges();
                     return user;
                 }
             }

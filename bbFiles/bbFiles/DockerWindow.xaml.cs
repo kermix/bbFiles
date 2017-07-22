@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace bbFiles
 {
     /// <summary>
     /// Logika interakcji dla klasy DockerWindow.xaml
     /// </summary>
-    public partial class DockerWindow : Window
+    public partial class DockerWindow
     {
         private User user = null;
         public DockerWindow(User user)
@@ -50,37 +51,37 @@ namespace bbFiles
             {
                 throw new UndefinedUserRole(Properties.Strings.UndefinedRole);
             }
-            cc_Content.Content = new UserControls.Statistics();
+            
         }
 
         private void btn_UserClick(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Users(user);
+            
         }
 
         private void btn_Acceptors_Click(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Acceptors(user);
+            
         }
 
         private void btn_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Statistics();
+            cc_Content = new UserControls.Statistics();
         }
 
         private void btn_Donors_Click(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Donors(user);
+            
         }
 
         private void btn_Donates_Click(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Donates(user);
+            
         }
 
         private void btn_Orders_Click(object sender, RoutedEventArgs e)
         {
-            cc_Content.Content = new UserControls.Orders(user);
+        
         }
     }
 }

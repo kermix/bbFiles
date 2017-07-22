@@ -25,30 +25,29 @@ namespace bbFiles.UserControls
         public Statistics()
         {
             InitializeComponent();
-            var stats = new Structs.Statistics();
 
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Rh+",
-                    Values = new ChartValues<int>
+                    Values = new ChartValues<long>
                     {
-                        stats.BloodTypes["oWithMarker"],
-                        stats.BloodTypes["aWithMarker"],
-                        stats.BloodTypes["bWithMarker"],
-                        stats.BloodTypes["abWithMarker"]
-                    }
+                        GetBloodAmount("O+"),
+                        GetBloodAmount("A+"),
+                        GetBloodAmount("B+"),
+                        GetBloodAmount("AB+")
+        }
                 },
                 new ColumnSeries
                 {
                     Title = "Rh-",
-                    Values = new ChartValues<int>
+                    Values = new ChartValues<long>
                     {
-                        stats.BloodTypes["oWithOutMarker"],
-                        stats.BloodTypes["aWithOutMarker"],
-                        stats.BloodTypes["bWithOutMarker"],
-                        stats.BloodTypes["abWithOutMarker"]
+                        GetBloodAmount("O-"),
+                        GetBloodAmount("A-"),
+                        GetBloodAmount("B-"),
+                        GetBloodAmount("AB-")
                     }
                 }
             };
@@ -62,5 +61,13 @@ namespace bbFiles.UserControls
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
+
+        public long GetBloodAmount(string BloodType)
+        {
+            return (new databaseContext()).Stats
+                        .Where(x => x.BloodType.StartsWith(BloodType))
+                        .Select(x => x.TotalAmount)
+                        .Single();
+        }
     }
 }
