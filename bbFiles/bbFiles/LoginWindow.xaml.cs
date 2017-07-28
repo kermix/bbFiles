@@ -30,26 +30,25 @@ namespace bbFiles
         {
             try
             {
-                User user = SignIn.Verify(tb_User.Text, tb_Password.Password);
+                User user = User.SignIn(tb_User.Text, tb_Password.Password);
                 if (user != null)
                 {
-                    if (!user.HasPasswordChanged())
+                    if (user.PasswordChaged == false)
                     {
                         (new ChangePasswordWindow(user)).Show();
                     }
                     else
                     {
-                        (new DockerWindow(user)).Show();
+                        (new DockerWindow()).Show();
                     }
                     this.Close();
                 }
                 else
                     lb_Message.Content = Properties.Strings.CantLoginMessage;
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
-                //lb_Message.Content = ex.Message;
-                MessageBox.Show(ex.ToString());
+                lb_Message.Content = ex.Message;
             }
         }
 

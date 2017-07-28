@@ -12,16 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Security.Principal;
+using MahApps.Metro;
+using MahApps.Metro.Controls;
 
 namespace bbFiles
 {
     /// <summary>
     /// Interaction logic for ChangePasswordWindow.xaml
     /// </summary>
-    public partial class ChangePasswordWindow : Window
+    public partial class ChangePasswordWindow
     {
-        User user = null;
-        public ChangePasswordWindow(User user)
+        Model.User user = null;
+        public ChangePasswordWindow(Model.User user)
         {
             this.user = user;
             InitializeComponent();
@@ -34,7 +36,6 @@ namespace bbFiles
                 if (tb_newPassword.Password == tb_repeatNewPassword.Password)
                 {
                     user.ChangePassword(tb_newPassword.Password);
-                    lb_Message.Content = Properties.Strings.PasswordChanged;
                     MainWindow lw = new MainWindow();
                     lw.Show();
                     this.Close();

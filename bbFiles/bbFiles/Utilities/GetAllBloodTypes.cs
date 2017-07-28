@@ -8,13 +8,13 @@ namespace bbFiles
 {
     partial class Utilities
     {
-        public static Dictionary<BloodTypes, string> GetAllBloodTypes()
+        public static Dictionary<BloodType, string> GetAllBloodTypes()
         {
-            Dictionary<BloodTypes, string> BloodTypesDictionary = new Dictionary<BloodTypes, string>();
-            BloodTypesDictionary.Add(BloodTypes.O, "0");
-            BloodTypesDictionary.Add(BloodTypes.A, "A");
-            BloodTypesDictionary.Add(BloodTypes.B, "B");
-            BloodTypesDictionary.Add(BloodTypes.AB, "AB");
+            Dictionary<BloodType, string> BloodTypesDictionary = new Dictionary<BloodType, string>();
+            BloodTypesDictionary.Add(BloodType.O, "0");
+            BloodTypesDictionary.Add(BloodType.A, "A");
+            BloodTypesDictionary.Add(BloodType.B, "B");
+            BloodTypesDictionary.Add(BloodType.AB, "AB");
             return BloodTypesDictionary;
         }
     }

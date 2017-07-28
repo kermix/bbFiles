@@ -83,6 +83,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -92,15 +101,23 @@
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.1.9.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -110,6 +127,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -119,75 +138,70 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="localdbDataSet.Designer.cs">
+    <Compile Include="Converters\reverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\revertBooleanConverter.cs" />
+    <Compile Include="Converters\StringTrimmingConverter.cs" />
+    <Compile Include="Entities\Acceptor.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>localdbDataSet.xsd</DependentUpon>
+      <DependentUpon>dbModel.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\dbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\dbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Donate.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Donor.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Order.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ValidationRules\UserValidationRules.cs" />
+    <Compile Include="Helpers\RoleHelper.cs" />
+    <Compile Include="Messages\ErrorMessage.cs" />
+    <Compile Include="Messages\LoginMessage.cs" />
+    <Compile Include="Messages\UserMessage.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Acceptor.cs" />
-    <Compile Include="ChangePasswordWindow.xaml.cs">
-      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Enums.cs" />
-    <Compile Include="Classes\Exceptions.cs" />
-    <Compile Include="Classes\PasswordHelper.cs" />
-    <Compile Include="Classes\Privileges.cs" />
-    <Compile Include="Classes\SignIn.cs" />
-    <Compile Include="Classes\User.cs" />
-    <Compile Include="Classes\UserContactInfo.cs" />
-    <Compile Include="Model\Credential.cs" />
-    <Compile Include="databaseContext.cs" />
-    <Compile Include="DockerWindow.xaml.cs">
-      <DependentUpon>DockerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Donate.cs" />
-    <Compile Include="Model\Donor.cs" />
-    <Compile Include="Interfaces\IUControlManagement.cs" />
-    <Compile Include="Model\Order.cs" />
-    <Compile Include="Properties\Strings.Designer.cs">
+    <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Strings.en.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.en.resx</DependentUpon>
+    <Compile Include="Services\MainDataAccessService.cs" />
+    <Compile Include="Services\UsersDataAccessService.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Stat.cs" />
-    <Compile Include="UserControls\Statistics.xaml.cs">
-      <DependentUpon>Statistics.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\Enums.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Utilities\GetAllBloodTypes.cs" />
-    <Compile Include="Utilities\GetAllRoles.cs" />
     <Compile Include="Utilities\IEnumerable.cs" />
-    <Compile Include="Utilities\UcSendEndOfEdition.cs" />
     <Compile Include="Utilities\ValidatePesel.cs" />
-    <Page Include="ChangePasswordWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DockerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LoginWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="ViewModel\UsersViewModel.cs" />
+    <Compile Include="Views\Users\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
-    <Page Include="UserControls\Statistics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -203,38 +217,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Strings.en.resx">
+    <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Strings.resx">
+    <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="bbFiles_TemporaryKey.pfx" />
-    <None Include="localdbDataSet.xsc">
-      <DependentUpon>localdbDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="localdbDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>localdbDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="localdbDataSet.xss">
-      <DependentUpon>localdbDataSet.xsd</DependentUpon>
+    <EntityDeploy Include="Entities\dbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Entities\dbModel.edmx.diagram">
+      <DependentUpon>dbModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\bbFiles.Model.Acceptor.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Address.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Credential.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Donate.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Donor.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Order.datasource" />
-    <None Include="Properties\DataSources\bbFiles.Model.Stat.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.Acceptor.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.Donate.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.Donor.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.Order.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.Statistic.datasource" />
+    <None Include="Properties\DataSources\bbFiles.Entities.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -266,13 +271,28 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="localdb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="dbModel.edmx.sql" />
+    <Content Include="Entities\dbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="localdb_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>localdb.mdf</DependentUpon>
+    <Content Include="Entities\dbModel.edmx.sql" />
+    <Content Include="Entities\dbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Users\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,12 +1,14 @@
 ﻿namespace bbFiles
 {
-    public enum Roles : byte
+    public enum Role : byte
     {
-        ACCEPTOR = 0,
-        EMPLOYEE,
-        ADMIN
+        Wrong,
+        Acceptor,
+        Worker,
+        Admin,
+
     }
-    public enum BloodTypes : byte
+    public enum BloodType : byte
     {
         O = 0,
         A,
