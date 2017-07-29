@@ -1,13 +1,10 @@
-using bbFiles.Messages;
 using bbFiles.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using System.Collections.Generic;
 
 namespace bbFiles.ViewModel
 {
-
     public class MainViewModel : ViewModelBase
     {
         IMainDataAccessService _serviceProxy;
@@ -84,12 +81,14 @@ namespace bbFiles.ViewModel
         }
 
         public RelayCommand OpenUserViewCommand { get; set; }
+        public RelayCommand OpenAcceptorViewCommand { get; set; }
 
         public MainViewModel(IMainDataAccessService serviceProxy)
         {
             _instance = this;
             _serviceProxy = serviceProxy;
             OpenUserViewCommand = new RelayCommand(OpenUserView);
+            OpenAcceptorViewCommand = new RelayCommand(OpenAcceptorView);
             IsWorker = IsAdmin = IsAcceptor = false;
             CanNavigate = true;
         }
@@ -97,6 +96,10 @@ namespace bbFiles.ViewModel
         void OpenUserView()
         {
             SelectedViewModel = new UsersViewModel(new UsersDataAccessService());
+        }
+        void OpenAcceptorView()
+        {
+            SelectedViewModel = new AcceptorsViewModel(new AcceptorDataAccessService());
         }
 
         public void ToogleNavigation()

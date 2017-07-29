@@ -2,11 +2,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace bbFiles.Views
 {
@@ -45,9 +41,7 @@ namespace bbFiles.Views
                 }
                 else
                     this.ShowLoginDialog(this, null);
-
             }
-
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

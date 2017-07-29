@@ -6,4 +6,8 @@ namespace bbFiles.Messages
     {
         public User User { get; set; }
     }
+    public class AcceptorMessage
+    {
+        public Acceptor Acceptor { get; set; }
+    }
 }

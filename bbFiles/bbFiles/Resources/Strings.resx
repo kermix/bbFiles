@@ -243,4 +243,10 @@
   <data name="Worker" xml:space="preserve">
     <value>Pracownik</value>
   </data>
+  <data name="SearchByName" xml:space="preserve">
+    <value>Szukaj po nazwie: </value>
+  </data>
+  <data name="NoDependentUserError" xml:space="preserve">
+    <value>Ten odbiorca nie posiada już zależnego użytkownika, ale jego dane nadal powinny pozostać w bazie.</value>
+  </data>
 </root>

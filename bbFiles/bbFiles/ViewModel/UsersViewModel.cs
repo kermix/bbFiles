@@ -212,7 +212,6 @@ namespace bbFiles.ViewModel
             DeleteUserCommand = new RelayCommand<User>(DeleteUser);
             CancelCommand = new RelayCommand(Cancel);
             GetUsers();
-            UserDetailsMode = false;
         }
         #endregion
 

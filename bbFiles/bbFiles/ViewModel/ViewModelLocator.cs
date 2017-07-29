@@ -43,9 +43,13 @@ namespace bbFiles.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
             SimpleIoc.Default.Register<IUsersDataAccessService, UsersDataAccessService>();
+            SimpleIoc.Default.Register<IAcceptorsDataService, AcceptorDataAccessService>();
+            SimpleIoc.Default.Register<IDonorsAccessDataService, MainDataAccessService>();
             SimpleIoc.Default.Register<IMainDataAccessService, MainDataAccessService>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<UsersViewModel>();
+            SimpleIoc.Default.Register<AcceptorsViewModel>();
+
         }
 
         public MainViewModel Main
@@ -63,7 +67,14 @@ namespace bbFiles.ViewModel
                 return ServiceLocator.Current.GetInstance<UsersViewModel>();
             }
         }
-        
+        public AcceptorsViewModel Acceptor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AcceptorsViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

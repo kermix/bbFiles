@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type vms:UsersViewModel}">
             <v:UsersView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:AcceptorsViewModel}">
+            <v:AcceptorsView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid IsEnabled="{Binding IsLogged, Mode=OneWay}">
         <Grid.RowDefinitions>
@@ -54,6 +57,7 @@
                     Width="60"
                     Grid.Column="2"
                     ToolTip="{x:Static p:Strings.Acceptors}"
+                    Command="{Binding OpenAcceptorViewCommand}"
                     IsEnabled="{Binding IsWorker, Mode=OneWay}">
                 <IconPacks:PackIconFontAwesome Kind="Building"/>
             </Button>

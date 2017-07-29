@@ -250,6 +250,15 @@ namespace bbFiles.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ten odbiorca nie posiada już zależnego użytkownika, ale jego dane nadal powinny pozostać w bazie..
+        /// </summary>
+        public static string NoDependentUserError {
+            get {
+                return ResourceManager.GetString("NoDependentUserError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zamówienia.
         /// </summary>
         public static string Orders {
@@ -345,6 +354,15 @@ namespace bbFiles.Resources {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Szukaj po nazwie: .
+        /// </summary>
+        public static string SearchByName {
+            get {
+                return ResourceManager.GetString("SearchByName", resourceCulture);
             }
         }
         

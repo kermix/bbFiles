@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using bbFiles.Entities;
+using System.Data.Entity;
+using GalaSoft.MvvmLight.Messaging;
+using bbFiles.Messages;
+
+namespace bbFiles.Services
+{
+    public interface IAcceptorsDataService
+    {
+        ObservableCollection<Acceptor> GetAcceptors();
+        int CreateAcceptor(Acceptor Acceptor);
+        void DeleteDependentUser(Acceptor Acceptor);
+    }
+    public class AcceptorDataAccessService : IAcceptorsDataService
+    {
+        dbModel context = new dbModel();
+
+        public ObservableCollection<Acceptor> GetAcceptors()
+        {
+            context.Dispose();
+            context = new dbModel();
+            context.Acceptors.Load();
+            ObservableCollection<Acceptor> Acceptors = context.Acceptors.Local;
+            return Acceptors;
+        }
+
+        public int CreateAcceptor(Acceptor Acceptor)
+        {
+
+            context.Entry(Acceptor).State = Acceptor.Id == 0 ?
+                                   EntityState.Added :
+                                   EntityState.Modified;
+            context.SaveChanges();
+            return Acceptor.Id;
+        }
+        public void DeleteDependentUser(Acceptor Acceptor)
+        {
+            if(Acceptor.User != null)
+            {
+                context.Users.Attach(Acceptor.User);
+                context.Users.Remove(Acceptor.User);
+                context.SaveChanges();
+            }
+            else
+            {
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.UserSelectionErrorTitle, Error = Resources.Strings.NoDependentUserError });
+            }
+
+        }
+    }
+}

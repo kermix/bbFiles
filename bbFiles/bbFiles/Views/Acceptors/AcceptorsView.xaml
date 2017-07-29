@@ -1,20 +1,20 @@
-﻿<UserControl
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-    xmlns:Entities="clr-namespace:bbFiles.Entities"
-    xmlns:Validation="clr-namespace:bbFiles.Entities.ValidationRules"
-    xmlns:Helpers="clr-namespace:bbFiles.Helpers"
-    xmlns:Converters="clr-namespace:bbFiles.Converters"
-    xmlns:p="clr-namespace:bbFiles.Resources"
-    x:Class="bbFiles.Views.UsersView"
-    mc:Ignorable="d" 
+﻿<UserControl x:Class="bbFiles.Views.AcceptorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:Entities="clr-namespace:bbFiles.Entities"
+             xmlns:Validation="clr-namespace:bbFiles.Entities.ValidationRules"
+             xmlns:Helpers="clr-namespace:bbFiles.Helpers"
+             xmlns:Converters="clr-namespace:bbFiles.Converters"
+             xmlns:p="clr-namespace:bbFiles.Resources" 
+             xmlns:local="clr-namespace:bbFiles.Views"
+             mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded"
-             DataContext="{Binding User, Source={StaticResource Locator}}" Name="UI">
+             DataContext="{Binding Acceptor, Source={StaticResource Locator}}" Name="UI">
     <UserControl.Resources>
         <ObjectDataProvider 
             x:Key="Roles" 
@@ -24,8 +24,8 @@
         <Converters:reverseBooleanToVisibilityConverter x:Key="reverseBooleanToVisibilityConverter" />
         <Converters:revertBooleanConverter x:Key="revertBooleanConverter" />
         <Converters:StringTrimmingConverter x:Key="trimmingConverter" />
-        <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type Entities:User}, CreateList=True}"
-                              Filter="CollectionViewSource_Filter"/>
+        <CollectionViewSource x:Key="acceptorViewSource" d:DesignSource="{d:DesignInstance {x:Type Entities:Acceptor}, CreateList=True}"/>
+        <CollectionViewSource x:Key="acceptorOrdersViewSource" Source="{Binding Orders, Source={StaticResource acceptorViewSource}}"/>
         <Style x:Key="SaveButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroCircleButtonStyle}">
             <Setter Property="IsEnabled" Value="False"/>
             <Style.Triggers>
@@ -53,12 +53,12 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" 
                     Grid.Column="1"
-                    IsEnabled="{Binding UserDetailsMode, Mode=OneWay, Converter={StaticResource revertBooleanConverter}}">
+                    IsEnabled="{Binding AcceptorDetailsMode, Mode=OneWay, Converter={StaticResource revertBooleanConverter}}">
             <Button Style="{DynamicResource MetroCircleButtonStyle}"
                     Height="40"
                     Width="40"
                     ToolTip="{x:Static p:Strings.Add}"
-                    Command="{Binding  SendUserCommand, Mode=OneWay}"
+                    Command="{Binding  SendAcceptorCommand, Mode=OneWay}"
                     CommandParameter="{x:Null}">
                 <IconPacks:PackIconFontAwesome Kind="Plus"/>
             </Button>
@@ -66,16 +66,16 @@
                     Height="40"
                     Width="40"
                     ToolTip="{x:Static p:Strings.Edit}"
-                    Command="{Binding  SendUserCommand, Mode=OneWay}"
-                    CommandParameter="{Binding ElementName=userDataGrid,Path=SelectedItem}">
+                    Command="{Binding  SendAcceptorCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=acceptorDataGrid,Path=SelectedItem}">
                 <IconPacks:PackIconFontAwesome Kind="Pencil"/>
             </Button>
             <Button Style="{DynamicResource MetroCircleButtonStyle}"
                     Height="40"
                     Width="40"
                     ToolTip="{x:Static p:Strings.Delete}"
-                    Command="{Binding DeleteUserCommand, Mode=OneWay}"
-                    CommandParameter="{Binding ElementName=userDataGrid,Path=SelectedItem}">
+                    Command="{Binding DeleteAcceptorUserCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=acceptorDataGrid,Path=SelectedItem}">
                 <IconPacks:PackIconFontAwesome Kind="Trash"/>
             </Button>
             <Button Style="{DynamicResource MetroCircleButtonStyle}"
@@ -86,8 +86,8 @@
                 <IconPacks:PackIconFontAwesome Kind="Refresh"/>
             </Button>
         </StackPanel>
-        <Grid x:Name="existingUserGrid"
-              Visibility="{Binding UserDetailsMode, Mode=OneWay, 
+        <Grid x:Name="existingAcceptorGrid"
+              Visibility="{Binding AcceptorDetailsMode, Mode=OneWay, 
             Converter={StaticResource booleanToVisibilityConverter}}"
               Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -123,7 +123,7 @@
                          Grid.Column="1"
                          IsEnabled="{Binding InEdit, Mode=OneWay}">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserLogin" 
+                        <Binding Path="SelectedAcceptorUserLogin" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True"
@@ -140,56 +140,48 @@
                              Grid.Column="1"
                              Helpers:PasswordHelper.Attach="True">
                     <Helpers:PasswordHelper.Password>
-                        <Binding Path="SelectedUserPassword"
+                        <Binding Path="SelectedAcceptorUserPassword"
                                  Mode="TwoWay"
                                  NotifyOnValidationError="True"
                                  ValidatesOnExceptions="True">
-                        <Binding.ValidationRules>
-                            <Validation:LengthValidationRule Min="8" Max="20"/>
-                            <Validation:RegexValidationRule RegEx="^[a-zA-Z0-9!@#$%^*()-+=_]+$"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="8" Max="20"/>
+                                <Validation:RegexValidationRule RegEx="^[a-zA-Z0-9!@#$%^*()-+=_]+$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
                     </Helpers:PasswordHelper.Password>
                 </PasswordBox>
                 <CheckBox x:Name="passwordChangedComboBox" 
                           Grid.Row="2"
                           Grid.Column="1"
                           IsThreeState="False" 
-                          IsChecked="{Binding SelectedUserPasswordChaged, Mode=TwoWay}"/>
+                          IsChecked="{Binding SelectedAcceptorUserPasswordChaged, Mode=TwoWay}"/>
                 <ComboBox x:Name="roleComboBox" 
                           Grid.Row="3"
                           Grid.Column="1"
                           ItemsSource="{Binding Source={StaticResource Roles}}"
                           DisplayMemberPath="Value"
                           SelectedValuePath="Key"
-                          SelectedValue="{Binding SelectedUserRole, Mode=TwoWay}"
-                          IsEnabled="{Binding InEdit, Mode=OneWay}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <mvvm:EventToCommand Command="{Binding CheckRoleCommand, Mode=OneWay}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                          SelectedValue="{Binding SelectedAcceptorUserRole, Mode=TwoWay}"
+                          IsEnabled="False">
                 </ComboBox>
                 <DatePicker x:Name="registeredDateDatePicker"
                             Grid.Row="4"
                             Grid.Column="1"
                             VerticalAlignment="Center" 
-                            SelectedDate="{Binding SelectedUserRegisteredDate, Mode=TwoWay, 
+                            SelectedDate="{Binding SelectedAcceptorUserRegisteredDate, Mode=TwoWay, 
                     NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                             IsEnabled="False"/>
                 <DatePicker x:Name="LastLoginDateDatePicker"
                             Grid.Row="5"
                             Grid.Column="1"
                             VerticalAlignment="Center" 
-                        SelectedDate="{Binding SelectedUserLastLoginDate, Mode=TwoWay, 
+                        SelectedDate="{Binding SelectedAcceptorUserLastLoginDate, Mode=TwoWay, 
                 NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                             IsEnabled="False"/>
             </Grid>
-            <Grid x:Name="existingUserAcceptorGrid" 
-                  Grid.Column="1"
-                  Grid.Row="0"
-                  Visibility="{Binding UserAcceptorGridVisibility, Mode=OneWay, 
-            Converter={StaticResource booleanToVisibilityConverter}}">
+            <Grid Grid.Column="1"
+                  Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -202,7 +194,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="4*"/>
-
                 </Grid.RowDefinitions>
                 <Label Content="{x:Static p:Strings.AcceptorName}" 
                        Grid.Column="0"
@@ -227,7 +218,7 @@
                          Grid.Column="1"
                          IsEnabled="{Binding InEdit, Mode=OneWay}">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorName"
+                        <Binding Path="SelectedAcceptorName"
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -239,10 +230,9 @@
                 </TextBox>
                 <TextBox x:Name="streetTextBox"  
                          Grid.Row="1"
-                         Grid.Column="1"
-                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                         Grid.Column="1">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorAddress_Street" 
+                        <Binding Path="SelectedAcceptorAddress_Street" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -256,7 +246,7 @@
                          Grid.Column="1"
                          Grid.Row="2">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorAddress_City" 
+                        <Binding Path="SelectedAcceptorAddress_City" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -271,7 +261,7 @@
                          Grid.Column="1"
                          Grid.Row="3">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorAddress_PostalCode" 
+                        <Binding Path="SelectedAcceptorAddress_PostalCode" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -285,7 +275,7 @@
                          Grid.Column="1" 
                          Grid.Row="4">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorContact_Email" 
+                        <Binding Path="SelectedAcceptorContact_Email" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -299,7 +289,7 @@
                          Grid.Column="1" 
                          Grid.Row="5">
                     <TextBox.Text>
-                        <Binding Path="SelectedUserAcceptorContact_Phone" 
+                        <Binding Path="SelectedAcceptorContact_Phone" 
                                  Mode="TwoWay" 
                                  NotifyOnValidationError="True" 
                                  ValidatesOnExceptions="True">
@@ -309,6 +299,9 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
+                <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1">
+                    <!-- TODO Acceptor Orders DataGrid -->
+                </DataGrid>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" >
                 <Grid.ColumnDefinitions>
@@ -321,7 +314,7 @@
                         Width="40"
                         VerticalAlignment="Bottom"
                         ToolTip="{x:Static p:Strings.Save}"
-                        Command="{Binding SaveUserCommand}">
+                        Command="{Binding SaveAcceptorCommand}">
                     <IconPacks:PackIconFontAwesome Kind="FloppyOutline"/>
                 </Button>
                 <Button Grid.Column="1" 
@@ -330,21 +323,21 @@
                         Width="40"
                         VerticalAlignment="Bottom"
                         ToolTip="{x:Static p:Strings.Close}"
-                        Command="{Binding RefreshCommand, Mode=OneWay}">
+                        Command="{Binding CancelCommand, Mode=OneWay}">
                     <IconPacks:PackIconFontAwesome Kind="Times"/>
                 </Button>
             </Grid>
         </Grid>
-        <Grid Visibility="{Binding Path=UserDetailsMode, Mode=OneWay, 
+        <Grid Visibility="{Binding Path=AcceptorDetailsMode, Mode=OneWay, 
             Converter={StaticResource reverseBooleanToVisibilityConverter}}"
               Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="8*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="userDataGrid"
+            <DataGrid x:Name="acceptorDataGrid"
                       Grid.Row="0"
-                  DataContext="{StaticResource userViewSource}"
+                  DataContext="{StaticResource acceptorViewSource}"
                   ItemsSource="{Binding}"
                   AutoGenerateColumns="False" 
                   EnableRowVirtualization="True" 
@@ -353,43 +346,35 @@
                   SelectionUnit="FullRow"
                   SelectionMode="Single"
                   SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
-                          Path=DataContext.SelectedUser}">
+                          Path=DataContext.SelectedAcceptor}">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="idColumn" 
                                     Binding="{Binding Id, Mode=TwoWay}" 
                                     Header="{x:Static p:Strings.ID}" 
                                     Width="*"/>
-                    <DataGridTextColumn x:Name="loginColumn" 
-                                    Binding="{Binding Login}" 
-                                    Header="{x:Static p:Strings.Username}" 
+                    <DataGridTextColumn x:Name="nameColumn" 
+                                    Binding="{Binding Name}" 
+                                    Header="{x:Static p:Strings.AcceptorName}" 
                                     Width="*"/>
-                    <DataGridCheckBoxColumn x:Name="passwordChagedColumn"
-                                        Binding="{Binding PasswordChaged}"
-                                        Header="{x:Static p:Strings.IsPasswordChanged}"
-                                        Width="SizeToHeader"/>
-                    <DataGridTemplateColumn x:Name="lastLoginDateColumn"
-                                        Header="{x:Static p:Strings.LastLoginDateShort}" 
-                                        Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding LastLoginDate, 
-                                Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="registeredDateColumn"
-                                        Header="{x:Static p:Strings.RegisteredDate}" 
-                                        Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding RegisteredDate, Mode=TwoWay, 
-                                NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn x:Name="roleColumn" 
-                                    Binding="{Binding Role}" 
-                                    Header="{x:Static p:Strings.Roles}" 
+                    <DataGridTextColumn x:Name="addressCityColumn" 
+                                    Binding="{Binding Address_City}" 
+                                    Header="{x:Static p:Strings.City}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="addressStreetColumn" 
+                                    Binding="{Binding Address_Street}" 
+                                    Header="{x:Static p:Strings.Street}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="addressPostalCodeColumn" 
+                                    Binding="{Binding Address_PostalCode}" 
+                                    Header="{x:Static p:Strings.PostalCode}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="contactPhoneColumn" 
+                                    Binding="{Binding Contact_Phone}" 
+                                    Header="{x:Static p:Strings.PhoneNumber}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="contactEmailColumn" 
+                                    Binding="{Binding Contact_Email}" 
+                                    Header="{x:Static p:Strings.Email}" 
                                     Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
