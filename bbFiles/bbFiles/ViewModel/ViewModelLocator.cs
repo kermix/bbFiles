@@ -44,11 +44,17 @@ namespace bbFiles.ViewModel
             ////}
             SimpleIoc.Default.Register<IUsersDataAccessService, UsersDataAccessService>();
             SimpleIoc.Default.Register<IAcceptorsDataService, AcceptorDataAccessService>();
-            SimpleIoc.Default.Register<IDonorsAccessDataService, MainDataAccessService>();
+            SimpleIoc.Default.Register<IDonorsAccessDataService, DonorsDataAccessService>();
+            SimpleIoc.Default.Register<IDonatesDataAccessService, DonatesDataAccessService>();
+            SimpleIoc.Default.Register<IOrdersDataAccessService, OrdersDataAccessService>();
             SimpleIoc.Default.Register<IMainDataAccessService, MainDataAccessService>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<UsersViewModel>();
             SimpleIoc.Default.Register<AcceptorsViewModel>();
+            SimpleIoc.Default.Register<DonorsViewModel>();
+            SimpleIoc.Default.Register<DonatesViewModel>();
+            SimpleIoc.Default.Register<OrdersViewModel>();
+
 
         }
 
@@ -75,6 +81,28 @@ namespace bbFiles.ViewModel
             }
         }
 
+        public DonorsViewModel Donor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DonorsViewModel>();
+            }
+        }
+
+        public DonatesViewModel Donate
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DonatesViewModel>();
+            }
+        }
+        public OrdersViewModel Order
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<OrdersViewModel>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

@@ -20,28 +20,28 @@ namespace bbFiles.Services
     public class AcceptorDataAccessService : IAcceptorsDataService
     {
         dbModel context = new dbModel();
-
         public ObservableCollection<Acceptor> GetAcceptors()
         {
+            ObservableCollection<Acceptor> Acceptors = new ObservableCollection<Acceptor>();
             context.Dispose();
             context = new dbModel();
             context.Acceptors.Load();
-            ObservableCollection<Acceptor> Acceptors = context.Acceptors.Local;
+            Acceptors = context.Acceptors.Local;
             return Acceptors;
         }
 
         public int CreateAcceptor(Acceptor Acceptor)
         {
-
             context.Entry(Acceptor).State = Acceptor.Id == 0 ?
-                                   EntityState.Added :
-                                   EntityState.Modified;
+                               EntityState.Added :
+                               EntityState.Modified;
             context.SaveChanges();
             return Acceptor.Id;
         }
+
         public void DeleteDependentUser(Acceptor Acceptor)
         {
-            if(Acceptor.User != null)
+            if (Acceptor.User != null)
             {
                 context.Users.Attach(Acceptor.User);
                 context.Users.Remove(Acceptor.User);
@@ -49,9 +49,12 @@ namespace bbFiles.Services
             }
             else
             {
-                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.UserSelectionErrorTitle, Error = Resources.Strings.NoDependentUserError });
+                Messenger.Default.Send(new ErrorMessage()
+                {
+                    Title = Resources.Strings.UserSelectionErrorTitle,
+                    Error = Resources.Strings.NoDependentUserError
+                }); // TODO move message to viewmodel
             }
-
         }
     }
 }

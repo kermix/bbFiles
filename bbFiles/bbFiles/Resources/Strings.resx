@@ -132,7 +132,7 @@
   <data name="Admin" xml:space="preserve">
     <value>Administrator</value>
   </data>
-  <data name="BlankFieldsTitle" xml:space="preserve">
+  <data name="BlankFieldsError" xml:space="preserve">
     <value>Żadne pole nie może pozostać puste.</value>
   </data>
   <data name="City" xml:space="preserve">
@@ -187,7 +187,7 @@
     <value>Hasło:</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone:</value>
+    <value>Nr. Tel.:</value>
   </data>
   <data name="PostalCode" xml:space="preserve">
     <value>Kod pocztowy:</value>
@@ -225,8 +225,8 @@
   <data name="Street" xml:space="preserve">
     <value>Ulica i numer budynku:</value>
   </data>
-  <data name="UserEditErrorTitle" xml:space="preserve">
-    <value>Błąd edycji użytkownika</value>
+  <data name="EditErrorTitle" xml:space="preserve">
+    <value>Błąd edycji</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Użytkownik:</value>
@@ -248,5 +248,83 @@
   </data>
   <data name="NoDependentUserError" xml:space="preserve">
     <value>Ten odbiorca nie posiada już zależnego użytkownika, ale jego dane nadal powinny pozostać w bazie.</value>
+  </data>
+  <data name="DonorAlreadyExistsError" xml:space="preserve">
+    <value>Użytkownik o podanym numerze PESEL istnieje.</value>
+  </data>
+  <data name="PeselError" xml:space="preserve">
+    <value>Błędny PESEL.</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detale</value>
+  </data>
+  <data name="BloodType" xml:space="preserve">
+    <value>Grupa krwi:</value>
+  </data>
+  <data name="Firstname" xml:space="preserve">
+    <value>Imię:</value>
+  </data>
+  <data name="PESEL" xml:space="preserve">
+    <value>PESEL:</value>
+  </data>
+  <data name="RhMarker" xml:space="preserve">
+    <value>Czynnik Rh:</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Nazwisko:</value>
+  </data>
+  <data name="SearchByPesel" xml:space="preserve">
+    <value>Szukaj po numerze PESEL:</value>
+  </data>
+  <data name="ProperFieldRange" xml:space="preserve">
+    <value>Poprawny zakres wartości: </value>
+  </data>
+  <data name="NoSuchDonorError" xml:space="preserve">
+    <value>Podany dawca nie istnieje.</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Ilość [ml]:</value>
+  </data>
+  <data name="Avaliable" xml:space="preserve">
+    <value>Dostępność:</value>
+  </data>
+  <data name="DonateDate" xml:space="preserve">
+    <value>Data pobrania:</value>
+  </data>
+  <data name="OrderId" xml:space="preserve">
+    <value>Numer zamówienia: </value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="NoSuchAcceptorError" xml:space="preserve">
+    <value>Podany odbiorca nie istnieje.</value>
+  </data>
+  <data name="OrderTooBigError" xml:space="preserve">
+    <value>Zamówienie jest zbyt duże. Aktualnie nie jest dostępna taka ilość wybranej grupy krwii.</value>
+  </data>
+  <data name="OrderSelectionErrorTitle" xml:space="preserve">
+    <value>Błąd wyboru zamówienia</value>
+  </data>
+  <data name="SelectOrderFirstError" xml:space="preserve">
+    <value>Najpierw wybierz zamówienie.</value>
+  </data>
+  <data name="AcceptorId" xml:space="preserve">
+    <value>ID odbieorcy: </value>
+  </data>
+  <data name="MarkAsSend" xml:space="preserve">
+    <value>Oznacz jako wysłane</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>Data zamówienia: </value>
+  </data>
+  <data name="SearchByAcceptor" xml:space="preserve">
+    <value>Szukaj po odbiorcy:</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Wysłano: </value>
+  </data>
+  <data name="OrderAlreadySendError" xml:space="preserve">
+    <value>To zamówienie już wcześniej zostało oznaczone jako wysłane.</value>
   </data>
 </root>

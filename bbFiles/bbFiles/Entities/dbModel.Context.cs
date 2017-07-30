@@ -30,5 +30,6 @@ namespace bbFiles.Entities
         public virtual DbSet<Donor> Donors { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Statistic> Statistics { get; set; }
     }
 }

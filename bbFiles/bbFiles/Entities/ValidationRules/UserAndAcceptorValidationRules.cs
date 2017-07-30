@@ -28,7 +28,7 @@ namespace bbFiles.Entities.ValidationRules
             if ((length < Min) || (length > Max))
             {
                 return new ValidationResult(false,
-                  Resources.Strings.ProperFieldLength + Min + " - " + Max + "."); 
+                  Resources.Strings.ProperFieldLength + Min + " - " + Max + ".");
             }
             else
             {
@@ -67,11 +67,12 @@ namespace bbFiles.Entities.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-                var emailAttrib = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
-                bool result;
-                result = emailAttrib.IsValid(value.ToString());
+            var emailAttrib = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+            bool result;
+            result = emailAttrib.IsValid(value.ToString());
 
-                return new ValidationResult(result, Resources.Strings.InProperEmailFormat);
+            return new ValidationResult(result, Resources.Strings.InProperEmailFormat);
         }
     }
 }
+

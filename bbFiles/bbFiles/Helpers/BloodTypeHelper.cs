@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bbFiles
+namespace bbFiles.Helpers
 {
-    partial class Utilities
+    class BloodTypeHelper
     {
         public static Dictionary<BloodType, string> GetAllBloodTypes()
         {

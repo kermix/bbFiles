@@ -23,7 +23,6 @@
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <Converters:reverseBooleanToVisibilityConverter x:Key="reverseBooleanToVisibilityConverter" />
         <Converters:revertBooleanConverter x:Key="revertBooleanConverter" />
-        <Converters:StringTrimmingConverter x:Key="trimmingConverter" />
         <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type Entities:User}, CreateList=True}"
                               Filter="CollectionViewSource_Filter"/>
         <Style x:Key="SaveButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroCircleButtonStyle}">
@@ -156,7 +155,7 @@
                           Grid.Column="1"
                           IsThreeState="False" 
                           IsChecked="{Binding SelectedUserPasswordChaged, Mode=TwoWay}"/>
-                <ComboBox x:Name="roleComboBox" 
+                <ComboBox x:Name="roleCheckbox" 
                           Grid.Row="3"
                           Grid.Column="1"
                           ItemsSource="{Binding Source={StaticResource Roles}}"
@@ -330,7 +329,7 @@
                         Width="40"
                         VerticalAlignment="Bottom"
                         ToolTip="{x:Static p:Strings.Close}"
-                        Command="{Binding RefreshCommand, Mode=OneWay}">
+                        Command="{Binding CancelCommand, Mode=OneWay}">
                     <IconPacks:PackIconFontAwesome Kind="Times"/>
                 </Button>
             </Grid>

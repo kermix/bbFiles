@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using bbFiles.Messages;
 using System;
+using Microsoft.Practices.ServiceLocation;
 
 namespace bbFiles.ViewModel
 {
@@ -196,7 +197,6 @@ namespace bbFiles.ViewModel
         public RelayCommand SaveUserCommand { get; set; }
         public RelayCommand CheckRoleCommand { get; set; }
         public RelayCommand<User> DeleteUserCommand { get; set; }
-        public RelayCommand SearchCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         #endregion
         #region Constructor
@@ -234,7 +234,7 @@ namespace bbFiles.ViewModel
                             string.IsNullOrWhiteSpace(SelectedUser.Acceptor.Contact_Phone)
                         )))
             {
-                Messenger.Default.Send(new ErrorMessage(){ Title = Resources.Strings.UserEditErrorTitle, Error = Resources.Strings.BlankFieldsTitle });
+                Messenger.Default.Send(new ErrorMessage(){ Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.BlankFieldsError });
                 return;
             }
 
@@ -243,12 +243,12 @@ namespace bbFiles.ViewModel
             {
                 RaisePropertyChanged("SelectedUser");
                 GetUsers();
-                MainViewModel.Instance.ToogleNavigation();
+                (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             }
         }
         void SendUser(User User)
         {
-            MainViewModel.Instance.ToogleNavigation();
+            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             UserDetailsMode = true;
             if (User == null)
             {
@@ -266,7 +266,7 @@ namespace bbFiles.ViewModel
         }
         void Cancel()
         {
-            MainViewModel.Instance.ToogleNavigation();
+            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             GetUsers();
         }
         void CheckRole()
@@ -302,15 +302,6 @@ namespace bbFiles.ViewModel
                 });
 
                 //TODO cannot delete ur self
-            }
-        }
-        void ReceiveUser()
-        {
-            if (SelectedUser != null)
-            {
-                Messenger.Default.Register<UserMessage>(this, (user) => {
-                    this.SelectedUser = user.User;
-                });
             }
         }
 

@@ -15,4 +15,15 @@
         B,
         AB
     }
+    public enum BloodTypeMarker : byte
+    {
+        O = 0,
+        ORh,
+        A,
+        ARh,
+        B,
+        BRh,
+        AB,
+        ABRh
+    }
 }

@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using bbFiles.Messages;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Practices.ServiceLocation;
 
 namespace bbFiles.ViewModel
 {
@@ -40,6 +41,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorAddress_PostalCode");
                 RaisePropertyChanged("SelectedAcceptorContact_Phone");
                 RaisePropertyChanged("SelectedAcceptorContact_Email");
+                RaisePropertyChanged("SelectedAcceptorOrders");
                 RaisePropertyChanged("SelectedAcceptorUserLogin");
                 RaisePropertyChanged("SelectedAcceptorUserPassword");
                 RaisePropertyChanged("SelectedAcceptorUserRegisteredDate");
@@ -103,6 +105,11 @@ namespace bbFiles.ViewModel
                 SelectedAcceptor.Contact_Email = value;
                 RaisePropertyChanged("SelectedAcceptorContact_Email");
             }
+        }
+        public ObservableCollection<Order> SelectedAcceptorOrders
+        {
+            get { return SelectedAcceptor.Orders; }
+            set { SelectedAcceptor.Orders = value; RaisePropertyChanged("SelectedAcceptorOrders"); }
         }
         public string SelectedAcceptorUserLogin
         {
@@ -221,7 +228,7 @@ namespace bbFiles.ViewModel
                 (SelectedAcceptor.User != null && (string.IsNullOrWhiteSpace(SelectedAcceptor.User.Login) || string.IsNullOrWhiteSpace(SelectedAcceptor.User.Password) ||
                 SelectedAcceptor.User.RegisteredDate == null)))
             {
-                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.UserEditErrorTitle, Error = Resources.Strings.BlankFieldsTitle });
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.BlankFieldsError });
                 return;
             }
 
@@ -230,12 +237,12 @@ namespace bbFiles.ViewModel
             {
                 RaisePropertyChanged("SelectedAcceptor");
                 GetAcceptors();
-                MainViewModel.Instance.ToogleNavigation();
+                (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             }
         }
         void SendAcceptor(Acceptor Acceptor)
         {
-            MainViewModel.Instance.ToogleNavigation();
+            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             AcceptorDetailsMode = true;
             if (Acceptor == null)
             {
@@ -256,7 +263,7 @@ namespace bbFiles.ViewModel
         }
         void Cancel()
         {
-            MainViewModel.Instance.ToogleNavigation();
+            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             GetAcceptors();
         }
         void DeleteAcceptorUser(Acceptor Acceptor)

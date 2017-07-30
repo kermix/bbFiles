@@ -13,14 +13,22 @@
         Title="bbFiles" Height="560" Width="910"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Loaded="MetroWindow_Loaded"
-        ShowDialogsOverTitleBar="False">
+        Loaded="MetroWindow_Loaded">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vms:UsersViewModel}">
             <v:UsersView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vms:AcceptorsViewModel}">
             <v:AcceptorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:DonorsViewModel}">
+            <v:DonorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:DonatesViewModel}">
+            <v:DonatesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:OrdersViewModel}">
+            <v:OrdersView/>
         </DataTemplate>
     </Window.Resources>
     <Grid IsEnabled="{Binding IsLogged, Mode=OneWay}">
@@ -41,6 +49,7 @@
                     Height="60"
                     Width="60"
                     ToolTip="{x:Static p:Strings.Donors}"
+                    Command="{Binding OpenDonorViewCommand}"
                     IsEnabled="{Binding IsWorker, Mode=OneWay}">
                 <IconPacks:PackIconFontAwesome Kind="Users"/>
             </Button>
@@ -49,6 +58,7 @@
                     Width="60"
                     Grid.Column="1"
                     ToolTip="{x:Static p:Strings.Donates}"
+                    Command="{Binding OpenDonateViewCommand}"
                     IsEnabled="{Binding IsWorker, Mode=OneWay}">
                 <IconPacks:PackIconFontAwesome Kind="Tint"/>
             </Button>
@@ -66,6 +76,7 @@
                     Width="60"
                     Grid.Column="3"
                     ToolTip="{x:Static p:Strings.Orders}"
+                    Command="{Binding OpenOrderViewCommand}"
                     IsEnabled="{Binding IsAcceptor, Mode=OneWay}">
                 <IconPacks:PackIconFontAwesome Kind="List"/>
             </Button>

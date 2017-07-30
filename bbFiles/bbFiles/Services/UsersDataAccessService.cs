@@ -13,22 +13,21 @@ namespace bbFiles.Services
     public class UsersDataAccessService : IUsersDataAccessService
     {
         dbModel context = new dbModel();
-
         public ObservableCollection<User> GetUsers()
         {
+            ObservableCollection<User> Users = new ObservableCollection<User>();
             context.Dispose();
             context = new dbModel();
             context.Users.Load();
-            ObservableCollection<User> Users = context.Users.Local;
+            Users = context.Users.Local;
             return Users;
         }
 
         public int CreateUser(User User)
         {
             context.Entry(User).State = User.Id == 0 ?
-                                    EntityState.Added :
-                                    EntityState.Modified;
-
+                                EntityState.Added :
+                                EntityState.Modified;
             context.SaveChanges();
             return User.Id;
         }

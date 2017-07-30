@@ -23,23 +23,20 @@ namespace bbFiles.Views
         }
         private async void ShowLoginDialog(object sender, RoutedEventArgs e)
         {
+
             LoginDialogData result = await this.ShowLoginAsync(bbFiles.Resources.Strings.LoginTitle, "", new LoginDialogSettings {
                 ColorScheme = this.MetroDialogOptions.ColorScheme,
                 UsernameWatermark = bbFiles.Resources.Strings.Username,
-                PasswordWatermark = bbFiles.Resources.Strings.Password}
-                );
-            if (result == null)
-            {
-                this.ShowLoginDialog(this, null);
-            }
-            else
+                PasswordWatermark = bbFiles.Resources.Strings.Password,
+                NegativeButtonVisibility = Visibility.Visible,
+                NegativeButtonText = bbFiles.Resources.Strings.Close,
+                AffirmativeButtonText = bbFiles.Resources.Strings.LogIn
+            });
+            if (result != null)
             {
                 var vm = ((ViewModel.MainViewModel)this.DataContext);
                 vm.Login(result.Username, result.Password);
-                if(vm.UserLevel != Role.Wrong)
-                {
-                }
-                else
+                if(vm.UserLevel == Role.Wrong)
                     this.ShowLoginDialog(this, null);
             }
         }

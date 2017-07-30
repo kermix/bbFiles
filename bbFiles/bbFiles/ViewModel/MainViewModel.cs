@@ -8,8 +8,6 @@ namespace bbFiles.ViewModel
     public class MainViewModel : ViewModelBase
     {
         IMainDataAccessService _serviceProxy;
-        private static MainViewModel _instance;
-        public static MainViewModel Instance { get { return _instance; } }
         private object _selectedViewModel;
         public object SelectedViewModel
         {
@@ -17,6 +15,7 @@ namespace bbFiles.ViewModel
             set { _selectedViewModel = value; RaisePropertyChanged("SelectedViewModel"); }
         }
         Role _userLevel = Role.Wrong;
+        public int userId { get; private set; }
         public Role UserLevel
         {
             get { return _userLevel; }
@@ -82,13 +81,21 @@ namespace bbFiles.ViewModel
 
         public RelayCommand OpenUserViewCommand { get; set; }
         public RelayCommand OpenAcceptorViewCommand { get; set; }
+        public RelayCommand OpenDonorViewCommand { get; set; }
+        public RelayCommand OpenDonateViewCommand { get; set; }
+        public RelayCommand OpenOrderViewCommand { get; set; }
+
 
         public MainViewModel(IMainDataAccessService serviceProxy)
         {
-            _instance = this;
             _serviceProxy = serviceProxy;
             OpenUserViewCommand = new RelayCommand(OpenUserView);
             OpenAcceptorViewCommand = new RelayCommand(OpenAcceptorView);
+            OpenDonorViewCommand = new RelayCommand(OpenDonorView);
+            OpenDonateViewCommand = new RelayCommand(OpenDonateView);
+            OpenOrderViewCommand = new RelayCommand(OpenOrderView);
+
+
             IsWorker = IsAdmin = IsAcceptor = false;
             CanNavigate = true;
         }
@@ -100,6 +107,18 @@ namespace bbFiles.ViewModel
         void OpenAcceptorView()
         {
             SelectedViewModel = new AcceptorsViewModel(new AcceptorDataAccessService());
+        }
+        void OpenDonorView()
+        {
+            SelectedViewModel = new DonorsViewModel(new DonorsDataAccessService());
+        }
+        void OpenDonateView()
+        {
+            SelectedViewModel = new DonatesViewModel(new DonatesDataAccessService());
+        }
+        void OpenOrderView()
+        {
+            SelectedViewModel = new OrdersViewModel(new OrdersDataAccessService());
         }
 
         public void ToogleNavigation()
@@ -114,6 +133,7 @@ namespace bbFiles.ViewModel
             if(!EqualityComparer<Entities.User>.Default.Equals(User, default(Entities.User)))
             {
                 UserLevel = User.Role;
+                userId = User.Id;
                 IsLogged = true;
             }
         }

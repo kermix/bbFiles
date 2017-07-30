@@ -7,13 +7,14 @@
       <Diagram DiagramId="3cfef452141b497882f9ab9b89e552ba" Name="Diagram1">
         <EntityTypeShape EntityType="bbFilesModel.Acceptor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="bbFilesModel.Donate" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="bbFilesModel.Donor" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bbFilesModel.Donor" Width="1.5" PointX="9.625" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bbFilesModel.Order" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bbFilesModel.User" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="bbFilesModel.FK_dbo_Orders_dbo_Acceptors_AcceptorId" ManuallyRouted="false" />
         <AssociationConnector Association="bbFilesModel.FK_dbo_Donates_dbo_Donors_Donor_PESEL" ManuallyRouted="false" />
         <AssociationConnector Association="bbFilesModel.FK_dbo_Donates_dbo_Orders_OrderId" ManuallyRouted="false" />
         <AssociationConnector Association="bbFilesModel.UserAcceptor" />
+        <EntityTypeShape EntityType="bbFilesModel.Statistic" Width="1.5" PointX="0.75" PointY="4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

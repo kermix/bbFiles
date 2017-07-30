@@ -4,6 +4,8 @@
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -17,6 +19,7 @@
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -115,7 +118,6 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -140,7 +142,6 @@
     </ApplicationDefinition>
     <Compile Include="Converters\reverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\revertBooleanConverter.cs" />
-    <Compile Include="Converters\StringTrimmingConverter.cs" />
     <Compile Include="Entities\Acceptor.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -168,10 +169,17 @@
     <Compile Include="Entities\Order.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Statistic.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\User.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\ValidationRules\UserValidationRules.cs" />
+    <Compile Include="Entities\ValidationRules\DonorValidationRules.cs" />
+    <Compile Include="Entities\ValidationRules\GeneralValidationRules.cs" />
+    <Compile Include="Entities\ValidationRules\UserAndAcceptorValidationRules.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Helpers\BloodTypeHelper.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Messages\ErrorMessage.cs" />
     <Compile Include="Messages\LoginMessage.cs" />
@@ -183,31 +191,39 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\AcceptorsDataAccessService.cs" />
-    <Compile Include="Services\DonorsAccessDataService.cs" />
+    <Compile Include="Services\DonatesDataAccessService.cs" />
+    <Compile Include="Services\DonorsDataAccessService.cs" />
     <Compile Include="Services\MainDataAccessService.cs" />
+    <Compile Include="Services\OrdersDataAccessService.cs" />
+    <Compile Include="Services\StatisticsDataAccessService.cs" />
     <Compile Include="Services\UsersDataAccessService.cs" />
     <Compile Include="ViewModel\AcceptorsViewModel.cs" />
+    <Compile Include="ViewModel\DonatesViewModel.cs" />
     <Compile Include="ViewModel\DonorsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OrdersViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\Acceptors\AcceptorsView.xaml.cs">
       <DependentUpon>AcceptorsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Donates\DonatesView.xaml.cs">
+      <DependentUpon>DonatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Donors\DonorsView.xaml.cs">
+      <DependentUpon>DonorsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Enums.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
-    <Compile Include="Utilities\GetAllBloodTypes.cs" />
-    <Compile Include="Utilities\IEnumerable.cs" />
-    <Compile Include="Utilities\ValidatePesel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\UsersViewModel.cs" />
-    <Compile Include="Views\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="Views\Orders\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Users\UsersView.xaml.cs">
       <DependentUpon>UsersView.xaml</DependentUpon>
@@ -299,11 +315,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Donates\DonatesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Donors\DonorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl1.xaml">
+    <Page Include="Views\Orders\OrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,6 +336,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
