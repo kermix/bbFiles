@@ -74,6 +74,31 @@ namespace bbFiles.Services
                 neededAmount -= donate.Amount;
             }
 
+
+            BloodTypeMarker BloodTypeMarker;
+            if (Order.Blood_Type == BloodType.O && Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ORh;
+            else if (Order.Blood_Type == BloodType.O && !Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.O;
+            else if (Order.Blood_Type == BloodType.A && Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ARh;
+            else if (Order.Blood_Type == BloodType.A && !Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.A;
+            else if (Order.Blood_Type == BloodType.B && Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.BRh;
+            else if (Order.Blood_Type == BloodType.B && !Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.B;
+            else if (Order.Blood_Type == BloodType.AB && Order.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ABRh;
+            else
+                BloodTypeMarker = BloodTypeMarker.AB;
+
+
+            int blockerAmount = linkedDonates.Select(x => x.Amount).Sum();
+            var stat = context.Statistics.Find(BloodTypeMarker);
+            stat.TotalAmount -= blockerAmount;
+            context.Entry(stat).State = EntityState.Modified;
+
             if (neededAmount > 0)
             {
                 linkedDonates = new ObservableCollection<Donate>();

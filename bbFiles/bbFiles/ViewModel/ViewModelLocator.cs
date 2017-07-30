@@ -42,6 +42,8 @@ namespace bbFiles.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+
+            SimpleIoc.Default.Register<IStatisticsDataAccessService, StatisticsDataAccessService>();
             SimpleIoc.Default.Register<IUsersDataAccessService, UsersDataAccessService>();
             SimpleIoc.Default.Register<IAcceptorsDataService, AcceptorDataAccessService>();
             SimpleIoc.Default.Register<IDonorsAccessDataService, DonorsDataAccessService>();
@@ -54,8 +56,7 @@ namespace bbFiles.ViewModel
             SimpleIoc.Default.Register<DonorsViewModel>();
             SimpleIoc.Default.Register<DonatesViewModel>();
             SimpleIoc.Default.Register<OrdersViewModel>();
-
-
+            SimpleIoc.Default.Register<StatisticsViewModel>();
         }
 
         public MainViewModel Main
@@ -101,6 +102,13 @@ namespace bbFiles.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<OrdersViewModel>();
+            }
+        }
+        public StatisticsViewModel Statistic
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StatisticsViewModel>();
             }
         }
         public static void Cleanup()

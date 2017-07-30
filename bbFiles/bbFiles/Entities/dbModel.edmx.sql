@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/30/2017 18:29:41
+-- Date Created: 07/30/2017 20:45:15
 -- Generated from EDMX file: C:\Users\kermax\Source\Repos\bbFiles\bbFiles\bbFiles\Entities\dbModel.edmx
 -- --------------------------------------------------
 
@@ -17,14 +17,14 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_dbo_Orders_dbo_Acceptors_AcceptorId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_dbo_Orders_dbo_Acceptors_AcceptorId];
-GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_Donates_dbo_Donors_Donor_PESEL]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Donates] DROP CONSTRAINT [FK_dbo_Donates_dbo_Donors_Donor_PESEL];
 GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_Donates_dbo_Orders_OrderId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Donates] DROP CONSTRAINT [FK_dbo_Donates_dbo_Orders_OrderId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_dbo_Orders_dbo_Acceptors_AcceptorId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_dbo_Orders_dbo_Acceptors_AcceptorId];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserAcceptor]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Acceptors] DROP CONSTRAINT [FK_UserAcceptor];
@@ -45,6 +45,9 @@ IF OBJECT_ID(N'[dbo].[Donors]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Orders];
+GO
+IF OBJECT_ID(N'[dbo].[Statistics]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Statistics];
 GO
 IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Users];
@@ -117,6 +120,13 @@ CREATE TABLE [dbo].[Users] (
 );
 GO
 
+-- Creating table 'Statistics'
+CREATE TABLE [dbo].[Statistics] (
+    [BloodType] tinyint  NOT NULL,
+    [TotalAmount] bigint  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -149,6 +159,12 @@ GO
 ALTER TABLE [dbo].[Users]
 ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [BloodType] in table 'Statistics'
+ALTER TABLE [dbo].[Statistics]
+ADD CONSTRAINT [PK_Statistics]
+    PRIMARY KEY CLUSTERED ([BloodType] ASC);
 GO
 
 -- --------------------------------------------------

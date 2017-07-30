@@ -32,13 +32,14 @@ namespace bbFiles.Views
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 var vm = ((ViewModel.DonorsViewModel)this.DataContext);
-                System.Windows.Data.CollectionViewSource myCollectionViewSource =
+
+                System.Windows.Data.CollectionViewSource donorsCollectionViewSource =
                     ((System.Windows.Data.CollectionViewSource)(this.FindResource("donorViewSource")));
-                Binding b = new Binding("Donors");
-                b.Source = vm;
-                b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(myCollectionViewSource, CollectionViewSource.SourceProperty, b);
-                myCollectionViewSource.Filter += CollectionViewSource_Filter;
+                Binding bindingDonors = new Binding("Donors");
+                bindingDonors.Source = vm;
+                bindingDonors.Mode = BindingMode.OneWay;
+                BindingOperations.SetBinding(donorsCollectionViewSource, CollectionViewSource.SourceProperty, bindingDonors);
+                donorsCollectionViewSource.Filter += CollectionViewSource_Filter;
             }
         }
 

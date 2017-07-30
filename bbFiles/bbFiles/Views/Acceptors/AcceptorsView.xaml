@@ -47,7 +47,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="14*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" 
@@ -86,15 +86,16 @@
             </Button>
         </StackPanel>
         <Grid x:Name="existingAcceptorGrid"
-              Visibility="{Binding AcceptorDetailsMode, Mode=OneWay, 
-            Converter={StaticResource booleanToVisibilityConverter}}"
+              Visibility="{Binding Path=AcceptorDetailsMode, Mode=OneWay, 
+            Converter={StaticResource BooleanToVisibilityConverter}}"
               Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Column="0" Grid.Row="0">
@@ -109,7 +110,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
                 <Label Content="{x:Static p:Strings.Username}"  Grid.Row="0" Grid.Column="0"/>
                 <Label Content="{x:Static p:Strings.Password}"  Grid.Row="1" Grid.Column="0"/>
@@ -179,6 +179,31 @@
                 NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                             IsEnabled="False"/>
             </Grid>
+            <DataGrid x:Name="ordersDataGrid"
+                      Grid.Row="1" 
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="2" 
+                      AutoGenerateColumns="False" 
+                      EnableRowVirtualization="True" 
+                      DataContext="{StaticResource acceptorOrdersViewSource}"
+                      ItemsSource="{Binding}"
+                      IsReadOnly="True"
+                      RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="selectedAcceptorOrderIdColumn" Binding="{Binding Id,Mode=OneWay}" Header="{x:Static p:Strings.ID}" Width="*"/>
+                    <DataGridTextColumn x:Name="selectedAcceptorOrderAmountColumn" Binding="{Binding Amount,Mode=OneWay}" Header="{x:Static p:Strings.Amount}" Width="*"/>
+                    <DataGridTextColumn x:Name="selectedAcceptorOrderBlood_TypeColumn" Binding="{Binding Blood_Type, Mode=OneWay}" Header="{x:Static p:Strings.BloodType}" Width="*"/>
+                    <DataGridCheckBoxColumn x:Name="selectedAcceptorOrderbBlood_RhMarkerColumn" Binding="{Binding Blood_RhMarker, Mode=OneWay}" Header="{x:Static p:Strings.RhMarker}" Width="*"/>
+                    <DataGridTemplateColumn x:Name="selectedAcceptorOrderDateColumn" Header="{x:Static p:Strings.OrderDate}" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding OrderDate, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn x:Name="selectedAcceptorOrderSendColumn" Binding="{Binding Send, Mode=OneWay}" Header="{x:Static p:Strings.Send}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid Grid.Column="1"
                   Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -192,7 +217,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
                 <Label Content="{x:Static p:Strings.AcceptorName}" 
                        Grid.Column="0"
@@ -299,11 +323,8 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1">
-                    <!-- TODO Acceptor Orders DataGrid -->
-                </DataGrid>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1" >
+            <Grid Grid.Row="2" Grid.Column="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

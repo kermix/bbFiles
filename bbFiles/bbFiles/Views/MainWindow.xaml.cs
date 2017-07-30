@@ -38,6 +38,8 @@ namespace bbFiles.Views
                 vm.Login(result.Username, result.Password);
                 if(vm.UserLevel == Role.Wrong)
                     this.ShowLoginDialog(this, null);
+
+                //TODO change password if not changed
             }
         }
 

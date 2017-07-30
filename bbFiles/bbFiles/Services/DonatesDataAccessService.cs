@@ -31,6 +31,29 @@ namespace bbFiles.Services
         public int CreateDonate(Donate Donate)
         {
             context.Donates.Add(Donate);
+            BloodTypeMarker BloodTypeMarker;
+
+            if (Donate.Donor.Blood_Type == BloodType.O && Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ORh;
+            else if (Donate.Donor.Blood_Type == BloodType.O && !Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.O;
+            else if (Donate.Donor.Blood_Type == BloodType.A && Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ARh;
+            else if (Donate.Donor.Blood_Type == BloodType.A && !Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.A;
+            else if (Donate.Donor.Blood_Type == BloodType.B && Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.BRh;
+            else if (Donate.Donor.Blood_Type == BloodType.B && !Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.B;
+            else if (Donate.Donor.Blood_Type == BloodType.AB && Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker = BloodTypeMarker.ABRh;
+            else
+                BloodTypeMarker = BloodTypeMarker.AB;
+
+            var stat = context.Statistics.Find(BloodTypeMarker);
+            stat.TotalAmount += Donate.Amount;
+            context.Entry(stat).State = EntityState.Modified;
+
             context.SaveChanges();
             return Donate.Id;
         }

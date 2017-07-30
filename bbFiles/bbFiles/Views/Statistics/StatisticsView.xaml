@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="bbFiles.Views.StatisticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:Entities="clr-namespace:bbFiles.Entities"
+             xmlns:Validation="clr-namespace:bbFiles.Entities.ValidationRules"
+             xmlns:Helpers="clr-namespace:bbFiles.Helpers"
+             xmlns:Converters="clr-namespace:bbFiles.Converters"
+             xmlns:p="clr-namespace:bbFiles.Resources"
+             xmlns:local="clr-namespace:bbFiles.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             DataContext="{Binding Statistic, Source={StaticResource Locator}}" Name="UI">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" 
+                    Grid.Column="1">
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="40"
+                    Width="40"
+                    ToolTip="{x:Static p:Strings.Refresh}"
+                    Command="{Binding RefreshCommand, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="Refresh"/>
+            </Button>
+        </StackPanel>
+        <lvc:CartesianChart Series="{Binding SeriesCollection, Mode=OneWay}" LegendLocation="Left" Grid.Column="0">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Grupa krwi" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="% rezerwy" LabelFormatter="{Binding Formatter}" 
+                          MinValue="0" MaxValue="100"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+    </Grid>
+</UserControl>

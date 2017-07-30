@@ -31,14 +31,25 @@ namespace bbFiles.Views
             // Nie ładuj danych w czasie projektowania.
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
-                var vm = ((ViewModel.AcceptorsViewModel)this.DataContext);
-                System.Windows.Data.CollectionViewSource myCollectionViewSource =
+                var vm = (ViewModel.AcceptorsViewModel)this.DataContext;
+
+                System.Windows.Data.CollectionViewSource acceptorsCollectionViewSource =
                     ((System.Windows.Data.CollectionViewSource)(this.FindResource("acceptorViewSource")));
-                Binding b = new Binding("Acceptors");
-                b.Source = vm;
-                b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(myCollectionViewSource, CollectionViewSource.SourceProperty, b);
-                myCollectionViewSource.Filter += CollectionViewSource_Filter;
+                Binding acceptorsBinding = new Binding("Acceptors");
+                acceptorsBinding.Source = vm;
+                acceptorsBinding.Mode = BindingMode.OneWay;
+                BindingOperations.SetBinding(acceptorsCollectionViewSource, CollectionViewSource.SourceProperty, acceptorsBinding);
+
+                System.Windows.Data.CollectionViewSource acceptorOrdersCollectionViewSource =
+                  ((System.Windows.Data.CollectionViewSource)(this.FindResource("acceptorOrdersViewSource")));
+                Binding ordersBinding = new Binding("SelectedAcceptor.Orders");
+                ordersBinding.Source = vm;
+                ordersBinding.Mode = BindingMode.OneWay;
+                BindingOperations.SetBinding(acceptorOrdersCollectionViewSource, CollectionViewSource.SourceProperty, ordersBinding);
+
+
+
+                acceptorsCollectionViewSource.Filter += CollectionViewSource_Filter;
             }
         }
 

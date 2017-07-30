@@ -30,6 +30,9 @@
         <DataTemplate DataType="{x:Type vms:OrdersViewModel}">
             <v:OrdersView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:StatisticsViewModel}">
+            <v:StatisticsView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid IsEnabled="{Binding IsLogged, Mode=OneWay}">
         <Grid.RowDefinitions>
@@ -94,6 +97,7 @@
                     Width="60"
                     Grid.Column="5"
                     ToolTip="{x:Static p:Strings.Stats}"
+                    Command="{Binding OpenStatisticViewCommand}"
                     IsEnabled="{Binding IsAcceptor, Mode=OneWay}">
                 <IconPacks:PackIconFontAwesome Kind="BarChart"/>
             </Button>

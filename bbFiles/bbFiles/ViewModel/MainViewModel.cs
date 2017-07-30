@@ -84,6 +84,7 @@ namespace bbFiles.ViewModel
         public RelayCommand OpenDonorViewCommand { get; set; }
         public RelayCommand OpenDonateViewCommand { get; set; }
         public RelayCommand OpenOrderViewCommand { get; set; }
+        public RelayCommand OpenStatisticViewCommand { get; set; }
 
 
         public MainViewModel(IMainDataAccessService serviceProxy)
@@ -94,6 +95,7 @@ namespace bbFiles.ViewModel
             OpenDonorViewCommand = new RelayCommand(OpenDonorView);
             OpenDonateViewCommand = new RelayCommand(OpenDonateView);
             OpenOrderViewCommand = new RelayCommand(OpenOrderView);
+            OpenStatisticViewCommand = new RelayCommand(OpenStatisticView);
 
 
             IsWorker = IsAdmin = IsAcceptor = false;
@@ -119,6 +121,10 @@ namespace bbFiles.ViewModel
         void OpenOrderView()
         {
             SelectedViewModel = new OrdersViewModel(new OrdersDataAccessService());
+        }
+        void OpenStatisticView()
+        {
+            SelectedViewModel = new StatisticsViewModel(new StatisticsDataAccessService());
         }
 
         public void ToogleNavigation()

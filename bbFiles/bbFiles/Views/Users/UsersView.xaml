@@ -47,7 +47,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="14*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" 
