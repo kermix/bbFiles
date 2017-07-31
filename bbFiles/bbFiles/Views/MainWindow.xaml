@@ -1,0 +1,107 @@
+﻿<Controls:MetroWindow x:Class="bbFiles.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:bbFiles.Views"
+        xmlns:p="clr-namespace:bbFiles.Resources"
+        xmlns:vms="clr-namespace:bbFiles.ViewModel"      
+        xmlns:v="clr-namespace:bbFiles.Views"      
+        mc:Ignorable="d"
+        Title="bbFiles" Height="560" Width="910"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Loaded="MetroWindow_Loaded">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vms:UsersViewModel}">
+            <v:UsersView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:AcceptorsViewModel}">
+            <v:AcceptorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:DonorsViewModel}">
+            <v:DonorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:DonatesViewModel}">
+            <v:DonatesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:OrdersViewModel}">
+            <v:OrdersView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:StatisticsViewModel}">
+            <v:StatisticsView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid IsEnabled="{Binding IsLogged, Mode=OneWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" IsEnabled="{Binding CanNavigate, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    ToolTip="{x:Static p:Strings.Donors}"
+                    Command="{Binding OpenDonorViewCommand}"
+                    IsEnabled="{Binding IsWorker, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="Users"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Grid.Column="1"
+                    ToolTip="{x:Static p:Strings.Donates}"
+                    Command="{Binding OpenDonateViewCommand}"
+                    IsEnabled="{Binding IsWorker, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="Tint"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Grid.Column="2"
+                    ToolTip="{x:Static p:Strings.Acceptors}"
+                    Command="{Binding OpenAcceptorViewCommand}"
+                    IsEnabled="{Binding IsWorker, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="Building"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Grid.Column="3"
+                    ToolTip="{x:Static p:Strings.Orders}"
+                    Command="{Binding OpenOrderViewCommand}"
+                    IsEnabled="{Binding IsAcceptor, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="List"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Grid.Column="4"
+                    ToolTip="{x:Static p:Strings.Users}"
+                    Command="{Binding OpenUserViewCommand}"
+                    IsEnabled="{Binding IsAdmin, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="UserMd"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Grid.Column="5"
+                    ToolTip="{x:Static p:Strings.Stats}"
+                    Command="{Binding OpenStatisticViewCommand}"
+                    IsEnabled="{Binding IsAcceptor, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="BarChart"/>
+            </Button>
+        </Grid>
+        <ContentControl x:Name="ContentControl" Content="{Binding SelectedViewModel,Mode=OneWay}" Grid.Row="1"/>
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,380 @@
+﻿<UserControl x:Class="bbFiles.Views.DonorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:Entities="clr-namespace:bbFiles.Entities"
+             xmlns:Validation="clr-namespace:bbFiles.Entities.ValidationRules"
+             xmlns:Helpers="clr-namespace:bbFiles.Helpers"
+             xmlns:Converters="clr-namespace:bbFiles.Converters"
+             xmlns:p="clr-namespace:bbFiles.Resources"
+             xmlns:local="clr-namespace:bbFiles.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded"
+             DataContext="{Binding Donor, Source={StaticResource Locator}}" Name="UI">
+    <UserControl.Resources>
+        <ObjectDataProvider 
+            x:Key="BloodTypes" 
+            ObjectType="{x:Type Helpers:BloodTypeHelper}" 
+            MethodName="GetAllBloodTypes"/>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <Converters:reverseBooleanToVisibilityConverter x:Key="reverseBooleanToVisibilityConverter" />
+        <Converters:revertBooleanConverter x:Key="revertBooleanConverter" />
+        <CollectionViewSource x:Key="donorViewSource" d:DesignSource="{d:DesignInstance {x:Type Entities:Donor}, CreateList=True}"/>
+        <CollectionViewSource x:Key="donorDonatesViewSource" Source="{Binding Donates, Source={StaticResource donorViewSource}}"/>
+        <Style x:Key="SaveButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroCircleButtonStyle}">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=firstnameTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=surnameTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=peselTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=cityTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=streetTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=postalCodeTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=emailTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding ElementName=phoneTextBox, Path=(Validation.HasError)}" Value="False"/>
+                        <Condition Binding="{Binding InEdit, Mode=OneWay}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" 
+                    Grid.Column="1"
+                    IsEnabled="{Binding DonorDetailsMode, Mode=OneWay, Converter={StaticResource revertBooleanConverter}}">
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="40"
+                    Width="40"
+                    ToolTip="{x:Static p:Strings.Add}"
+                    Command="{Binding  SendDonorCommand, Mode=OneWay}"
+                    CommandParameter="{x:Null}">
+                <IconPacks:PackIconFontAwesome Kind="Plus"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="40"
+                    Width="40"
+                    ToolTip="{x:Static p:Strings.Details}"
+                    Command="{Binding  SendDonorCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=donorDataGrid,Path=SelectedItem}">
+                <IconPacks:PackIconFontAwesome Kind="Search"/>
+            </Button>
+            <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                    Height="40"
+                    Width="40"
+                    ToolTip="{x:Static p:Strings.Refresh}"
+                    Command="{Binding RefreshCommand, Mode=OneWay}">
+                <IconPacks:PackIconFontAwesome Kind="Refresh"/>
+            </Button>
+        </StackPanel>
+        <Grid x:Name="existingDonorGrid"
+              Visibility="{Binding DonorDetailsMode, Mode=OneWay, 
+            Converter={StaticResource booleanToVisibilityConverter}}"
+              Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{x:Static p:Strings.Firstname}"  Grid.Row="0" Grid.Column="0"/>
+                <Label Content="{x:Static p:Strings.Surname}"  Grid.Row="1" Grid.Column="0"/>
+                <Label Content="{x:Static p:Strings.PESEL}"  Grid.Row="2" Grid.Column="0"/>
+                <Label Content="{x:Static p:Strings.BloodType}"  Grid.Row="3" Grid.Column="0"/>
+                <Label Content="{x:Static p:Strings.RhMarker}" Grid.Row="4" Grid.Column="0"/>
+                <TextBox x:Name="firstnameTextBox"  
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorFirstname" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True"
+                                 ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="3" Max="20"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="surnameTextBox"  
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorSurname" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True"
+                                 ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="3" Max="40"/>
+                                <Validation:RegexValidationRule RegEx="^[a-zA-Z][a-zA-Z- ]*[a-zA-Z]$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="peselTextBox"  
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorPESEL" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True"
+                                 ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="11" Max="11"/>
+                                <Validation:RegexValidationRule RegEx="^[0-9]+$"/>
+                                <Validation:PeselValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ComboBox x:Name="bloodTypeComboBox" 
+                          Grid.Row="3"
+                          Grid.Column="1"
+                          ItemsSource="{Binding Source={StaticResource BloodTypes}}"
+                          DisplayMemberPath="Value"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding SelectedDonorBloodType, Mode=TwoWay}"
+                          IsEnabled="{Binding InEdit, Mode=OneWay}">
+                </ComboBox>
+                <CheckBox x:Name="rhMarkerCheckBox" 
+                          Grid.Row="4"
+                          Grid.Column="1"
+                          IsThreeState="False" 
+                          IsChecked="{Binding SelectedDonorRhMarker, Mode=TwoWay}"
+                          IsEnabled="{Binding InEdit, Mode=OneWay}"/>
+            </Grid>
+            <Grid Grid.Column="1"
+                  Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{x:Static p:Strings.Street}" 
+                       Grid.Column="0"
+                       Grid.Row="0"/>
+                <Label Content="{x:Static p:Strings.City}"
+                       Grid.Column="0" 
+                       Grid.Row="1"/>
+                <Label Content="{x:Static p:Strings.PostalCode}"
+                       Grid.Column="0" 
+                       Grid.Row="2"/>
+                <Label Content="{x:Static p:Strings.Email}" 
+                       Grid.Column="0" 
+                       Grid.Row="3"/>
+                <Label Content="{x:Static p:Strings.PhoneNumber}" 
+                       Grid.Column="0" 
+                       Grid.Row="4"/>
+                <TextBox x:Name="streetTextBox"  
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorAddressStreet"
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="5" Max="40"/>
+                                <Validation:RegexValidationRule RegEx="^[a-zA-Z0-9ęĘóÓąĄśŚłŁżŻźŹćńŃ -.]+$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="cityTextBox"  
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorAddressCity" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <Validation:LengthValidationRule Min="3" Max="30"/>
+                                <Validation:RegexValidationRule RegEx="^[a-zA-ZęĘóÓąĄśŚłŁżŻźŹćńŃ -]+$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="postalCodeTextBox" 
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorAddressPostalCode" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <Validation:RegexValidationRule RegEx="^[0-9]{2}\-[0-9]{3}$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="emailTextBox" 
+                         Grid.Column="1" 
+                         Grid.Row="3"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorContactEmail" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <Validation:EmailValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="phoneTextBox"
+                         Grid.Column="1" 
+                         Grid.Row="4"
+                         IsEnabled="{Binding InEdit, Mode=OneWay}">
+                    <TextBox.Text>
+                        <Binding Path="SelectedDonorContactPhone" 
+                                 Mode="TwoWay" 
+                                 NotifyOnValidationError="True" 
+                                 ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <Validation:RegexValidationRule RegEx="^([0-9]{9})$"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+            <DataGrid x:Name="donatesDataGrid" 
+                          AutoGenerateColumns="False" 
+                          EnableRowVirtualization="True"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          Grid.Row="1"
+                          DataContext="{StaticResource donorDonatesViewSource}"
+                          ItemsSource="{Binding}" 
+                          RowDetailsVisibilityMode="VisibleWhenSelected"
+                          IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="selectedDonorDonateIdColumn" Binding="{Binding Id, Mode=OneWay}" Header="{x:Static p:Strings.ID}" Width="*"/>
+                    <DataGridTextColumn x:Name="selectedDonorDonateAmountColumn" Binding="{Binding Amount, Mode=OneWay}" Header="{x:Static p:Strings.Amount}" Width="*"/>
+                    <DataGridTemplateColumn x:Name="selectedDonorDonateDateColumn" Header="{x:Static p:Strings.DonateDate}" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding DonateDate, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn x:Name="selectedDonorDonateOrderIdColumn" Binding="{Binding OrderId, Mode=OneWay}" Header="{x:Static p:Strings.OrderId}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="2" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" 
+                        Style="{StaticResource SaveButton}"
+                        Height="40"
+                        Width="40"
+                        VerticalAlignment="Bottom"
+                        ToolTip="{x:Static p:Strings.Save}"
+                        Command="{Binding SaveDonorCommand}">
+                    <IconPacks:PackIconFontAwesome Kind="FloppyOutline"/>
+                </Button>
+                <Button Grid.Column="1" 
+                        Style="{StaticResource MetroCircleButtonStyle}"
+                        Height="40"
+                        Width="40"
+                        VerticalAlignment="Bottom"
+                        ToolTip="{x:Static p:Strings.Close}"
+                        Command="{Binding CancelCommand, Mode=OneWay}">
+                    <IconPacks:PackIconFontAwesome Kind="Times"/>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Visibility="{Binding Path=DonorDetailsMode, Mode=OneWay, 
+            Converter={StaticResource reverseBooleanToVisibilityConverter}}"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="donorDataGrid"
+                      Grid.Row="0"
+                  DataContext="{StaticResource donorViewSource}"
+                  ItemsSource="{Binding}"
+                  AutoGenerateColumns="False" 
+                  EnableRowVirtualization="True" 
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
+                          Path=DataContext.SelectedDonor}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="peselColumn" 
+                                    Binding="{Binding PESEL, Mode=TwoWay}" 
+                                    Header="{x:Static p:Strings.PESEL}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="firstnameColumn" 
+                                    Binding="{Binding Firstname}" 
+                                    Header="{x:Static p:Strings.Firstname}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="surnameColumn" 
+                                    Binding="{Binding Surname}" 
+                                    Header="{x:Static p:Strings.Surname}" 
+                                    Width="*"/>
+                    <DataGridTextColumn x:Name="bloodTypeColumn" 
+                                    Binding="{Binding Blood_Type}" 
+                                    Header="{x:Static p:Strings.BloodType}" 
+                                    Width="*"/>
+                    <DataGridCheckBoxColumn x:Name="rhMarkerColumn"
+                                        Binding="{Binding Blood_RhMarker}"
+                                        Header="{x:Static p:Strings.RhMarker}"
+                                        Width="SizeToHeader"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="{x:Static p:Strings.SearchByPesel}" HorizontalAlignment="Right" Grid.Row="1" Height="32" VerticalAlignment="Bottom" Margin="200 0"/>
+            <TextBox x:Name="SearchTextbox" Text="" HorizontalAlignment="Right" Grid.Row="1" Width="200" Height="32" VerticalAlignment="Bottom" 
+                     TextChanged="SearchTextbox_TextChanged"/>
+        </Grid>
+    </Grid>
+</UserControl>

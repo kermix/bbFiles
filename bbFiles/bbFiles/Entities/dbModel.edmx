@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bbFilesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="bbFilesModelStoreContainer">
+    <EntitySet Name="Acceptors" EntityType="bbFilesModel.Store.Acceptors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Donates" EntityType="bbFilesModel.Store.Donates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Donors" EntityType="bbFilesModel.Store.Donors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="bbFilesModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="bbFilesModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Statistics" EntityType="bbFilesModel.Store.Statistics" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Orders_dbo_Acceptors_AcceptorId" Association="bbFilesModel.Store.FK_dbo_Orders_dbo_Acceptors_AcceptorId">
+      <End Role="Acceptors" EntitySet="Acceptors" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Donates_dbo_Donors_Donor_PESEL" Association="bbFilesModel.Store.FK_dbo_Donates_dbo_Donors_Donor_PESEL">
+      <End Role="Donors" EntitySet="Donors" />
+      <End Role="Donates" EntitySet="Donates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Donates_dbo_Orders_OrderId" Association="bbFilesModel.Store.FK_dbo_Donates_dbo_Orders_OrderId">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Donates" EntitySet="Donates" />
+    </AssociationSet>
+    <AssociationSet Name="UserAcceptor" Association="bbFilesModel.Store.UserAcceptor">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Acceptor" EntitySet="Acceptors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Acceptors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_Street" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_PostalCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="User_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Donates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Avaliable" Type="bit" Nullable="false" />
+    <Property Name="DonateDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="true" />
+    <Property Name="Donor_PESEL" Type="nvarchar" Nullable="false" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Donors">
+    <Key>
+      <PropertyRef Name="PESEL" />
+    </Key>
+    <Property Name="PESEL" Type="nvarchar" Nullable="false" MaxLength="11" />
+    <Property Name="Firstname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_Street" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address_PostalCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Phone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Blood_Type" Type="tinyint" Nullable="false" />
+    <Property Name="Blood_RhMarker" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="Blood_Type" Type="tinyint" Nullable="false" />
+    <Property Name="Blood_RhMarker" Type="bit" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Send" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="AcceptorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RegisteredDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="true" />
+    <Property Name="PasswordChaged" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Role" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Statistics">
+    <Key>
+      <PropertyRef Name="BloodType" />
+    </Key>
+    <Property Name="BloodType" Type="tinyint" Nullable="false" />
+    <Property Name="TotalAmount" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Orders_dbo_Acceptors_AcceptorId">
+    <End Role="Acceptors" Type="bbFilesModel.Store.Acceptors" Multiplicity="1" />
+    <End Role="Orders" Type="bbFilesModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Acceptors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="AcceptorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Donates_dbo_Donors_Donor_PESEL">
+    <End Role="Donors" Type="bbFilesModel.Store.Donors" Multiplicity="1" />
+    <End Role="Donates" Type="bbFilesModel.Store.Donates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donors">
+        <PropertyRef Name="PESEL" />
+      </Principal>
+      <Dependent Role="Donates">
+        <PropertyRef Name="Donor_PESEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Donates_dbo_Orders_OrderId">
+    <End Role="Orders" Type="bbFilesModel.Store.Orders" Multiplicity="0..1" />
+    <End Role="Donates" Type="bbFilesModel.Store.Donates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Donates">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAcceptor">
+    <End Role="User" Type="bbFilesModel.Store.Users" Multiplicity="0..1" />
+    <End Role="Acceptor" Type="bbFilesModel.Store.Acceptors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Acceptor">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bbFilesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acceptor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Acceptors_AcceptorId" FromRole="Acceptors" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="bbFilesModel.UserAcceptor" FromRole="Acceptor" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Donate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Avaliable" Type="Boolean" Nullable="false" />
+          <Property Name="DonateDate" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="Donor_PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Donor" Relationship="Self.FK_dbo_Donates_dbo_Donors_Donor_PESEL" FromRole="Donates" ToRole="Donors" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Donates_dbo_Orders_OrderId" FromRole="Donates" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Donor">
+          <Key>
+            <PropertyRef Name="PESEL" />
+          </Key>
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Blood_Type" Type="bbFilesModel.BloodType" Nullable="false" />
+          <Property Name="Blood_RhMarker" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Donates" Relationship="Self.FK_dbo_Donates_dbo_Donors_Donor_PESEL" FromRole="Donors" ToRole="Donates" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Blood_Type" Type="bbFilesModel.BloodType" Nullable="false" />
+          <Property Name="Blood_RhMarker" Type="Boolean" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Send" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="AcceptorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acceptor" Relationship="Self.FK_dbo_Orders_dbo_Acceptors_AcceptorId" FromRole="Orders" ToRole="Acceptors" />
+          <NavigationProperty Name="Donates" Relationship="Self.FK_dbo_Donates_dbo_Orders_OrderId" FromRole="Orders" ToRole="Donates" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredDate" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordChaged" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="Role" Type="bbFilesModel.Role" Nullable="false" />
+          <NavigationProperty Name="Acceptor" Relationship="bbFilesModel.UserAcceptor" FromRole="User" ToRole="Acceptor" />
+        </EntityType>
+        <Association Name="FK_dbo_Orders_dbo_Acceptors_AcceptorId">
+          <End Role="Acceptors" Type="Self.Acceptor" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acceptors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="AcceptorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Donates_dbo_Donors_Donor_PESEL">
+          <End Role="Donors" Type="Self.Donor" Multiplicity="1" />
+          <End Role="Donates" Type="Self.Donate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donors">
+              <PropertyRef Name="PESEL" />
+            </Principal>
+            <Dependent Role="Donates">
+              <PropertyRef Name="Donor_PESEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Donates_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Donates" Type="Self.Donate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Donates">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acceptors" EntityType="Self.Acceptor" />
+          <EntitySet Name="Donates" EntityType="Self.Donate" />
+          <EntitySet Name="Donors" EntityType="Self.Donor" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_Orders_dbo_Acceptors_AcceptorId" Association="Self.FK_dbo_Orders_dbo_Acceptors_AcceptorId">
+            <End Role="Acceptors" EntitySet="Acceptors" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Donates_dbo_Donors_Donor_PESEL" Association="Self.FK_dbo_Donates_dbo_Donors_Donor_PESEL">
+            <End Role="Donors" EntitySet="Donors" />
+            <End Role="Donates" EntitySet="Donates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Donates_dbo_Orders_OrderId" Association="Self.FK_dbo_Donates_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Donates" EntitySet="Donates" />
+          </AssociationSet>
+          <AssociationSet Name="UserAcceptor" Association="bbFilesModel.UserAcceptor">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Acceptor" EntitySet="Acceptors" />
+          </AssociationSet>
+          <EntitySet Name="Statistics" EntityType="bbFilesModel.Statistic" />
+        </EntityContainer>
+        <EnumType Name="Role" UnderlyingType="Byte" a:ExternalTypeName="bbFiles.Role" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Member Name="Wrong" />
+          <Member Name="Acceptor" />
+          <Member Name="Worker" />
+          <Member Name="Admin" />
+        </EnumType>
+        <EnumType Name="BloodType" UnderlyingType="Byte" a:ExternalTypeName="bbFiles.BloodType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Member Name="O" />
+          <Member Name="A" />
+          <Member Name="B" />
+          <Member Name="AB" />
+        </EnumType>
+        <Association Name="UserAcceptor">
+          <End Type="bbFilesModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="bbFilesModel.Acceptor" Role="Acceptor" Multiplicity="0..1" />
+        </Association>
+        <EnumType Name="BloodTypeMarker" UnderlyingType="Byte" a:ExternalTypeName="bbFiles.BloodTypeMarker" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Member Name="O" />
+          <Member Name="ORh" />
+          <Member Name="A" />
+          <Member Name="ARh" />
+          <Member Name="B" />
+          <Member Name="BRh" />
+          <Member Name="AB" />
+          <Member Name="ABRh" />
+        </EnumType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="BloodType" />
+          </Key>
+          <Property Name="BloodType" Type="bbFilesModel.BloodTypeMarker" Nullable="false" />
+          <Property Name="TotalAmount" Type="Int64" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bbFilesModelStoreContainer" CdmEntityContainer="dbModel">
+    <EntitySetMapping Name="Acceptors">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.Acceptor)">
+        <MappingFragment StoreEntitySet="Acceptors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address_Street" ColumnName="Address_Street" />
+          <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+          <ScalarProperty Name="Address_PostalCode" ColumnName="Address_PostalCode" />
+          <ScalarProperty Name="Contact_Phone" ColumnName="Contact_Phone" />
+          <ScalarProperty Name="Contact_Email" ColumnName="Contact_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Donates">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.Donate)">
+        <MappingFragment StoreEntitySet="Donates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Avaliable" ColumnName="Avaliable" />
+          <ScalarProperty Name="DonateDate" ColumnName="DonateDate" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Donor_PESEL" ColumnName="Donor_PESEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Donors">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.Donor)">
+        <MappingFragment StoreEntitySet="Donors">
+          <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Address_Street" ColumnName="Address_Street" />
+          <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+          <ScalarProperty Name="Address_PostalCode" ColumnName="Address_PostalCode" />
+          <ScalarProperty Name="Contact_Phone" ColumnName="Contact_Phone" />
+          <ScalarProperty Name="Contact_Email" ColumnName="Contact_Email" />
+          <ScalarProperty Name="Blood_Type" ColumnName="Blood_Type" />
+          <ScalarProperty Name="Blood_RhMarker" ColumnName="Blood_RhMarker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Blood_Type" ColumnName="Blood_Type" />
+          <ScalarProperty Name="Blood_RhMarker" ColumnName="Blood_RhMarker" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Send" ColumnName="Send" />
+          <ScalarProperty Name="AcceptorId" ColumnName="AcceptorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RegisteredDate" ColumnName="RegisteredDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="PasswordChaged" ColumnName="PasswordChaged" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Statistics">
+      <EntityTypeMapping TypeName="IsTypeOf(bbFilesModel.Statistic)">
+        <MappingFragment StoreEntitySet="Statistics">
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserAcceptor" TypeName="bbFilesModel.UserAcceptor" StoreEntitySet="Acceptors">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Acceptor">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="User_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
