@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
+using GalaSoft.MvvmLight.Messaging;
+using bbFiles.Messages;
 
 namespace bbFiles.ViewModel
 {
@@ -32,7 +34,9 @@ namespace bbFiles.ViewModel
         
         void GetStatistics()
         {
-            SeriesCollection = new SeriesCollection
+            try
+            {
+                SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
@@ -57,11 +61,13 @@ namespace bbFiles.ViewModel
                     }
                 }
             };
-            RaisePropertyChanged("SeriesCollection");
+                RaisePropertyChanged("SeriesCollection");
+            }
+            catch (NullReferenceException)
+            {
+            Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.DatabaseErrorTitle, Error = Resources.Strings.StatisticScaffoldError });
+            }
+            
         }
-
-
-
-
     }
 }

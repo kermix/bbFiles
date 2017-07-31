@@ -23,7 +23,6 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("Users");
             }
         }
-
         User _selectedUser;
         public User SelectedUser
         {
@@ -248,6 +247,11 @@ namespace bbFiles.ViewModel
         }
         void SendUser(User User)
         {
+            if(User != null && User.Id == ServiceLocator.Current.GetInstance<MainViewModel>().userId)
+            {
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.UserSelectionErrorTitle, Error = Resources.Strings.CannotDeleteOrEditYourselfError });
+                return;
+            }
             (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             UserDetailsMode = true;
             if (User == null)
@@ -288,6 +292,11 @@ namespace bbFiles.ViewModel
         }
         void DeleteUser(User User)
         {
+            if (User != null && User.Id == ServiceLocator.Current.GetInstance<MainViewModel>().userId)
+            {
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.UserSelectionErrorTitle, Error = Resources.Strings.CannotDeleteOrEditYourselfError });
+                return;
+            }
             if (User != null)
             {
                 _serviceProxy.DeleteUser(User);
@@ -300,8 +309,6 @@ namespace bbFiles.ViewModel
                     Title = Resources.Strings.UserSelectionErrorTitle,
                     Error = Resources.Strings.SelectUserFirstError
                 });
-
-                //TODO cannot delete ur self
             }
         }
 

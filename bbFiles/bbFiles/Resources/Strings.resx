@@ -327,4 +327,13 @@
   <data name="OrderAlreadySendError" xml:space="preserve">
     <value>To zamówienie już wcześniej zostało oznaczone jako wysłane.</value>
   </data>
+  <data name="DatabaseErrorTitle" xml:space="preserve">
+    <value>Błąd obsługi bazy danych</value>
+  </data>
+  <data name="StatisticScaffoldError" xml:space="preserve">
+    <value>Błąd szkieletu bazy danych. Nie można wyświetlić statystyk. Należy skontaktować się z administracją.</value>
+  </data>
+  <data name="CannotDeleteOrEditYourselfError" xml:space="preserve">
+    <value>Nie możesz usunąć ani edytować konta, które jest aktualnie w użyciu.</value>
+  </data>
 </root>

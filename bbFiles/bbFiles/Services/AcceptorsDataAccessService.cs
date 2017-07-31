@@ -15,7 +15,7 @@ namespace bbFiles.Services
     {
         ObservableCollection<Acceptor> GetAcceptors();
         int CreateAcceptor(Acceptor Acceptor);
-        void DeleteDependentUser(Acceptor Acceptor);
+        bool DeleteDependentUser(Acceptor Acceptor);
     }
     public class AcceptorDataAccessService : IAcceptorsDataService
     {
@@ -39,22 +39,17 @@ namespace bbFiles.Services
             return Acceptor.Id;
         }
 
-        public void DeleteDependentUser(Acceptor Acceptor)
+        public bool DeleteDependentUser(Acceptor Acceptor)
         {
             if (Acceptor.User != null)
             {
                 context.Users.Attach(Acceptor.User);
                 context.Users.Remove(Acceptor.User);
                 context.SaveChanges();
+                return true;
             }
             else
-            {
-                Messenger.Default.Send(new ErrorMessage()
-                {
-                    Title = Resources.Strings.UserSelectionErrorTitle,
-                    Error = Resources.Strings.NoDependentUserError
-                }); // TODO move message to viewmodel
-            }
+                return false;
         }
     }
 }

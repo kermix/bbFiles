@@ -151,6 +151,15 @@ namespace bbFiles.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie możesz usunąć ani edytować konta, które jest aktualnie w użyciu..
+        /// </summary>
+        public static string CannotDeleteOrEditYourselfError {
+            get {
+                return ResourceManager.GetString("CannotDeleteOrEditYourselfError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miejscowość:.
         /// </summary>
         public static string City {
@@ -165,6 +174,15 @@ namespace bbFiles.Resources {
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Błąd obsługi bazy danych.
+        /// </summary>
+        public static string DatabaseErrorTitle {
+            get {
+                return ResourceManager.GetString("DatabaseErrorTitle", resourceCulture);
             }
         }
         
@@ -615,6 +633,15 @@ namespace bbFiles.Resources {
         public static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Błąd szkieletu bazy danych. Nie można wyświetlić statystyk. Należy skontaktować się z administracją..
+        /// </summary>
+        public static string StatisticScaffoldError {
+            get {
+                return ResourceManager.GetString("StatisticScaffoldError", resourceCulture);
             }
         }
         

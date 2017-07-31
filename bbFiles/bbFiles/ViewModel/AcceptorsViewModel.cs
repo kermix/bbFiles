@@ -270,8 +270,11 @@ namespace bbFiles.ViewModel
         {
             if (Acceptor != null)
             {
-                _serviceProxy.DeleteDependentUser(Acceptor);
-                GetAcceptors();
+                bool deletionResult = _serviceProxy.DeleteDependentUser(Acceptor);
+                if(deletionResult)
+                    GetAcceptors();
+                else
+                    Messenger.Default.Send(new ErrorMessage() { Error = Resources.Strings.UserSelectionErrorTitle, Title = Resources.Strings.NoDependentUserError})
             }
             else
             {
@@ -280,8 +283,6 @@ namespace bbFiles.ViewModel
                     Title = Resources.Strings.UserSelectionErrorTitle,
                     Error = Resources.Strings.SelectUserFirstError
                 });
-
-                //TODO cannot delete ur self
             }
         }
         void ReceiveAcceptor()

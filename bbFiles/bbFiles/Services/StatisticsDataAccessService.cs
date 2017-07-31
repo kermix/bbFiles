@@ -16,9 +16,16 @@ namespace bbFiles.Services
         dbModel context = new dbModel();
         public long GetStatistic(BloodTypeMarker BloodType)
         {
-            context.Dispose();
-            context = new dbModel();
-            return (context.Statistics.Find(BloodType)).TotalAmount / 5000;
+            try
+            {
+                context.Dispose();
+                context = new dbModel();
+                return (context.Statistics.Find(BloodType)).TotalAmount / 5000;
+            }
+            catch(NullReferenceException ex)
+            {
+                throw new NullReferenceException();
+            }
         }
     }
 }
