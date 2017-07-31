@@ -271,10 +271,10 @@ namespace bbFiles.ViewModel
             if (Acceptor != null)
             {
                 bool deletionResult = _serviceProxy.DeleteDependentUser(Acceptor);
-                if(deletionResult)
+                if (deletionResult)
                     GetAcceptors();
                 else
-                    Messenger.Default.Send(new ErrorMessage() { Error = Resources.Strings.UserSelectionErrorTitle, Title = Resources.Strings.NoDependentUserError})
+                    Messenger.Default.Send(new ErrorMessage() { Error = Resources.Strings.UserSelectionErrorTitle, Title = Resources.Strings.NoDependentUserError });
             }
             else
             {

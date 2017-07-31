@@ -1,7 +1,10 @@
+using bbFiles.Messages;
 using bbFiles.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace bbFiles.ViewModel
 {
@@ -134,7 +137,17 @@ namespace bbFiles.ViewModel
 
         public void Login(string username, string password)
         {
-            var User = _serviceProxy.LogIn(username, password);
+            var User = new Entities.User();
+
+            try
+            { 
+                User = _serviceProxy.LogIn(username, password);
+            }
+            catch (SqlException)
+            {
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.Error, Error = Resources.Strings.NoConnectionError });
+                User = new Entities.User();
+            }
 
             if(!EqualityComparer<Entities.User>.Default.Equals(User, default(Entities.User)))
             {

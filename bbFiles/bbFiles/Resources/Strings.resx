@@ -336,4 +336,7 @@
   <data name="CannotDeleteOrEditYourselfError" xml:space="preserve">
     <value>Nie możesz usunąć ani edytować konta, które jest aktualnie w użyciu.</value>
   </data>
+  <data name="NoConnectionError" xml:space="preserve">
+    <value>Nie można połączyć się z bazą danych. Należy sprawdzić swoje połącznie z interentem lub skontaktować się z administracją.</value>
+  </data>
 </root>

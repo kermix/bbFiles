@@ -367,6 +367,15 @@ namespace bbFiles.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie można połączyć się z bazą danych. Należy sprawdzić swoje połącznie z interentem lub skontaktować się z administracją..
+        /// </summary>
+        public static string NoConnectionError {
+            get {
+                return ResourceManager.GetString("NoConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ten odbiorca nie posiada już zależnego użytkownika, ale jego dane nadal powinny pozostać w bazie..
         /// </summary>
         public static string NoDependentUserError {
