@@ -11,15 +11,24 @@ using System.Threading.Tasks;
 
 namespace bbFiles.Services
 {
-    
+
+    /// <exclude />
     public interface IDonorsAccessDataService
     {
         ObservableCollection<Donor> GetDonors();
         string CreateDonor(Donor Donor);
     }
+
+    /// <summary>
+    /// Service that serves Db connection and operations for Donors.
+    /// </summary>
     class DonorsDataAccessService : IDonorsAccessDataService
     {
         dbModel context = new dbModel();
+        /// <summary>
+        /// Gets all donors from the db.
+        /// </summary>
+        /// <returns>Observable collection of all donors</returns>
         public ObservableCollection<Donor> GetDonors()
         {
             ObservableCollection<Donor> Donors = new ObservableCollection<Donor>();
@@ -29,7 +38,11 @@ namespace bbFiles.Services
             Donors = context.Donors.Local;
             return Donors;
         }
-
+        /// <summary>
+        /// Adds <paramref name="Donor"/> to the db.
+        /// </summary>
+        /// <param name="Donor">The donate.</param>
+        /// <returns>Id of added donor</returns>
         public string CreateDonor(Donor Donor)
         {
             if (!context.Donors.Any(x => x.PESEL == Donor.PESEL))

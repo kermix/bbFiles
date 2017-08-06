@@ -12,13 +12,31 @@ namespace bbFiles.ViewModel
     {
         IMainDataAccessService _serviceProxy;
         private object _selectedViewModel;
+        /// <summary>
+        /// Gets or sets the selected view model.
+        /// </summary>
+        /// <value>
+        /// The selected view model.
+        /// </value>
         public object SelectedViewModel
         {
             get { return _selectedViewModel; }
             set { _selectedViewModel = value; RaisePropertyChanged("SelectedViewModel"); }
         }
-        Role _userLevel = Role.Wrong;
+        /// <summary>
+        /// Gets the logged user ID.
+        /// </summary>
+        /// <value>
+        /// The user ID.
+        /// </value>
         public int userId { get; private set; }
+        Role _userLevel = Role.Wrong;
+        /// <summary>
+        /// Gets the user level.
+        /// </summary>
+        /// <value>
+        /// The user level.
+        /// </value>
         public Role UserLevel
         {
             get { return _userLevel; }
@@ -36,6 +54,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _isLogged = false;
+        /// <summary>
+        /// Gets a value indicating whether user is logged.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if user is logged; otherwise, <c>false</c>.
+        /// </value>
         public bool IsLogged
         {
             get { return _isLogged; }
@@ -46,6 +70,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _isWorker;
+        /// <summary>
+        /// Gets a value indicating whether logged user is worker.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if logged user is worker; otherwise, <c>false</c>.
+        /// </value>
         public bool IsWorker
         {
             get { return _isWorker; }
@@ -56,6 +86,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _isAcceptor;
+        /// <summary>
+        /// Gets a value indicating whether logged user is acceptor.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if logged user is acceptor; otherwise, <c>false</c>.
+        /// </value>
         public bool IsAcceptor
         {
             get { return _isAcceptor; }
@@ -66,6 +102,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _isAdmin;
+        /// <summary>
+        /// Gets a value indicating whether logged user is admin.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if logged user is admin; otherwise, <c>false</c>.
+        /// </value>
         public bool IsAdmin
         {
             get { return _isAdmin; }
@@ -76,20 +118,36 @@ namespace bbFiles.ViewModel
             }
         }
         bool _canNavigate;
+        /// <summary>
+        /// Gets a value indicating whether this instance can navigate.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can navigate; otherwise, <c>false</c>.
+        /// </value>
         public bool CanNavigate
         {
             get { return _canNavigate; }
             private set { _canNavigate = value; RaisePropertyChanged("CanNavigate"); }
         }
 
+        /// <exclude />
         public RelayCommand OpenUserViewCommand { get; set; }
+        /// <exclude />
         public RelayCommand OpenAcceptorViewCommand { get; set; }
+        /// <exclude />
         public RelayCommand OpenDonorViewCommand { get; set; }
+        /// <exclude />
         public RelayCommand OpenDonateViewCommand { get; set; }
+        /// <exclude />
         public RelayCommand OpenOrderViewCommand { get; set; }
+        /// <exclude />
         public RelayCommand OpenStatisticViewCommand { get; set; }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public MainViewModel(IMainDataAccessService serviceProxy)
         {
             _serviceProxy = serviceProxy;
@@ -130,11 +188,19 @@ namespace bbFiles.ViewModel
             SelectedViewModel = new StatisticsViewModel(new StatisticsDataAccessService());
         }
 
+        /// <summary>
+        /// Toogles the navigation.
+        /// </summary>
         public void ToogleNavigation()
         {
             CanNavigate = !CanNavigate;
         }
 
+        /// <summary>
+        /// Logins the specified user.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
         public void Login(string username, string password)
         {
             var User = new Entities.User();

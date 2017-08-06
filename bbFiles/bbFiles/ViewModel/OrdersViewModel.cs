@@ -18,12 +18,24 @@ namespace bbFiles.ViewModel
     {
         IOrdersDataAccessService _serviceProxy;
         ObservableCollection<Order> _orders;
+        /// <summary>
+        /// Gets or sets the orders observable collection. On set raises property changed event.
+        /// </summary>
+        /// <value>
+        /// The orders.
+        /// </value>
         public ObservableCollection<Order> Orders
         {
             get { return _orders; }
             set { _orders = value; RaisePropertyChanged("Orders"); }
         }
         Order _selectedOrder;
+        /// <summary>
+        /// Gets or sets the selected order. Indicates on accually selected order on DataGrid.
+        /// </summary>
+        /// <value>
+        /// The selected order.
+        /// </value>
         public Order SelectedOrder
         {
             get { return _selectedOrder; }
@@ -41,31 +53,37 @@ namespace bbFiles.ViewModel
         }
 
         #region Notifable SelectedDonate properties
+        /// <exclude />
         public int SelectedOrderAmount
         {
             get { return SelectedOrder.Amount; }
             set { SelectedOrder.Amount = value; RaisePropertyChanged("SelectedOrderAmount"); }
         }
+        /// <exclude />
         public BloodType SelectedOrderBloodType
         {
             get { return SelectedOrder.Blood_Type; }
             set { SelectedOrder.Blood_Type = value; RaisePropertyChanged("SelectedOrderBloodType"); }
         }
+        /// <exclude />
         public bool SelectedOrderRhMarker
         {
             get { return SelectedOrder.Blood_RhMarker; }
             set { SelectedOrder.Blood_RhMarker = value; RaisePropertyChanged("SelectedOrderRhMarker"); }
         }
+        /// <exclude />
         public bool SelectedOrderSend
         {
             get { return SelectedOrder.Send; }
             set { SelectedOrder.Send = value; RaisePropertyChanged("SelectedOrderSend"); }
         }
+        /// <exclude />
         public DateTime SelectedOrderDate
         {
             get { return SelectedOrder.OrderDate; }
             set { SelectedOrder.OrderDate = value; RaisePropertyChanged("SelectedOrderDate"); }
         }
+        /// <exclude />
         public int SelectedOrderAcceptorId
         {
             get { return SelectedOrder.AcceptorId; }
@@ -74,6 +92,12 @@ namespace bbFiles.ViewModel
         #endregion
         #region Visibility parameters
         bool _inEdit;
+        /// <summary>
+        /// Gets or sets a value indicating whether [in edit].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [in edit]; otherwise, <c>false</c>.
+        /// </value>
         public bool InEdit
         {
             get { return !_inEdit; }
@@ -84,6 +108,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _orderDetailsMode;
+        /// <summary>
+        /// Gets or sets a value indicating whether [order details mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [order details mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool OrderDetailsMode
         {
             get { return _orderDetailsMode; }
@@ -97,13 +127,22 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Command Declarations
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Order> SendOrderCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Order> MarkAsSendCommand { get; set; }
+        /// <exclude />
         public RelayCommand SaveOrderCommand { get; set; }
+        /// <exclude />
         public RelayCommand CancelCommand { get; set; }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrdersViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public OrdersViewModel(IOrdersDataAccessService serviceProxy)
         {
             _serviceProxy = serviceProxy;
@@ -155,7 +194,7 @@ namespace bbFiles.ViewModel
 
         void SendOrder(Order Order)
         {
-            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation(); ;
+            (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             OrderDetailsMode = true;
             if (Order == null)
             {

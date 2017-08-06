@@ -14,6 +14,12 @@ namespace bbFiles.ViewModel
     {
         IUsersDataAccessService _serviceProxy;
         ObservableCollection<User> _users;
+        /// <summary>
+        /// Gets or sets the users obesrvable collection. On set raises property changed event.
+        /// </summary>
+        /// <value>
+        /// The users.
+        /// </value>
         public ObservableCollection<User> Users
         {
             get { return _users; }
@@ -24,6 +30,12 @@ namespace bbFiles.ViewModel
             }
         }
         User _selectedUser;
+        /// <summary>
+        /// Gets or sets the selected user. Indicates on accually selected user on DataGrid.
+        /// </summary>
+        /// <value>
+        /// The selected user.
+        /// </value>
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -47,6 +59,7 @@ namespace bbFiles.ViewModel
         }
 
         #region Notifable SelectedUser properties
+        /// <exclude />
         public string SelectedUserLogin
         {
             get { return SelectedUser.Login; }
@@ -56,6 +69,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserLogin");
             }
         }
+        /// <exclude />
         public string SelectedUserPassword
         {
             get { return SelectedUser.Password; }
@@ -65,6 +79,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserPassword");
             }
         }
+        /// <exclude />
         public System.DateTime SelectedUserRegisteredDate
         {
             get { return SelectedUser.RegisteredDate; }
@@ -74,6 +89,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserRegisteredDate");
             }
         }
+        /// <exclude />
         public Nullable<System.DateTime> SelectedUserLastLoginDate
         {
             get { return SelectedUser.LastLoginDate; }
@@ -83,6 +99,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserLastLoginDate");
             }
         }
+        /// <exclude />
         public bool SelectedUserPasswordChaged
         {
             get { return SelectedUser.PasswordChaged; }
@@ -92,6 +109,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserPasswordChaged");
             }
         }
+        /// <exclude />
         public bbFiles.Role SelectedUserRole
         {
             get { return SelectedUser.Role; }
@@ -101,6 +119,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserRole");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorName
         {
             get { return SelectedUser.Acceptor.Name; }
@@ -110,6 +129,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserAcceptorName");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorAddress_Street
         {
             get { return SelectedUser.Acceptor.Address_Street; }
@@ -119,6 +139,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserAcceptorAddress_Street");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorAddress_City
         {
             get { return SelectedUser.Acceptor.Address_City; }
@@ -128,6 +149,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserAcceptorAddress_City");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorAddress_PostalCode
         {
             get { return SelectedUser.Acceptor.Address_PostalCode; }
@@ -137,6 +159,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserAcceptorAddress_PostalCode");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorContact_Phone
         {
             get { return SelectedUser.Acceptor.Contact_Phone; }
@@ -146,6 +169,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedUserAcceptorContact_Phone");
             }
         }
+        /// <exclude />
         public string SelectedUserAcceptorContact_Email
         {
             get { return SelectedUser.Acceptor.Contact_Email; }
@@ -158,6 +182,12 @@ namespace bbFiles.ViewModel
         #endregion
         #region Visiblility Parameters
         bool _userAcceptorGridVisibility;
+        /// <summary>
+        /// Gets or sets a value indicating whether [user acceptor grid visibility].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [user acceptor grid visibility]; otherwise, <c>false</c>.
+        /// </value>
         public bool UserAcceptorGridVisibility
         {
             get { return _userAcceptorGridVisibility; }
@@ -168,6 +198,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _inEdit;
+        /// <summary>
+        /// Gets or sets a value indicating whether [in edit].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [in edit]; otherwise, <c>false</c>.
+        /// </value>
         public bool InEdit
         {
             get { return !_inEdit; }
@@ -178,6 +214,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _userDetailsMode;
+        /// <summary>
+        /// Gets or sets a value indicating whether [user details mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [user details mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool UserDetailsMode
         {
             get { return _userDetailsMode; }
@@ -191,14 +233,24 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Command Declarations
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
+        /// <exclude />
         public RelayCommand<User> SendUserCommand { get; set; }
+        /// <exclude />
         public RelayCommand SaveUserCommand { get; set; }
+        /// <exclude />
         public RelayCommand CheckRoleCommand { get; set; }
+        /// <exclude />
         public RelayCommand<User> DeleteUserCommand { get; set; }
+        /// <exclude />
         public RelayCommand CancelCommand { get; set; }
         #endregion
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UsersViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public UsersViewModel(IUsersDataAccessService serviceProxy)
         {
             _serviceProxy = serviceProxy;

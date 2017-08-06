@@ -13,6 +13,12 @@ namespace bbFiles.ViewModel
     {
         IDonorsAccessDataService _serviceProxy;
         ObservableCollection<Donor> _donors;
+        /// <summary>
+        /// Gets or sets the donors obesrvable collection. On set raises property changed event.
+        /// </summary>
+        /// <value>
+        /// The donors.
+        /// </value>
         public ObservableCollection<Donor> Donors {
             get
             {
@@ -25,6 +31,12 @@ namespace bbFiles.ViewModel
             }
         }
         Donor _selectedDonor;
+        /// <summary>
+        /// Gets or sets the selected donor. Indicates on accually selected donor on DataGrid.
+        /// </summary>
+        /// <value>
+        /// The selected donor.
+        /// </value>
         public Donor SelectedDonor
         {
             get
@@ -50,55 +62,66 @@ namespace bbFiles.ViewModel
         }
 
         #region Notifable SelectedDonor properties
+        /// <exclude />
         public string SelectedDonorPESEL {
             get { return SelectedDonor.PESEL; }
             set { SelectedDonor.PESEL = value; RaisePropertyChanged("SelectedDonorPESEL"); }
         }
+        /// <exclude />
         public string SelectedDonorFirstname
         {
             get { return SelectedDonor.Firstname; }
             set { SelectedDonor.Firstname = value; RaisePropertyChanged("SelectedDonorFirstname"); }
         }
+        /// <exclude />
         public string SelectedDonorSurname
         {
             get { return SelectedDonor.Surname; }
             set { SelectedDonor.Surname = value; RaisePropertyChanged("SelectedDonorSurname"); }
         }
+        /// <exclude />
         public string SelectedDonorAddressStreet
         {
             get { return SelectedDonor.Address_Street; }
             set { SelectedDonor.Address_Street = value; RaisePropertyChanged("SelectedDonorAddressStreet"); }
         }
+        /// <exclude />
         public string SelectedDonorAddressCity
         {
             get { return SelectedDonor.Address_City; }
             set { SelectedDonor.Address_City = value; RaisePropertyChanged("SelectedDonorAddressCity"); }
         }
+        /// <exclude />
         public string SelectedDonorAddressPostalCode
         {
             get { return SelectedDonor.Address_PostalCode; }
             set { SelectedDonor.Address_PostalCode = value; RaisePropertyChanged("SelectedDonorAddressPostalCode"); }
         }
+        /// <exclude />
         public string SelectedDonorContactPhone
         {
             get { return SelectedDonor.Contact_Phone; }
             set { SelectedDonor.Contact_Phone = value; RaisePropertyChanged("SelectedDonorContactPhone"); }
         }
+        /// <exclude />
         public string SelectedDonorContactEmail
         {
             get { return SelectedDonor.Contact_Email; }
             set { SelectedDonor.Contact_Email = value; RaisePropertyChanged("SelectedDonorContactEmail"); }
         }
+        /// <exclude />
         public BloodType SelectedDonorBloodType
         {
             get { return SelectedDonor.Blood_Type; }
             set { SelectedDonor.Blood_Type = value; RaisePropertyChanged("SelectedDonorBloodType"); }
         }
+        /// <exclude />
         public bool SelectedDonorRhMarker
         {
             get { return SelectedDonor.Blood_RhMarker; }
             set { SelectedDonor.Blood_RhMarker = value; RaisePropertyChanged("SelectedDonorRhMarker"); }
         }
+        /// <exclude />
         public ObservableCollection<Donate> SelectedUserDonates
         {
             get { return SelectedDonor.Donates; }
@@ -107,6 +130,12 @@ namespace bbFiles.ViewModel
         #endregion
         #region Visibility parameters
         bool _inEdit;
+        /// <summary>
+        /// Gets or sets a value indicating whether [in edit].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [in edit]; otherwise, <c>false</c>.
+        /// </value>
         public bool InEdit
         {
             get { return !_inEdit; }
@@ -117,6 +146,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _donorDetailsMode;
+        /// <summary>
+        /// Gets or sets a value indicating whether [donor details mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [donor details mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool DonorDetailsMode
         {
             get { return _donorDetailsMode; }
@@ -130,12 +165,20 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Command Declarations
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Donor> SendDonorCommand { get; set; }
+        /// <exclude />
         public RelayCommand SaveDonorCommand { get; set; }
+        /// <exclude />
         public RelayCommand CancelCommand { get; set; }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DonorsViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public DonorsViewModel(IDonorsAccessDataService serviceProxy)
         {
             _serviceProxy = serviceProxy;

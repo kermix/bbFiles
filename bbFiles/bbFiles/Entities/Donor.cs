@@ -11,7 +11,7 @@ namespace bbFiles.Entities
 {
     using System;
     using System.Collections.ObjectModel;
-    
+    /// <exclude />
     public partial class Donor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

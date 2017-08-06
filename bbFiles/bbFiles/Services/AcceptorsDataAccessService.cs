@@ -11,15 +11,23 @@ using bbFiles.Messages;
 
 namespace bbFiles.Services
 {
+    /// <exclude />
     public interface IAcceptorsDataService
     {
         ObservableCollection<Acceptor> GetAcceptors();
         int CreateAcceptor(Acceptor Acceptor);
         bool DeleteDependentUser(Acceptor Acceptor);
     }
+    /// <summary>
+    /// Service that serves Db connection and operations for Donates.
+    /// </summary>
     public class AcceptorDataAccessService : IAcceptorsDataService
     {
         dbModel context = new dbModel();
+        /// <summary>
+        /// Gets all acceptors from the db.
+        /// </summary>
+        /// <returns>Observable collection of all acceptors</returns>
         public ObservableCollection<Acceptor> GetAcceptors()
         {
             ObservableCollection<Acceptor> Acceptors = new ObservableCollection<Acceptor>();
@@ -29,7 +37,11 @@ namespace bbFiles.Services
             Acceptors = context.Acceptors.Local;
             return Acceptors;
         }
-
+        /// <summary>
+        /// Adds or edits the <paramref name="Acceptor"/> to the db.
+        /// </summary>
+        /// <param name="Acceptor">The donate.</param>
+        /// <returns>ID of added of edited acceptor.</returns>
         public int CreateAcceptor(Acceptor Acceptor)
         {
             context.Entry(Acceptor).State = Acceptor.Id == 0 ?
@@ -39,6 +51,11 @@ namespace bbFiles.Services
             return Acceptor.Id;
         }
 
+        /// <summary>
+        /// Deletes the associeted user from acceptor record.
+        /// </summary>
+        /// <param name="Acceptor">The acceptor.</param>
+        /// <returns>True if deleted or false if there is no associeted user. </returns>
         public bool DeleteDependentUser(Acceptor Acceptor)
         {
             if (Acceptor.User != null)

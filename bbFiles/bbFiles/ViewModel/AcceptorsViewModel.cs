@@ -18,6 +18,12 @@ namespace bbFiles.ViewModel
     {
         IAcceptorsDataService _serviceProxy;
         ObservableCollection<Acceptor> _acceptors;
+        /// <summary>
+        /// Gets or sets the acceptors obesrvable collection. On set raises property changed event.
+        /// </summary>
+        /// <value>
+        /// The acceptors.
+        /// </value>
         public ObservableCollection<Acceptor> Acceptors
         {
             get { return _acceptors; }
@@ -28,6 +34,12 @@ namespace bbFiles.ViewModel
             }
         }
         Acceptor _selectedAcceptor;
+        /// <summary>
+        /// Gets or sets the selected acceptor. Indicates on accually selected acceptor on DataGrid.
+        /// </summary>
+        /// <value>
+        /// The selected acceptor.
+        /// </value>
         public Acceptor SelectedAcceptor
         {
             get { return _selectedAcceptor; }
@@ -52,6 +64,7 @@ namespace bbFiles.ViewModel
         }
 
         #region Notifable SelectedAcceptor properties
+        /// <exclude />
         public string SelectedAcceptorName
         {
             get { return SelectedAcceptor.Name; }
@@ -61,6 +74,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorName");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorAddress_Street
         {
             get { return SelectedAcceptor.Address_Street; }
@@ -70,6 +84,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorAddress_Street");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorAddress_City
         {
             get { return SelectedAcceptor.Address_City; }
@@ -79,6 +94,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorAddress_City");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorAddress_PostalCode
         {
             get { return SelectedAcceptor.Address_PostalCode; }
@@ -88,6 +104,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorAddress_PostalCode");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorContact_Phone
         {
             get { return SelectedAcceptor.Contact_Phone; }
@@ -97,6 +114,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorContact_Phone");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorContact_Email
         {
             get { return SelectedAcceptor.Contact_Email; }
@@ -106,11 +124,13 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorContact_Email");
             }
         }
+        /// <exclude />
         public ObservableCollection<Order> SelectedAcceptorOrders
         {
             get { return SelectedAcceptor.Orders; }
             set { SelectedAcceptor.Orders = value; RaisePropertyChanged("SelectedAcceptorOrders"); }
         }
+        /// <exclude />
         public string SelectedAcceptorUserLogin
         {
             get { return SelectedAcceptor.User.Login; }
@@ -120,6 +140,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorUserLogin");
             }
         }
+        /// <exclude />
         public string SelectedAcceptorUserPassword
         {
             get { return SelectedAcceptor.User.Password; }
@@ -129,6 +150,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorUserPassword");
             }
         }
+        /// <exclude />
         public DateTime SelectedAcceptorUserRegisteredDate
         {
             get { return SelectedAcceptor.User.RegisteredDate; }
@@ -138,6 +160,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorUserRegisteredDate");
             }
         }
+        /// <exclude />
         public DateTime? SelectedAcceptorUserLastLoginDate
         {
             get { return SelectedAcceptor.User.LastLoginDate; }
@@ -147,6 +170,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorUserLastLoginDate");
             }
         }
+        /// <exclude />
         public bool SelectedAcceptorUserPasswordChaged
         {
             get { return SelectedAcceptor.User.PasswordChaged; }
@@ -156,6 +180,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedAcceptorUserPasswordChaged");
             }
         }
+        /// <exclude />
         public Role SelectedAcceptorUserRole
         {
             get { return SelectedAcceptor.User.Role; }
@@ -168,6 +193,12 @@ namespace bbFiles.ViewModel
         #endregion
         #region Visiblility Parameters
         bool _inEdit;
+        /// <summary>
+        /// Gets or sets a value indicating whether [in edit].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [in edit]; otherwise, <c>false</c>.
+        /// </value>
         public bool InEdit
         {
             get { return !_inEdit; }
@@ -178,6 +209,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _acceptorDetailsMode;
+        /// <summary>
+        /// Gets or sets a value indicating whether [acceptor details mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [acceptor details mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool AcceptorDetailsMode
         {
             get { return _acceptorDetailsMode; }
@@ -191,14 +228,24 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Command Declarations
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Acceptor> SendAcceptorCommand { get; set; }
+        /// <exclude />
         public RelayCommand SaveAcceptorCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Acceptor> DeleteAcceptorUserCommand { get; set; }
+        /// <exclude />
         public RelayCommand SearchCommand { get; set; }
+        /// <exclude />
         public RelayCommand CancelCommand { get; set; }
         #endregion
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AcceptorsViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public AcceptorsViewModel(IAcceptorsDataService serviceProxy)
         {
             _serviceProxy = serviceProxy;
@@ -282,15 +329,6 @@ namespace bbFiles.ViewModel
                 {
                     Title = Resources.Strings.UserSelectionErrorTitle,
                     Error = Resources.Strings.SelectUserFirstError
-                });
-            }
-        }
-        void ReceiveAcceptor()
-        {
-            if (SelectedAcceptor != null)
-            {
-                Messenger.Default.Register<AcceptorMessage>(this, (acceptor) => {
-                    this.SelectedAcceptor = acceptor.Acceptor;
                 });
             }
         }

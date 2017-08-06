@@ -12,7 +12,8 @@ namespace bbFiles.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
+    /// <exclude />
     public partial class dbModel : DbContext
     {
         public dbModel()

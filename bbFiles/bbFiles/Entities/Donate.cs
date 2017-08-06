@@ -11,7 +11,7 @@ namespace bbFiles.Entities
 {
     using System;
     using System.Collections.ObjectModel;
-    
+    /// <exclude />
     public partial class Donate
     {
         public int Id { get; set; }

@@ -5,6 +5,10 @@ using System.Windows.Data;
 
 namespace bbFiles.Converters
 {
+    /// <summary>
+    /// Used to change boolean value to a Visibility enum but in reverse way. True -> Colapsed, False -> Visible
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
     class reverseBooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

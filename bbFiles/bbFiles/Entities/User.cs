@@ -11,7 +11,7 @@ namespace bbFiles.Entities
 {
     using System;
     using System.Collections.ObjectModel;
-    
+    /// <exclude />
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace bbFiles.Entities
         {
             this.PasswordChaged = false;
         }
-    
+
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -27,7 +27,7 @@ namespace bbFiles.Entities
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         public bool PasswordChaged { get; set; }
         public bbFiles.Role Role { get; set; }
-    
+
         public virtual Acceptor Acceptor { get; set; }
     }
 }

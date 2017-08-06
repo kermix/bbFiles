@@ -18,9 +18,16 @@ namespace bbFiles.Services
         void MarkAsSend(Order Order);
         ObservableCollection<Donate> LinkDonates(Order Order);
     }
+    /// <summary>
+    /// Serves connecition and operations with db for Orders.
+    /// </summary>
     public class OrdersDataAccessService : IOrdersDataAccessService
     {
         dbModel context = new dbModel();
+        /// <summary>
+        /// Gets all orders from the db.
+        /// </summary>
+        /// <returns>Observable collection of all orders</returns>
         public ObservableCollection<Order> GetOrders()
         {
             ObservableCollection<Order> Orders = new ObservableCollection<Order>();
@@ -30,6 +37,12 @@ namespace bbFiles.Services
             Orders = context.Orders.Local;
             return Orders;
         }
+
+        /// <summary>
+        /// Adds an <paramref name="Order"/> to the db.
+        /// </summary>
+        /// <param name="Order">The order.</param>
+        /// <returns>ID of the added order.</returns>
         public int CreateOrder(Order Order)
         {
             context.Orders.Add(Order);
@@ -37,6 +50,11 @@ namespace bbFiles.Services
             return Order.Id;
         }
 
+        /// <summary>
+        /// Finds the acceptor by ID.
+        /// </summary>
+        /// <param name="Id">The identifier.</param>
+        /// <returns>Acceptor or null if nothing matched</returns>
         public Acceptor FindAcceptor(int Id)
         {
             Acceptor acceptor = new Acceptor();
@@ -45,6 +63,10 @@ namespace bbFiles.Services
             return acceptor;
         }
 
+        /// <summary>
+        /// Changes Send value of the Order to true.
+        /// </summary>
+        /// <param name="Order">The order.</param>
         public void MarkAsSend(Order Order)
         {
             Order.Send = true;
@@ -52,6 +74,13 @@ namespace bbFiles.Services
             context.SaveChanges();
         }
 
+
+        /// <summary>
+        /// Finds proper donates for an <paramref name="Order"/>. When there is need amount of blood in bank sets Avaliable to false in choosen donates.
+        /// Makes changes to the statistics.
+        /// </summary>
+        /// <param name="Order">The order.</param>
+        /// <returns>Obeservable collection of choosen donates or empty observable collection if there is not enought blood in bank.</returns>
         public ObservableCollection<Donate> LinkDonates(Order Order)
         {
             var avaliableDonates = context.Donates
@@ -92,7 +121,6 @@ namespace bbFiles.Services
                     BloodTypeMarker = BloodTypeMarker.AB;
                     break;
             }
-
             if (Order.Blood_RhMarker)
                 BloodTypeMarker += 1;
 

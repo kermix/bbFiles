@@ -18,12 +18,24 @@ namespace bbFiles.ViewModel
     {
         IDonatesDataAccessService _serviceProxy;
         ObservableCollection<Donate> _donates;
+        /// <summary>
+        /// Gets or sets the donates obesrvable collection. On set raises property changed event.
+        /// </summary>
+        /// <value>
+        /// The donates.
+        /// </value>
         public ObservableCollection<Donate> Donates
         {
             get { return _donates; }
             set { _donates = value; RaisePropertyChanged("Donates"); }
         }
         Donate _selectedDonate;
+        /// <summary>
+        /// Gets or sets the selected donate. Indicates on accually selected donate on DataGrid.
+        /// </summary>
+        /// <value>
+        /// The selected donate.
+        /// </value>
         public Donate SelectedDonate
         {
             get { return _selectedDonate; }
@@ -39,6 +51,7 @@ namespace bbFiles.ViewModel
         }
 
         #region Notifable SelectedAcceptor properties
+        /// <exclude />
         public int SelectedDonateAmount
         {
             get { return SelectedDonate.Amount; }
@@ -48,6 +61,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedDonateAmount");
             }
         }
+        /// <exclude />
         public bool SelectedDonateAvaliable
         {
             get { return SelectedDonate.Avaliable; }
@@ -57,6 +71,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedDonateAvaliable");
             }
         }
+        /// <exclude />
         public DateTime SelectedDonateDate
         {
             get { return SelectedDonate.DonateDate; }
@@ -66,6 +81,7 @@ namespace bbFiles.ViewModel
                 RaisePropertyChanged("SelectedDonateDate");
             }
         }
+        /// <exclude />
         public string SelectedDonateDateDonorPesel
         {
             get { return SelectedDonate.Donor_PESEL; }
@@ -73,13 +89,23 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Command Declarations
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
+        /// <exclude />
         public RelayCommand<Donate> SendDonateCommand { get; set; }
+        /// <exclude />
         public RelayCommand SaveDonateCommand { get; set; }
+        /// <exclude />
         public RelayCommand CancelCommand { get; set; }
         #endregion
         #region Visiblility Parameters
         bool _inEdit;
+        /// <summary>
+        /// Gets or sets a value indicating whether [in edit].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [in edit]; otherwise, <c>false</c>.
+        /// </value>
         public bool InEdit
         {
             get { return !_inEdit; }
@@ -90,6 +116,12 @@ namespace bbFiles.ViewModel
             }
         }
         bool _donateDetailsMode;
+        /// <summary>
+        /// Gets or sets a value indicating whether [donate details mode].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [donate details mode]; otherwise, <c>false</c>.
+        /// </value>
         public bool DonateDetailsMode
         {
             get { return _donateDetailsMode; }
@@ -103,6 +135,10 @@ namespace bbFiles.ViewModel
         }
         #endregion
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DonatesViewModel"/> class.
+        /// </summary>
+        /// <param name="serviceProxy">The data access service.</param>
         public DonatesViewModel(IDonatesDataAccessService serviceProxy)
         {
             _serviceProxy = serviceProxy;

@@ -8,6 +8,10 @@ namespace bbFiles.Helpers
 {
     class RoleHelper
     {
+        /// <summary>
+        /// Creates dictiontary of roles for use in combobox binding.
+        /// </summary>
+        /// <returns>Dictiontary, key is Role enum, value is role string.</returns>
         public static Dictionary<Role, string> GetAllRoles()
         {
             Dictionary<Role, string> RolesDictionary = new Dictionary<Role, string>();

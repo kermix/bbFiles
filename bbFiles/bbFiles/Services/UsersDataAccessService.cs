@@ -4,15 +4,24 @@ using System.Data.Entity;
 
 namespace bbFiles.Services
 {
+    /// <exclude />
     public interface IUsersDataAccessService
     {
         ObservableCollection<User> GetUsers();
         int CreateUser(User User);
         void DeleteUser(User User);
     }
+    /// <summary>
+    /// Serves connection and operations for Users in db.
+    /// </summary>
+    /// <seealso cref="bbFiles.Services.IUsersDataAccessService" />
     public class UsersDataAccessService : IUsersDataAccessService
     {
         dbModel context = new dbModel();
+        /// <summary>
+        /// Gets all users from the db.
+        /// </summary>
+        /// <returns>Observable collection of all users</returns>
         public ObservableCollection<User> GetUsers()
         {
             ObservableCollection<User> Users = new ObservableCollection<User>();
@@ -23,6 +32,11 @@ namespace bbFiles.Services
             return Users;
         }
 
+        /// <summary>
+        /// Adds or edits <paramref name="User"/> to the db.
+        /// </summary>
+        /// <param name="User">The user.</param>
+        /// <returns>ID of creates users.</returns>
         public int CreateUser(User User)
         {
             context.Entry(User).State = User.Id == 0 ?
@@ -31,6 +45,10 @@ namespace bbFiles.Services
             context.SaveChanges();
             return User.Id;
         }
+        /// <summary>
+        /// Deletes <paramref name="User"/> from the db.
+        /// </summary>
+        /// <param name="User">The user.</param>
         public void DeleteUser(User User)
         {
             context.Users.Attach(User);

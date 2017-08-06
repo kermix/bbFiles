@@ -3,6 +3,10 @@ using System.Windows.Controls;
 
 namespace bbFiles.Helpers
 {
+    /// <summary>
+    /// Used to get password text from PasswordBox
+    /// Source: https://wpftutorial.net/PasswordBox.html
+    /// </summary>
     public static class PasswordHelper
     {
         public static readonly DependencyProperty PasswordProperty =

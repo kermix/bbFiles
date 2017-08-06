@@ -8,9 +8,7 @@ using System.Windows;
 
 namespace bbFiles
 {
-    /// <summary>
-    /// Logika interakcji dla klasy App.xaml
-    /// </summary>
+    /// <exclude />
     public partial class App : Application
     {
     }

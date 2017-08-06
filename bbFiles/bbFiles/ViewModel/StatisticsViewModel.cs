@@ -14,21 +14,44 @@ namespace bbFiles.ViewModel
     {
         IStatisticsDataAccessService _proxyService;
         SeriesCollection _seriesCollection;
+        /// <summary>
+        /// Gets or sets the series collection for stats.
+        /// </summary>
+        /// <value>
+        /// The series collection.
+        /// </value>
         public SeriesCollection SeriesCollection
         {
             get { return _seriesCollection; }
             set { _seriesCollection = value; RaisePropertyChanged("SeriesCollection"); }
         }
+        /// <summary>
+        /// Gets or sets the labels for stats chart.
+        /// </summary>
+        /// <value>
+        /// The labels.
+        /// </value>
         public string[] Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
+        /// <summary>
+        /// Gets or sets the formatter for serie's value.
+        /// </summary>
+        /// <value>
+        /// The formatter.
+        /// </value>
+        public Func<int, string> Formatter { get; set; }
+        /// <exclude />
         public RelayCommand RefreshCommand { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StatisticsViewModel"/> class.
+        /// </summary>
+        /// <param name="proxyService">The data access service.</param>
         public StatisticsViewModel(IStatisticsDataAccessService proxyService)
         {
             _proxyService = proxyService;
             GetStatistics();
             Labels = new[] { "0", "A", "B", "AB" };
-            Formatter = value => value.ToString("N");
+            Formatter = value => value.ToString("N") + "%";
             RefreshCommand = new RelayCommand(GetStatistics);
         }
         

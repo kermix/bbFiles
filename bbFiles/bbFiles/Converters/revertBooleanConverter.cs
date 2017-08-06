@@ -8,6 +8,10 @@ using System.Windows.Data;
 
 namespace bbFiles.Converters
 {
+    /// <summary>
+    /// Used to reverse boolean value binded to xaml control.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
     class revertBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

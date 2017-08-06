@@ -9,15 +9,25 @@ using System.Threading.Tasks;
 
 namespace bbFiles.Services
 {
+
+    /// <exclude />
     public interface IDonatesDataAccessService
     {
         ObservableCollection<Donate> GetDonates();
         int CreateDonate(Donate Donate);
         Donor FindDonor(string PESEL);
     }
+
+    /// <summary>
+    /// Service that serves Db connection and operations for Donates.
+    /// </summary>
     public class DonatesDataAccessService : IDonatesDataAccessService
     {
         dbModel context = new dbModel();
+        /// <summary>
+        /// Gets all donates from the db.
+        /// </summary>
+        /// <returns>Observable collection of all donates</returns>
         public ObservableCollection<Donate> GetDonates()
         {
             ObservableCollection<Donate> Donates = new ObservableCollection<Donate>();
@@ -28,6 +38,11 @@ namespace bbFiles.Services
 
             return Donates;
         }
+        /// <summary>
+        /// Adds <paramref name="Donate"/> th the db and makes changes to the statistics.
+        /// </summary>
+        /// <param name="Donate">The donate.</param>
+        /// <returns>Id of added donate</returns>
         public int CreateDonate(Donate Donate)
         {
             context.Donates.Add(Donate);
@@ -60,6 +75,11 @@ namespace bbFiles.Services
             return Donate.Id;
         }
 
+        /// <summary>
+        /// Finds the donor by the <paramref name="PESEL"/>
+        /// </summary>
+        /// <param name="PESEL">The pesel.</param>
+        /// <returns>Donor or null nothing matched</returns>
         public Donor FindDonor(string PESEL)
         {
             Donor donor = new Donor();

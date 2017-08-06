@@ -8,6 +8,10 @@ namespace bbFiles.Helpers
 {
     class BloodTypeHelper
     {
+        /// <summary>
+        /// Creates dictiontary of blood types for use in combobox binding.
+        /// </summary>
+        /// <returns>Dictiontary, key is BloodType enum, value is blood type string.</returns>
         public static Dictionary<BloodType, string> GetAllBloodTypes()
         {
             Dictionary<BloodType, string> BloodTypesDictionary = new Dictionary<BloodType, string>();
