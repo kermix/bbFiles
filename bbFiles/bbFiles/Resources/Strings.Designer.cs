@@ -10,11 +10,9 @@
 
 namespace bbFiles.Resources {
     using System;
-    
-    
-    /// <summary>
-    ///   Klasa zasobu wymagająca zdefiniowania typu do wyszukiwania zlokalizowanych ciągów itd.
-    /// </summary>
+
+
+    /// <exclude />
     // Ta klasa została automatycznie wygenerowana za pomocą klasy StronglyTypedResourceBuilder
     // przez narzędzie, takie jak ResGen lub Visual Studio.
     // Aby dodać lub usunąć członka, edytuj plik .ResX, a następnie ponownie uruchom ResGen
