@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using bbFiles.Entities;
 using System.Data.Entity;
+using System.Linq;
 
 namespace bbFiles.Services
 {
@@ -39,9 +40,15 @@ namespace bbFiles.Services
         /// <returns>ID of creates users.</returns>
         public int CreateUser(User User)
         {
+
+            if ((User.Id == 0) &&
+                (context.Users.FirstOrDefault(x => x.Login == User.Login) != default(User)))
+                return 0;
+
             context.Entry(User).State = User.Id == 0 ?
-                                EntityState.Added :
-                                EntityState.Modified;
+                                    EntityState.Added :
+                                    EntityState.Modified;
+            
             context.SaveChanges();
             return User.Id;
         }

@@ -44,6 +44,10 @@ namespace bbFiles.Services
         /// <returns>ID of added of edited acceptor.</returns>
         public int CreateAcceptor(Acceptor Acceptor)
         {
+            if ((Acceptor.User.Id == 0) &&
+                (context.Users.FirstOrDefault(x => x.Login == Acceptor.User.Login) != default(User)))
+                return 0;
+
             context.Entry(Acceptor).State = Acceptor.Id == 0 ?
                                EntityState.Added :
                                EntityState.Modified;

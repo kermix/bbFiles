@@ -290,12 +290,15 @@ namespace bbFiles.ViewModel
             }
 
             int id = _serviceProxy.CreateUser(SelectedUser);
+
             if (id != 0)
             {
                 RaisePropertyChanged("SelectedUser");
                 GetUsers();
                 (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             }
+            else
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.DuplicatedUserNameError });
         }
         void SendUser(User User)
         {

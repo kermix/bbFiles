@@ -339,4 +339,7 @@
   <data name="NoConnectionError" xml:space="preserve">
     <value>Nie można połączyć się z bazą danych. Należy sprawdzić swoje połącznie z interentem lub skontaktować się z administracją.</value>
   </data>
+  <data name="DuplicatedUserNameError" xml:space="preserve">
+    <value>Taka nazwa użytkownika już istnieje proszę podać inną nazwę.</value>
+  </data>
 </root>

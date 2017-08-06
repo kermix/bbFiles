@@ -286,6 +286,8 @@ namespace bbFiles.ViewModel
                 GetAcceptors();
                 (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             }
+            else
+                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.DuplicatedUserNameError });
         }
         void SendAcceptor(Acceptor Acceptor)
         {

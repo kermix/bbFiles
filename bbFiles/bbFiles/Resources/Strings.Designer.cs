@@ -10,9 +10,11 @@
 
 namespace bbFiles.Resources {
     using System;
-
-
-    /// <exclude />
+    
+    
+    /// <summary>
+    ///   Klasa zasobu wymagająca zdefiniowania typu do wyszukiwania zlokalizowanych ciągów itd.
+    /// </summary>
     // Ta klasa została automatycznie wygenerowana za pomocą klasy StronglyTypedResourceBuilder
     // przez narzędzie, takie jak ResGen lub Visual Studio.
     // Aby dodać lub usunąć członka, edytuj plik .ResX, a następnie ponownie uruchom ResGen
@@ -235,6 +237,15 @@ namespace bbFiles.Resources {
         public static string Donors {
             get {
                 return ResourceManager.GetString("Donors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Taka nazwa użytkownika już istnieje proszę podać inną nazwę..
+        /// </summary>
+        public static string DuplicatedUserNameError {
+            get {
+                return ResourceManager.GetString("DuplicatedUserNameError", resourceCulture);
             }
         }
         
