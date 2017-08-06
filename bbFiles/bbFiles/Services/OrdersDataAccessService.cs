@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace bbFiles.Services
 {
+    /// <exclude />
     public interface IOrdersDataAccessService
     {
         ObservableCollection<Order> GetOrders();
@@ -76,22 +77,24 @@ namespace bbFiles.Services
 
 
             BloodTypeMarker BloodTypeMarker;
-            if (Order.Blood_Type == BloodType.O && Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ORh;
-            else if (Order.Blood_Type == BloodType.O && !Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.O;
-            else if (Order.Blood_Type == BloodType.A && Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ARh;
-            else if (Order.Blood_Type == BloodType.A && !Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.A;
-            else if (Order.Blood_Type == BloodType.B && Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.BRh;
-            else if (Order.Blood_Type == BloodType.B && !Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.B;
-            else if (Order.Blood_Type == BloodType.AB && Order.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ABRh;
-            else
-                BloodTypeMarker = BloodTypeMarker.AB;
+            switch (Order.Blood_Type)
+            {
+                case BloodType.O:
+                    BloodTypeMarker = BloodTypeMarker.O;
+                    break;
+                case BloodType.A:
+                    BloodTypeMarker = BloodTypeMarker.A;
+                    break;
+                case BloodType.B:
+                    BloodTypeMarker = BloodTypeMarker.B;
+                    break;
+                default:
+                    BloodTypeMarker = BloodTypeMarker.AB;
+                    break;
+            }
+
+            if (Order.Blood_RhMarker)
+                BloodTypeMarker += 1;
 
 
             int blockerAmount = linkedDonates.Select(x => x.Amount).Sum();
