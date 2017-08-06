@@ -33,22 +33,24 @@ namespace bbFiles.Services
             context.Donates.Add(Donate);
             BloodTypeMarker BloodTypeMarker;
 
-            if (Donate.Donor.Blood_Type == BloodType.O && Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ORh;
-            else if (Donate.Donor.Blood_Type == BloodType.O && !Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.O;
-            else if (Donate.Donor.Blood_Type == BloodType.A && Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ARh;
-            else if (Donate.Donor.Blood_Type == BloodType.A && !Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.A;
-            else if (Donate.Donor.Blood_Type == BloodType.B && Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.BRh;
-            else if (Donate.Donor.Blood_Type == BloodType.B && !Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.B;
-            else if (Donate.Donor.Blood_Type == BloodType.AB && Donate.Donor.Blood_RhMarker)
-                BloodTypeMarker = BloodTypeMarker.ABRh;
-            else
-                BloodTypeMarker = BloodTypeMarker.AB;
+            switch (Donate.Donor.Blood_Type)
+            {
+                case BloodType.O:
+                        BloodTypeMarker = BloodTypeMarker.O;
+                    break;
+                case BloodType.A:
+                        BloodTypeMarker = BloodTypeMarker.A;
+                    break;
+                case BloodType.B:
+                        BloodTypeMarker = BloodTypeMarker.B;
+                    break;
+                default:
+                        BloodTypeMarker = BloodTypeMarker.AB;
+                    break;
+            }
+
+            if (Donate.Donor.Blood_RhMarker)
+                BloodTypeMarker += 1;
 
             var stat = context.Statistics.Find(BloodTypeMarker);
             stat.TotalAmount += Donate.Amount;
