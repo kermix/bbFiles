@@ -275,7 +275,11 @@ namespace bbFiles.ViewModel
                 (SelectedAcceptor.User != null && (string.IsNullOrWhiteSpace(SelectedAcceptor.User.Login) || string.IsNullOrWhiteSpace(SelectedAcceptor.User.Password) ||
                 SelectedAcceptor.User.RegisteredDate == null)))
             {
-                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.BlankFieldsError });
+                Messenger.Default.Send(new ErrorMessage()
+                {
+                    Title = Resources.Strings.EditErrorTitle,
+                    Error = Resources.Strings.BlankFieldsError
+                });
                 return;
             }
 
@@ -287,7 +291,11 @@ namespace bbFiles.ViewModel
                 (ServiceLocator.Current.GetInstance<MainViewModel>()).ToogleNavigation();
             }
             else
-                Messenger.Default.Send(new ErrorMessage() { Title = Resources.Strings.EditErrorTitle, Error = Resources.Strings.DuplicatedUserNameError });
+                Messenger.Default.Send(new ErrorMessage()
+                {
+                    Title = Resources.Strings.EditErrorTitle,
+                    Error = Resources.Strings.DuplicatedUserNameError
+                });
         }
         void SendAcceptor(Acceptor Acceptor)
         {
@@ -323,7 +331,11 @@ namespace bbFiles.ViewModel
                 if (deletionResult)
                     GetAcceptors();
                 else
-                    Messenger.Default.Send(new ErrorMessage() { Error = Resources.Strings.UserSelectionErrorTitle, Title = Resources.Strings.NoDependentUserError });
+                    Messenger.Default.Send(new ErrorMessage()
+                    {
+                        Error = Resources.Strings.UserSelectionErrorTitle,
+                        Title = Resources.Strings.NoDependentUserError
+                    });
             }
             else
             {

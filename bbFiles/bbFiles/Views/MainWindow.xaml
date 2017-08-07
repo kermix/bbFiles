@@ -13,7 +13,7 @@
         Title="bbFiles" Height="560" Width="910"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Loaded="MetroWindow_Loaded">
+        Loaded="MetroWindow_Loaded" WindowState="Maximized">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vms:UsersViewModel}">
             <v:UsersView/>
