@@ -1,0 +1,9 @@
+Mam nadzieje ze wszystko jest w filmiku. Sorka, że taki długi starałem się jak mogłem powiedzieć co najważniejsze.
+Część jest też w dokumentacji w folderze bbFiles/Help.
+Większość jednak starałem się zawrzeć w filmiku, bo mój angielski raczej nie powala.
+
+Jakby co to baza, z którą łączy się program jest na serwerze azure więc możecie spokojnie sobie sprawdzić wszystko jak i czy działa.
+Dane do logowania w apce to administrator/qwerty123
+
+Link do filmiku:
+https://youtu.be/f0QUFsTq0iE
